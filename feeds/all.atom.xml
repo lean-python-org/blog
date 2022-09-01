@@ -63,10 +63,12 @@ by providing guidance on when we should use particular language features
 &lt;p&gt;We start with &lt;strong&gt;Common Python&lt;/strong&gt; - the features we should all know so we can basically read each other's work.
 Clarity on this will be especially useful for teachers and anyone learning Python.&lt;/p&gt;
 &lt;p&gt;Then there is &lt;strong&gt;Situational Python&lt;/strong&gt; - the Python features that are useful
-but not for everyone or not all the time. It depends on the situation, for example:
-  * Web development might need very different features than scientific Python, e.g. asyncio
-  * Advanced library code might need advanced features, e.g. low-level threading / multi-processing
-For each feature we try to provide guidance on
+but not for everyone or not all the time. It depends on the situation, for example:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Web development might need very different features than scientific Python, e.g. asyncio&lt;/li&gt;
+&lt;li&gt;Advanced library code might need advanced features, e.g. low-level threading / multi-processing&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For each feature we try to provide guidance on
 what the situations are where it is the preferred One Obvious Way.
 The situations might be defined by domain (e.g. web application development vs data science)
 or type of code (e.g. scripting vs code with enterprise responsibilities).&lt;/p&gt;
