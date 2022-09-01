@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The When of Python Blog</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2022-09-01T22:02:00+12:00</updated><subtitle>Guidance on when to use Python features, and when not to</subtitle><entry><title>The Who of Python</title><link href="/who-of-python.html" rel="alternate"></link><published>2022-09-01T22:02:00+12:00</published><updated>2022-09-01T22:02:00+12:00</updated><author><name>Grant Paton-Simpson</name></author><id>tag:None,2022-09-01:/who-of-python.html</id><summary type="html">&lt;p&gt;Python is used by very different groups of people
+and how we decide which features are Common Python and
+which are Situational Python must take that into account.
+If something is common to one group only
+e.g. data scientists, or enterpise web application developers, it should be considered Situational Python - even if the use case is very common for that group.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Python is used by very different groups of people
+and how we decide which features are Common Python and
+which are Situational Python
+must take that into account.
+If something is common to one group only
+e.g. data scientists, or enterpise web application developers, it should be considered Situational Python
+even if the use case is very common for that group.&lt;/p&gt;
+&lt;p&gt;Nick Coghlan loosely and tentatively divided Python use cases up in a 2017 blog post (&lt;a href="https://www.curiousefficiency.org/posts/2017/10/considering-pythons-target-audience.html"&gt;Considering Python's Target Audience Nick Coghlan 2017-10-09&lt;/a&gt;):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Education&lt;/li&gt;
+&lt;li&gt;Personal automation &amp;amp; hobby projects&lt;/li&gt;
+&lt;li&gt;Organisational process automation&lt;/li&gt;
+&lt;li&gt;Set-and-forget infrastructure&lt;/li&gt;
+&lt;li&gt;Continuously upgraded infrastructure&lt;/li&gt;
+&lt;li&gt;Intermittently upgraded standard operating environments&lt;/li&gt;
+&lt;li&gt;Ephemeral software&lt;/li&gt;
+&lt;li&gt;Regular use applications&lt;/li&gt;
+&lt;li&gt;Shared abstraction layers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;He also suggested that largest split in Python's user base is between Python as a scripting language and Python as an application development language.&lt;/p&gt;
+&lt;p&gt;Another useful split would be between full-time developers and people who are astronomers, biologists etc first, and developers second.&lt;/p&gt;
+&lt;p&gt;However we divide things up the main point is that there is no such thing
+as an Everyday Python that is the same for everyone.
+But having said this, there is still a need for a Common Python so we can all basically &lt;em&gt;read&lt;/em&gt; each other's work.&lt;/p&gt;</content><category term="Python"></category><category term="language users"></category><category term="learners"></category><category term="teachers"></category><category term="web"></category><category term="data science"></category><category term="scripting"></category><category term="application development"></category></entry><entry><title>One Obvious Way - An Ongoing Challenge</title><link href="/one-obvious-way.html" rel="alternate"></link><published>2022-09-01T22:01:00+12:00</published><updated>2022-09-01T22:01:00+12:00</updated><author><name>Grant Paton-Simpson</name></author><id>tag:None,2022-09-01:/one-obvious-way.html</id><summary type="html">&lt;p&gt;Python prides itself on having one obvious way to do things
+but it is more of an ideal than a reality sometimes.
+But we should still aim in that direction.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;From the Zen of Python to the When of Python&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Python prides itself on having one obvious way to do things
+but it is more of an ideal than a reality sometimes.
+Nonetheless we should aim in that direction to increase code readability
+and reduce the barriers to learning and mastering Python.&lt;/p&gt;
+&lt;p&gt;The When of Python will hopefully make it easier to identify the preferred approaches to general tasks,
+and the preferred alternatives for specific situations.&lt;/p&gt;
+&lt;h2&gt;True 11 years ago, true today&lt;/h2&gt;
+&lt;p&gt;It was spooky reading a post of Nick Coghlan's from eleven years ago.
+It harmonises very well with a key concern of the When of Python - namely, making Python easier for learners.
+And not just people starting off as full-time developers.
+Python also needs to work for people who are astronomers, biologists etc first, and developers second.
+Anyway, here is what Nick had to say:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;What do you mean by "cognitive burden"?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Even without considering the near-term cost of changes, every addition to the language (and even the standard library) imposes a potential burden on anyone learning the language in the future. You can't just say, "Oh, I won't worry about learning that feature" if the code base you've been asked to maintain uses it, or if it is offered as an answer to a query posted on python-list or Stack Overflow or the like. The principle of "There Should Be One - and preferably only one - Obvious Way To Do It" is aimed squarely at reducing the cognitive load on people trying to learn the language. Quite clearly, the "only one" aspect is an ideal rather than a practical reality (two kinds of string formatting and three argument parsing libraries in the standard library all say "Hi!"), but in such cases we do try to indicate that the most recently added (and hopefully least quirky) approach is the preferred way to do it.&lt;/p&gt;
+&lt;p&gt;(&lt;a href="https://www.curiousefficiency.org/posts/2011/04/musings-on-culture-of-python-dev.html"&gt;Musings on the culture of python-dev  Nick Coghlan 2011-04-21&lt;/a&gt;)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Looking back from 2022, we've managed to simplify argument parsing. As far as string formatting goes, though, we now have four approaches! Oh well - two steps forward, one step back.
+Perhaps developing a When of Python will help.
+As we said in our Kiwi PyCon presentation, newer is not always better (or worse for that matter)
+so more explicit guidance is probably helpful.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="learners"></category><category term="teaching"></category></entry><entry><title>Welcome to the When of Python</title><link href="/welcome-to-when-of-python.html" rel="alternate"></link><published>2022-09-01T22:00:00+12:00</published><updated>2022-09-01T22:00:00+12:00</updated><author><name>Grant Paton-Simpson</name></author><id>tag:None,2022-09-01:/welcome-to-when-of-python.html</id><summary type="html">&lt;p&gt;The When of Python is a fledgling community initiative.
+The goal is to effectively shrink Python so it fits our brains
+by providing guidance on when we should use particular language features
+(and when we should not).&lt;/p&gt;</summary><content type="html">&lt;p&gt;The When of Python is a fledgling community initiative.
+The goal is to effectively shrink Python so it fits our brains
+by providing guidance on when we should use particular language features
+(and when we should not).&lt;/p&gt;
+&lt;p&gt;We start with &lt;strong&gt;Common Python&lt;/strong&gt; - the features we should all know so we can basically read each other's work.
+Clarity on this will be especially useful for teachers and anyone learning Python.&lt;/p&gt;
+&lt;p&gt;Then there is &lt;strong&gt;Situational Python&lt;/strong&gt; - the Python features that are useful
+but not for everyone or not all the time. It depends on the situation, for example:
+  * Web development might need very different features than scientific Python, e.g. asyncio
+  * Advanced library code might need advanced features, e.g. low-level threading / multi-processing
+For each feature we try to provide guidance on
+what the situations are where it is the preferred One Obvious Way.
+The situations might be defined by domain (e.g. web application development vs data science)
+or type of code (e.g. scripting vs code with enterprise responsibilities).&lt;/p&gt;
+&lt;p&gt;Finally there is &lt;strong&gt;Deprecated Python&lt;/strong&gt; - the features we should avoid using.
+And maybe we should go even further than that - perhaps working through existing code
+and expunging some features in favour of better alternatives.
+Soon(ish) we are planning to release some tools to make that easier.&lt;/p&gt;
+&lt;h2&gt;Initial Resources&lt;/h2&gt;
+&lt;p&gt;The When of Python" presentation as delivered at Kiwi Pycon 2022, and an addendum of post-conference refinements:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://when-of-python.github.io/kiwipycon2022"&gt;Slides&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Original presentation:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=JnY5MEiqG44"&gt;The When of Python&lt;/a&gt;&lt;/p&gt;</content><category term="Python"></category><category term="learners"></category><category term="teachers"></category></entry></feed>
