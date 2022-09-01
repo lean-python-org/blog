@@ -3,7 +3,7 @@ SITENAME = 'The When of Python Blog'
 SITESUBTITLE = 'Guidance on when to use Python features, and when not to'
 DESCRIPTION = 'Guidance on when to use Python features, and when not to'
 SITEIMAGE = 'images/logo.png'
-SITEURL = ''
+SITEURL = 'https://when-of-python.github.io/blog/'
 
 PATH = 'content'
 
