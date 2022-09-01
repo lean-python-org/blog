@@ -1,5 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The When of Python Blog - Python</title><link href="https://when-of-python.github.io/blog/" rel="alternate"></link><link href="https://when-of-python.github.io/blog/feeds/python.atom.xml" rel="self"></link><id>https://when-of-python.github.io/blog/</id><updated>2022-09-01T22:02:00+12:00</updated><subtitle>Guidance on when to use Python features, and when not to</subtitle><entry><title>The Who of Python</title><link href="https://when-of-python.github.io/blog/who-of-python.html" rel="alternate"></link><published>2022-09-01T22:02:00+12:00</published><updated>2022-09-01T22:02:00+12:00</updated><author><name>Grant Paton-Simpson</name></author><id>tag:when-of-python.github.io,2022-09-01:/blog/who-of-python.html</id><summary type="html">&lt;p&gt;Python is used by very different groups of people
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The When of Python Blog - Python</title><link href="https://when-of-python.github.io/blog/" rel="alternate"></link><link href="https://when-of-python.github.io/blog/feeds/python.atom.xml" rel="self"></link><id>https://when-of-python.github.io/blog/</id><updated>2022-09-02T09:00:00+12:00</updated><subtitle>Guidance on when to use Python features, and when not to</subtitle><entry><title>Feature Creep vs Easy On-Ramp</title><link href="https://when-of-python.github.io/blog/feature-creep-vs-easy-onramp.html" rel="alternate"></link><published>2022-09-02T09:00:00+12:00</published><updated>2022-09-02T09:00:00+12:00</updated><author><name>Ben Denham (with Grant Paton-Simpson)</name></author><id>tag:when-of-python.github.io,2022-09-02:/blog/feature-creep-vs-easy-onramp.html</id><summary type="html">&lt;p&gt;Experience with the X-Wing Miniatures Game provides a lesson for the Python community.
+We need to find a way to strip things back so it is easier (again) for beginners to learn the language.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Learning Python&lt;/h2&gt;
+&lt;p&gt;Python has a deep heritage as a learning language.  The creator of
+Python, Guido van Rossum, worked for several years on
+&lt;a href="https://en.wikipedia.org/wiki/ABC_(programming_language)"&gt;ABC&lt;/a&gt; which
+was intended for teaching and prototyping.  Python was born out of
+that context (see &lt;a href="https://python-course.eu/python-tutorial/history-and-philosophy-of-python.php"&gt;History and Philosophy of Python: Easy as
+ABC&lt;/a&gt;)
+and learnability is baked into its DNA.&lt;/p&gt;
+&lt;p&gt;As we were developing the ideas that would lead to the When of Python,
+we started thinking about whether Python was still as easy to learn as
+it used to be, given there is now often more than "one obvious way" to
+do things. We also wondered whether having a variety options for how
+to approach a task was necessarily a bad thing; it provides greater
+flexibility to the user after all.&lt;/p&gt;
+&lt;p&gt;This got me thinking about my experience with the X-Wing Miniatures Game...&lt;/p&gt;
+&lt;h2&gt;The X-Wing Miniatures Game&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="X-Wing miniatures" src="images/xwing.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;A few years ago I started playing the X-Wing Miniatures Game. Compared
+to similar games, the simplicity of the game was a major drawcard,
+because it meant that I could easily teach my friends how to play!
+Instead of having a hardback rulebook with hundreds of pages, all you
+needed to get going was a lightweight rules pamphlet and a handful of
+cards and tokens:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="X-Wing core rules" src="images/xwing-core.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Like many games, over time they released new expansions to provide new
+possibilities for your squadron. Not only did each expansion add a new
+ship to the game, but they also added new pilot abilities, ship
+upgrades, and game mechanics:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="An X-Wing expansion" src="images/xwing-expansion.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Each new expansion was a welcome addition for veteran players, as it
+helped keep the game fresh and exciting. However, after a few years of
+expansions, the sheer volume of added rules had created a steep
+learning curve that made the game unapproachable to beginners:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Lots more X-Wing rules" src="images/xwing-all.png"&gt;&lt;/p&gt;
+&lt;p&gt;In the end, the game designers had to release a second edition to
+drastically simplify the game because it had simply become too
+complex:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;"...it got more complicated, making it less easy to jump into the proverbial cockpit."
+ &lt;br&gt;&lt;a href="https://www.starwars.com/news/x-wing-second-edition"&gt;Fantasy Flight Games Hits Lightspeed with X-Wing Second Edition&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Releasing a second edition was no small endeavour: every player had to
+replace all of their existing cards and tokens with updated versions.&lt;/p&gt;
+&lt;h2&gt;Learnability&lt;/h2&gt;
+&lt;p&gt;Like X-Wing, learnability has been a big part of Python's
+success. Python recently surpassed Java as the top learning language
+in universities:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Headline: Python bumps off Java as top learning language (infoworld.com)" src="images/universities-headline.png"&gt;&lt;/p&gt;
+&lt;p&gt;That success has been attributed to its simplicity:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Python possesses a mix of qualities that makes it a good candidate for universities. It has a simpler syntax than Java or C++, allowing novices to start writing programs almost immediately.
+&lt;br&gt;&lt;a href="https://www.infoworld.com/article/2452940/python-bumps-off-java-as-top-learning-language.html"&gt;Python bumps off Java as top learning language - Eight out of the top 10 universities now use Python to introduce programming - Joab Jackson&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And just last year, Python became the most popular language on the
+TIOBE index:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Headline: Python ends C and Java's 20-year reign atop the TIOBE index (techreublic.com)" src="images/tiobe-headline.png"&gt;&lt;/p&gt;
+&lt;p&gt;Again, simplicity is arguably a major factor in that
+success:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;"Python, which started as a simple scripting language, as an alternative to Perl, has become mature. Its ease of learning, its huge amount of libraries and its widespread use in all kinds of domains, has made it the most popular programming language of today," said TIOBE CEO Paul Jansen.
+&lt;br&gt;&lt;a href="https://www.techrepublic.com/article/python-ends-c-and-javas-20-year-reign-atop-the-tiobe-index/"&gt;Python ends C and Java’s 20-year reign atop the TIOBE index - Brandon Vigliarolo&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Threats to Python's Learnability&lt;/h2&gt;
+&lt;p&gt;But how easy is it really to learn modern Python?  In order to
+confidently read code, we have to be familar with all the language
+features that we're likely to come across, Consider how much more
+needs to be at least mentioned in a Python crash-course today compared
+to just 10 years ago. We now have type hinting, f-strings, the
+wonderfully-named walrus operator (&lt;code&gt;:=&lt;/code&gt;), positional-only parameters,
+and structural pattern matching (&lt;code&gt;match&lt;/code&gt;). And that's just what's been
+added in the last 10 years!&lt;/p&gt;
+&lt;p&gt;With so much more to learn, Python risks becoming unapproachable to
+beginners, especially those who aren't full-time software engineers,
+such as scientists, school teachers, and data analysts.&lt;/p&gt;
+&lt;p&gt;By alienating those users that have made Python so widespread,
+Python's language creep could ultimately threaten its popularity.&lt;/p&gt;
+&lt;h2&gt;The When of Python&lt;/h2&gt;
+&lt;p&gt;Guidance on when to use Python features, and when not to, could
+radically simplify the task of learning (and teaching) Python. The
+When of Python could achieve this by eventually capturing a community
+consensus on the features to associate with &lt;strong&gt;Common Python&lt;/strong&gt;,
+&lt;strong&gt;Situational Python&lt;/strong&gt;, and &lt;strong&gt;Deprecated Python&lt;/strong&gt;. In short, the When
+of Python could help Python remain true to its teaching language
+roots, which have been such a crucial ingredient in its huge success
+to date, and hopefully will remain so!&lt;/p&gt;</content><category term="Python"></category><category term="learners"></category><category term="analogies"></category></entry><entry><title>The Who of Python</title><link href="https://when-of-python.github.io/blog/who-of-python.html" rel="alternate"></link><published>2022-09-01T22:02:00+12:00</published><updated>2022-09-01T22:02:00+12:00</updated><author><name>Grant Paton-Simpson</name></author><id>tag:when-of-python.github.io,2022-09-01:/blog/who-of-python.html</id><summary type="html">&lt;p&gt;Python is used by very different groups of people
 and how we decide which features are Common Python and
 which are Situational Python must take that into account.
 If something is common to one group only

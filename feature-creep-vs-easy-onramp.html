@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>  Feature Creep vs Easy On-Ramp | The When of Python Blog
+</title>
+  <link rel="canonical" href="https://when-of-python.github.io/blog/feature-creep-vs-easy-onramp.html">
+
+    <link rel="apple-touch-icon" href="https://when-of-python.github.io/blog/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" type="image/png" href="https://when-of-python.github.io/blog/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://when-of-python.github.io/blog/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="https://when-of-python.github.io/blog/manifest.json">
+    <meta name="theme-color" content="#333333">
+
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/css/darkly.bootstrap.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/theme/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/theme/css/pygments/default.min.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/theme/css/theme.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/css/custom.css">
+
+  <link rel="alternate" type="application/atom+xml" title="Full Atom Feed"
+        href="https://when-of-python.github.io/blog/feeds/all.atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="Categories Atom Feed"
+        href="https://when-of-python.github.io/blog/feeds/python.atom.xml">  
+  <meta name="description" content="Experience with the X-Wing Miniatures Game provides a lesson for the Python community. We need to find a way to strip things back so it is easier (again) for beginners to learn the language.">
+
+
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+<div class="row">
+    <div class="col-sm-4">
+      <a href="https://when-of-python.github.io/blog/">
+        <img class="img-fluid rounded" src=https://when-of-python.github.io/blog/images/logo.png alt="The When of Python Blog">
+      </a>
+    </div>
+  <div class="col-sm-8">
+    <h1 class="title"><a href="https://when-of-python.github.io/blog/">The When of Python Blog</a></h1>
+      <p class="text-muted">Guidance on when to use Python features, and when not to</p>
+      <ul class="list-inline">
+          <li class="list-inline-item"><a class="fab fa-fa-brands fa-twitter" href="https://twitter.com/WhenOfPython" target="_blank"></a></li>
+          <li class="list-inline-item"><a class="fab fa-fa-brands fa-github" href="https://github.com/when-of-python" target="_blank"></a></li>
+      </ul>
+  </div>
+</div>    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>  Feature Creep vs Easy On-Ramp
+</h1>
+      <hr>
+  <article class="article">
+    <header>
+      <ul class="list-inline">
+        <li class="list-inline-item text-muted" title="2022-09-02T09:00:00+12:00">
+          <i class="fas fa-clock"></i>
+          Fri 02 September 2022
+        </li>
+        <li class="list-inline-item">
+          <i class="fas fa-folder-open"></i>
+          <a href="https://when-of-python.github.io/blog/category/python.html">Python</a>
+        </li>
+          <li class="list-inline-item">
+            <i class="fas fa-user"></i>
+              <a href="https://when-of-python.github.io/blog/author/ben-denham-with-grant-paton-simpson.html">Ben Denham (with Grant Paton-Simpson)</a>          </li>
+          <li class="list-inline-item">
+            <i class="fas fa-tag"></i>
+              <a href="https://when-of-python.github.io/blog/tag/learners.html">#learners</a>,               <a href="https://when-of-python.github.io/blog/tag/analogies.html">#analogies</a>          </li>
+      </ul>
+    </header>
+    <div class="content">
+      <h2>Learning Python</h2>
+<p>Python has a deep heritage as a learning language.  The creator of
+Python, Guido van Rossum, worked for several years on
+<a href="https://en.wikipedia.org/wiki/ABC_(programming_language)">ABC</a> which
+was intended for teaching and prototyping.  Python was born out of
+that context (see <a href="https://python-course.eu/python-tutorial/history-and-philosophy-of-python.php">History and Philosophy of Python: Easy as
+ABC</a>)
+and learnability is baked into its DNA.</p>
+<p>As we were developing the ideas that would lead to the When of Python,
+we started thinking about whether Python was still as easy to learn as
+it used to be, given there is now often more than "one obvious way" to
+do things. We also wondered whether having a variety options for how
+to approach a task was necessarily a bad thing; it provides greater
+flexibility to the user after all.</p>
+<p>This got me thinking about my experience with the X-Wing Miniatures Game...</p>
+<h2>The X-Wing Miniatures Game</h2>
+<p><img alt="X-Wing miniatures" src="images/xwing.jpg"></p>
+<p>A few years ago I started playing the X-Wing Miniatures Game. Compared
+to similar games, the simplicity of the game was a major drawcard,
+because it meant that I could easily teach my friends how to play!
+Instead of having a hardback rulebook with hundreds of pages, all you
+needed to get going was a lightweight rules pamphlet and a handful of
+cards and tokens:</p>
+<p><img alt="X-Wing core rules" src="images/xwing-core.jpg"></p>
+<p>Like many games, over time they released new expansions to provide new
+possibilities for your squadron. Not only did each expansion add a new
+ship to the game, but they also added new pilot abilities, ship
+upgrades, and game mechanics:</p>
+<p><img alt="An X-Wing expansion" src="images/xwing-expansion.jpg"></p>
+<p>Each new expansion was a welcome addition for veteran players, as it
+helped keep the game fresh and exciting. However, after a few years of
+expansions, the sheer volume of added rules had created a steep
+learning curve that made the game unapproachable to beginners:</p>
+<p><img alt="Lots more X-Wing rules" src="images/xwing-all.png"></p>
+<p>In the end, the game designers had to release a second edition to
+drastically simplify the game because it had simply become too
+complex:</p>
+<blockquote>
+<p>"...it got more complicated, making it less easy to jump into the proverbial cockpit."
+ <br><a href="https://www.starwars.com/news/x-wing-second-edition">Fantasy Flight Games Hits Lightspeed with X-Wing Second Edition</a></p>
+</blockquote>
+<p>Releasing a second edition was no small endeavour: every player had to
+replace all of their existing cards and tokens with updated versions.</p>
+<h2>Learnability</h2>
+<p>Like X-Wing, learnability has been a big part of Python's
+success. Python recently surpassed Java as the top learning language
+in universities:</p>
+<p><img alt="Headline: Python bumps off Java as top learning language (infoworld.com)" src="images/universities-headline.png"></p>
+<p>That success has been attributed to its simplicity:</p>
+<blockquote>
+<p>Python possesses a mix of qualities that makes it a good candidate for universities. It has a simpler syntax than Java or C++, allowing novices to start writing programs almost immediately.
+<br><a href="https://www.infoworld.com/article/2452940/python-bumps-off-java-as-top-learning-language.html">Python bumps off Java as top learning language - Eight out of the top 10 universities now use Python to introduce programming - Joab Jackson</a></p>
+</blockquote>
+<p>And just last year, Python became the most popular language on the
+TIOBE index:</p>
+<p><img alt="Headline: Python ends C and Java's 20-year reign atop the TIOBE index (techreublic.com)" src="images/tiobe-headline.png"></p>
+<p>Again, simplicity is arguably a major factor in that
+success:</p>
+<blockquote>
+<p>"Python, which started as a simple scripting language, as an alternative to Perl, has become mature. Its ease of learning, its huge amount of libraries and its widespread use in all kinds of domains, has made it the most popular programming language of today," said TIOBE CEO Paul Jansen.
+<br><a href="https://www.techrepublic.com/article/python-ends-c-and-javas-20-year-reign-atop-the-tiobe-index/">Python ends C and Java’s 20-year reign atop the TIOBE index - Brandon Vigliarolo</a></p>
+</blockquote>
+<h2>Threats to Python's Learnability</h2>
+<p>But how easy is it really to learn modern Python?  In order to
+confidently read code, we have to be familar with all the language
+features that we're likely to come across, Consider how much more
+needs to be at least mentioned in a Python crash-course today compared
+to just 10 years ago. We now have type hinting, f-strings, the
+wonderfully-named walrus operator (<code>:=</code>), positional-only parameters,
+and structural pattern matching (<code>match</code>). And that's just what's been
+added in the last 10 years!</p>
+<p>With so much more to learn, Python risks becoming unapproachable to
+beginners, especially those who aren't full-time software engineers,
+such as scientists, school teachers, and data analysts.</p>
+<p>By alienating those users that have made Python so widespread,
+Python's language creep could ultimately threaten its popularity.</p>
+<h2>The When of Python</h2>
+<p>Guidance on when to use Python features, and when not to, could
+radically simplify the task of learning (and teaching) Python. The
+When of Python could achieve this by eventually capturing a community
+consensus on the features to associate with <strong>Common Python</strong>,
+<strong>Situational Python</strong>, and <strong>Deprecated Python</strong>. In short, the When
+of Python could help Python remain true to its teaching language
+roots, which have been such a crucial ingredient in its huge success
+to date, and hopefully will remain so!</p>
+    </div>
+  </article>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+<div class="row">
+  <ul class="col-sm-6 list-inline">
+      <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/authors.html">Authors</a></li>
+    <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/archives.html">Archives</a></li>
+    <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/categories.html">Categories</a></li>
+      <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/tags.html">Tags</a></li>
+  </ul>
+  <p class="col-sm-6 text-sm-right text-muted">
+    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
+    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+  </p>
+</div>    </div>
+  </footer>
+
+</body>
+
+</html>
