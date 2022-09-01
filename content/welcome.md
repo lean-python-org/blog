@@ -19,8 +19,10 @@ Clarity on this will be especially useful for teachers and anyone learning Pytho
 
 Then there is **Situational Python** - the Python features that are useful
 but not for everyone or not all the time. It depends on the situation, for example:
+
   * Web development might need very different features than scientific Python, e.g. asyncio
   * Advanced library code might need advanced features, e.g. low-level threading / multi-processing
+
 For each feature we try to provide guidance on
 what the situations are where it is the preferred One Obvious Way.
 The situations might be defined by domain (e.g. web application development vs data science)
