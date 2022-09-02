@@ -10,6 +10,16 @@
     --bs-highlight-bg: #e7ad52;
     --bs-body-bg: #111111;
 }
+::-moz-selection {
+    background: var(--bs-highlight-bg);
+    color: black;
+    text-shadow: none;
+}
+::selection {
+    background: var(--bs-highlight-bg);
+    color: black;
+    text-shadow: none;
+}
 
 a {
     text-decoration: none;
