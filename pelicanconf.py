@@ -1,7 +1,11 @@
 AUTHOR = 'Grant Paton-Simpson & Ben Denham'
 SITENAME = 'The When of Python Blog'
-SITESUBTITLE = 'Guidance on when to use Python features, and when not to'
-DESCRIPTION = 'Guidance on when to use Python features, and when not to'
+DESCRIPTION = '''
+<div class="text-muted" style="padding-bottom: 10px;">Guidance on when to use Python features (and when not to)</div>
+<div class="text-muted" style="padding-bottom: 10px;">Comment your opinions on our articles to join the discussion.</div>
+<div class="text-muted" style="padding-bottom: 10px;">Follow us on <a href="https://twitter.com/WhenOfPython">Twitter</a> and <a href="https://github.com/when-of-python">GitHub</a> to get the latest updates first.</div>
+'''
+SITESUBTITLE = DESCRIPTION
 SITEIMAGE = 'images/logo.png'
 SITEURL = ''
 
@@ -30,7 +34,7 @@ DEFAULT_PAGINATION = 10
 THEME = 'themes/pelican-alchemy/alchemy'
 
 # https://github.com/getpelican/pelican/wiki/Tips-n-Tricks#second-solution-using-static_paths
-STATIC_PATHS = ['extras', 'images', 'css']
+STATIC_PATHS = ['extras', 'images', 'css', 'js']
 EXTRA_PATH_METADATA = {
     'extras/android-chrome-192x192.png': {'path': 'android-chrome-192x192.png'},
     'extras/android-chrome-512x512.png': {'path': 'android-chrome-512x512.png'},
@@ -46,3 +50,5 @@ EXTRA_PATH_METADATA = {
 RFG_FAVICONS = True
 BOOTSTRAP_CSS = 'css/darkly.bootstrap.css'
 THEME_CSS_OVERRIDES = ['css/custom.css']
+
+THEME_TEMPLATES_OVERRIDES = ['template-overrides/']
