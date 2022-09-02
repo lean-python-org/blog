@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The When of Python Blog</title><link href="https://when-of-python.github.io/blog/" rel="alternate"></link><link href="https://when-of-python.github.io/blog/feeds/all.atom.xml" rel="self"></link><id>https://when-of-python.github.io/blog/</id><updated>2022-09-02T09:00:00+12:00</updated><subtitle>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The When of Python Blog</title><link href="https://when-of-python.github.io/blog/" rel="alternate"></link><link href="https://when-of-python.github.io/blog/feeds/all.atom.xml" rel="self"></link><id>https://when-of-python.github.io/blog/</id><updated>2022-09-03T11:00:00+12:00</updated><subtitle>
 &lt;div class="text-muted" style="padding-bottom: 10px;"&gt;Guidance on when to use Python features (and when not to)&lt;/div&gt;
 &lt;div class="text-muted" style="padding-bottom: 10px;"&gt;Comment your opinions on our articles to join the discussion.&lt;/div&gt;
 &lt;div class="text-muted" style="padding-bottom: 10px;"&gt;Follow us on &lt;a href="https://twitter.com/WhenOfPython"&gt;Twitter&lt;/a&gt; and &lt;a href="https://github.com/when-of-python"&gt;GitHub&lt;/a&gt; to get the latest updates first.&lt;/div&gt;
-</subtitle><entry><title>Feature Creep vs Easy On-Ramp</title><link href="https://when-of-python.github.io/blog/feature-creep-vs-easy-onramp.html" rel="alternate"></link><published>2022-09-02T09:00:00+12:00</published><updated>2022-09-02T09:00:00+12:00</updated><author><name>Ben Denham (with Grant Paton-Simpson)</name></author><id>tag:when-of-python.github.io,2022-09-02:/blog/feature-creep-vs-easy-onramp.html</id><summary type="html">&lt;p&gt;Experience with the X-Wing Miniatures Game provides a lesson for the Python community.
+</subtitle><entry><title>Python Feature Opinions</title><link href="https://when-of-python.github.io/blog/python-feature_opinions.html" rel="alternate"></link><published>2022-09-03T11:00:00+12:00</published><updated>2022-09-03T11:00:00+12:00</updated><author><name>Ben Denhan &amp; Grant Paton-Simpson</name></author><id>tag:when-of-python.github.io,2022-09-03:/blog/python-feature_opinions.html</id><summary type="html">&lt;p&gt;The When-of-Python is at heart a community project.
+We need people to share their opinions on different Python language features.
+If you have opinions on any language features we'd love to hear from you.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Your Opinions Welcome&lt;/h2&gt;
+&lt;p&gt;The When of Python is at heart a community project.
+We need people to share their opinions on different Python language features.
+If you have opinions on any language features we'd love to hear from you.&lt;/p&gt;
+&lt;p&gt;E.g. here is what a comment on lambda might look like:&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;Language feature:&lt;/strong&gt; lambda&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Common Python / Situational Python / Deprecated Python:&lt;/strong&gt; Situational (see &lt;a href="https://when-of-python.github.io/blog/welcome-to-when-of-python.html"&gt;Welcome to the When of Python&lt;/a&gt; for definitions)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Opinion:&lt;/strong&gt; Should only be used in sorting e.g. .sort(key=lambda ...) and, carefully, in Pandas e.g. .apply(lambda ...)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Any Interesting References (optional):&lt;/strong&gt; &lt;a href="https://treyhunner.com/2018/09/stop-writing-lambda-expressions/"&gt;Overusing lambda expressions in Python - Trey Hunner&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Bio (optional):&lt;/strong&gt; up to you - Anon is OK&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;This format is only a suggestion.&lt;/p&gt;
+&lt;p&gt;But please fire something off to us, either in the comments, or if you prefer, privately (whenofpython@p-s.co.nz).&lt;/p&gt;
+&lt;p&gt;We know people have opinions. Is type hinting a brilliant new feature; a blight on Python; or something else? Was the walrus operator worth the grief? Is structural pattern matching as good as it initially seems? Should dataclasses replace collections.namedtuple and typing.NamedTuple? Etc. You get the idea :-)&lt;/p&gt;</content><category term="Python"></category><category term="feedback"></category></entry><entry><title>Feature Creep vs Easy On-Ramp</title><link href="https://when-of-python.github.io/blog/feature-creep-vs-easy-onramp.html" rel="alternate"></link><published>2022-09-02T09:00:00+12:00</published><updated>2022-09-02T09:00:00+12:00</updated><author><name>Ben Denham (with Grant Paton-Simpson)</name></author><id>tag:when-of-python.github.io,2022-09-02:/blog/feature-creep-vs-easy-onramp.html</id><summary type="html">&lt;p&gt;Experience with the X-Wing Miniatures Game provides a lesson for the Python community.
 We need to find a way to strip things back so it is easier (again) for beginners to learn the language.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Learning Python&lt;/h2&gt;
 &lt;p&gt;Python has a deep heritage as a learning language.  The creator of
 Python, Guido van Rossum, worked for several years on
