@@ -4,7 +4,7 @@ Category: Python
 Tags: feedback
 Slug: python-feature_opinions
 Authors: Ben Denhan & Grant Paton-Simpson
-Summary: The When-of-Python is at heart a community project.
+Summary: The When of Python is at heart a community project.
          We need people to share their opinions on different Python language features.
          If you have opinions on any language features we'd love to hear from you.
 
