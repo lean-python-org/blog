@@ -36,7 +36,7 @@ Soon(ish) we are planning to release some tools to make that easier.
 Initial Resources
 -----------------
 
-The When of Python" presentation as delivered at Kiwi Pycon 2022, and an addendum of post-conference refinements:
+The When of Python presentation as delivered at Kiwi Pycon 2022, and an addendum of post-conference refinements:
 
 [Slides](https://when-of-python.github.io/kiwipycon2022)
 
