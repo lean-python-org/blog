@@ -3,6 +3,7 @@
 ## Setup
 
 * Install [Poetry](https://python-poetry.org/docs/#installation)
+* Clone repo & cd into main directory
 * Run `make deps`
 
 ## Writing Content
