@@ -6,6 +6,7 @@
 * Check poetry runs; if not, you might need to add \~/.local/bin to your BASH path e.g. put this line in \~/.bashrc  
 `export PATH=~/.local/bin:$PATH`
 * Clone repo & cd into main directory
+* Run `git submodule update --init`
 * Run `make deps`
 
 ## Writing Content
