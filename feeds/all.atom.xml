@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The When of Python Blog</title><link href="https://when-of-python.github.io/blog/" rel="alternate"></link><link href="https://when-of-python.github.io/blog/feeds/all.atom.xml" rel="self"></link><id>https://when-of-python.github.io/blog/</id><updated>2022-09-03T11:00:00+12:00</updated><subtitle>
-&lt;div class="text-muted" style="padding-bottom: 10px;"&gt;Guidance on when to use Python features (and when not to)&lt;/div&gt;
-&lt;div class="text-muted" style="padding-bottom: 10px;"&gt;Comment your opinions on our articles to join the discussion.&lt;/div&gt;
-&lt;div class="text-muted" style="padding-bottom: 10px;"&gt;Follow us on &lt;a href="https://twitter.com/WhenOfPython"&gt;Twitter&lt;/a&gt; and &lt;a href="https://github.com/when-of-python"&gt;GitHub&lt;/a&gt; to get the latest updates first.&lt;/div&gt;
-</subtitle><entry><title>Python Feature Opinions</title><link href="https://when-of-python.github.io/blog/python-feature_opinions.html" rel="alternate"></link><published>2022-09-03T11:00:00+12:00</published><updated>2022-09-03T11:00:00+12:00</updated><author><name>Ben Denhan &amp; Grant Paton-Simpson</name></author><id>tag:when-of-python.github.io,2022-09-03:/blog/python-feature_opinions.html</id><summary type="html">&lt;p&gt;The When of Python is at heart a community project.
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The When of Python Blog</title><link href="https://when-of-python.github.io/blog/" rel="alternate"></link><link href="https://when-of-python.github.io/blog/feeds/all.atom.xml" rel="self"></link><id>https://when-of-python.github.io/blog/</id><updated>2022-09-03T11:00:00+12:00</updated><subtitle>Guidance on when to use Python features (and when not to)</subtitle><entry><title>Python Feature Opinions</title><link href="https://when-of-python.github.io/blog/python-feature_opinions.html" rel="alternate"></link><published>2022-09-03T11:00:00+12:00</published><updated>2022-09-03T11:00:00+12:00</updated><author><name>Ben Denhan &amp; Grant Paton-Simpson</name></author><id>tag:when-of-python.github.io,2022-09-03:/blog/python-feature_opinions.html</id><summary type="html">&lt;p&gt;The When of Python is at heart a community project.
 We need people to share their opinions on different Python language features.
 If you have opinions on any language features we'd love to hear from you.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Your Opinions Welcome&lt;/h2&gt;
 &lt;p&gt;The When of Python is at heart a community project.
@@ -182,7 +178,7 @@ And maybe we should go even further than that - perhaps working through existing
 and expunging some features in favour of better alternatives.
 Soon(ish) we are planning to release some tools to make that easier.&lt;/p&gt;
 &lt;h2&gt;Initial Resources&lt;/h2&gt;
-&lt;p&gt;The When of Python" presentation as delivered at Kiwi Pycon 2022, and an addendum of post-conference refinements:&lt;/p&gt;
+&lt;p&gt;The When of Python presentation as delivered at Kiwi Pycon 2022, and an addendum of post-conference refinements:&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://when-of-python.github.io/kiwipycon2022"&gt;Slides&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Original presentation:&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=JnY5MEiqG44"&gt;The When of Python&lt;/a&gt;&lt;/p&gt;</content><category term="Python"></category><category term="learners"></category><category term="teachers"></category></entry></feed>
