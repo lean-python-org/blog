@@ -18,7 +18,7 @@
 
   <link rel="stylesheet" href="https://when-of-python.github.io/blog/css/darkly.bootstrap.css">
   <link rel="stylesheet" href="https://when-of-python.github.io/blog/theme/css/fontawesome.min.css">
-  <link rel="stylesheet" href="https://when-of-python.github.io/blog/theme/css/pygments/default.min.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/theme/css/pygments/native.min.css">
   <link rel="stylesheet" href="https://when-of-python.github.io/blog/theme/css/theme.css">
   <link rel="stylesheet" href="https://when-of-python.github.io/blog/css/custom.css">
 
@@ -81,31 +81,31 @@
     </header>
     <div class="content">
       <p>The for else construct seems simple enough - the problem is that the correct interpretation of how it works is counter intuitive to a large proportion of Python coders. For example, which of the following is correct? It's not immediately obvious whether the else block runs if the break is hit, or if it is not hit.</p>
-<div class="highlight"><pre><span></span><code><span class="s s-Atom">for</span> <span class="s s-Atom">animal</span> <span class="s s-Atom">in</span> <span class="s s-Atom">animals</span><span class="p">:</span>
-    <span class="s s-Atom">if</span> <span class="s s-Atom">animal</span> <span class="o">==</span> <span class="s s-Atom">my_pet</span><span class="o">:</span>
-        <span class="s s-Atom">break</span>
-<span class="s s-Atom">else</span><span class="p">:</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s2">&quot;No pet is found :-(&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">animal</span> <span class="ow">in</span> <span class="n">animals</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">animal</span> <span class="o">==</span> <span class="n">my_pet</span><span class="p">:</span>
+        <span class="k">break</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No pet is found :-(&quot;</span><span class="p">)</span>
 
-<span class="s s-Atom">for</span> <span class="s s-Atom">animal</span> <span class="s s-Atom">in</span> <span class="s s-Atom">animals</span><span class="p">:</span>
-    <span class="s s-Atom">if</span> <span class="s s-Atom">animal</span> <span class="o">==</span> <span class="s s-Atom">my_pet</span><span class="o">:</span>
-        <span class="s s-Atom">break</span>
-<span class="s s-Atom">else</span><span class="p">:</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s2">&quot;Pet found :-)&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">animal</span> <span class="ow">in</span> <span class="n">animals</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">animal</span> <span class="o">==</span> <span class="n">my_pet</span><span class="p">:</span>
+        <span class="k">break</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pet found :-)&quot;</span><span class="p">)</span>
 </code></pre></div>
 
-<p>Some suggestions for better names than else have included nobreak and (less seriously) if_we_exited_the_block_without_encountering_a_break.</p>
+<p>Some suggestions for better names than else have included <code>nobreak</code> and (less seriously) <code>if_we_exited_the_block_without_encountering_a_break</code>.</p>
 <p>In practice, it's clearer to just remove the ambiguity for the reader and set a variable before breaking.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">found_pet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">False</span><span class="w"></span>
-<span class="k">for</span><span class="w"> </span><span class="nv">animal</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">animals</span>:<span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nv">animal</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nv">my_pet</span>:<span class="w"></span>
-<span class="w">        </span><span class="nv">found_pet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">True</span><span class="w"></span>
-<span class="w">        </span><span class="k">break</span><span class="w"></span>
-<span class="k">if</span><span class="w"> </span><span class="nv">not</span><span class="w"> </span><span class="nv">found_pet</span>:<span class="w"></span>
-<span class="w">    </span><span class="nv">print</span><span class="ss">(</span><span class="s1">&#39;No pet found :(&#39;</span><span class="ss">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="n">found_pet</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">for</span> <span class="n">animal</span> <span class="ow">in</span> <span class="n">animals</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">animal</span> <span class="o">==</span> <span class="n">my_pet</span><span class="p">:</span>
+        <span class="n">found_pet</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">break</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">found_pet</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No pet found :(&#39;</span><span class="p">)</span>
 </code></pre></div>
 
-<p>If Raymond Hettinger had a time machine he could tell Guido in the future no one will find "<code>else</code>" intuitive: <a href="https://m.youtube.com/watch?v=OSGv2VnC0go">Transforming Code into Beautiful, Idiomatic Python</a>. Incidentally this is one of the classic Python presentations - watch it and bump the views over from 999,975 to a clean 1M ;-)</p>
+<p>If Raymond Hettinger had a time machine he could tell Guido in the future no one will find <code>else</code> intuitive: <a href="https://m.youtube.com/watch?v=OSGv2VnC0go">Transforming Code into Beautiful, Idiomatic Python</a>. Incidentally this is one of the classic Python presentations - watch it and bump the views over from 999,975 to a clean 1M ;-)</p>
 <p>Guido says if he had a time machine he would not have included the feature at all: <a href="https://mail.python.org/pipermail/python-ideas/2009-October/">Python-ideas for/else syntax</a>.</p>
 <p>Maybe we should put <code>for else</code> in the <strong>Deprecate Python</strong> category? Why not - there are alternatives that are versatile, simple, and safe.</p>
 <p>Fair comment? Overly harsh? What do you think?</p>
