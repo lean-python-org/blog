@@ -12,5 +12,4 @@ Maybe we should put pickle in the **Deprecate Python** category?
 
 Fair comment? Overly harsh? What do you think?
 
-
-
+Note - the following comments were transferred over from a more general blog post about features so all the pickle content can be together.
