@@ -7,7 +7,7 @@ Authors: Grant Paton-Simpson
 Summary: The `for else` construct is arguably too confusing for most Python coders and there are simple alternatives that are safe and versatile. A clear candidate for deprecation.
 
 
-The for else construct seems simple enough - the problem is that the correct interpretation of how it works is counter intuitive to a large proportion of Python coders. For example, which of the following is correct? It's not immediately obvious whether the else block runs if the break is hit, or if it is not hit.
+The for else construct seems simple enough - the problem is that the correct interpretation of how it works is counterintuitive to a large proportion of Python coders. For example, which of the following is correct? It's not immediately obvious whether the else block runs if the break is hit, or if it is not hit.
 
 ```python
 for animal in animals:
