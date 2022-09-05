@@ -6,9 +6,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>  Pickle in a Pickle | The When of Python Blog
+  <title>  Deprecate for else or else? | The When of Python Blog
 </title>
-  <link rel="canonical" href="https://when-of-python.github.io/blog/pickle-in-a-pickle.html">
+  <link rel="canonical" href="https://when-of-python.github.io/blog/deprecate-for-else-or-else.html">
 
     <link rel="apple-touch-icon" href="https://when-of-python.github.io/blog/apple-touch-icon.png" sizes="180x180">
     <link rel="icon" type="image/png" href="https://when-of-python.github.io/blog/favicon-32x32.png" sizes="32x32">
@@ -26,7 +26,7 @@
         href="https://when-of-python.github.io/blog/feeds/all.atom.xml">
   <link rel="alternate" type="application/atom+xml" title="Categories Atom Feed"
         href="https://when-of-python.github.io/blog/feeds/python.atom.xml">  
-  <meta name="description" content="Python pickle is something many of us have had a love-hate relationship with. We've loved it before using it and hated it afterwards ;-) Maybe we should put pickle in the Deprecate Python category?">
+  <meta name="description" content="The for else construct is arguably too confusing for most Python coders and there are simple alternatives that are safe and versatile. A clear candidate for deprecation.">
 
 
 </head>
@@ -57,15 +57,15 @@
 
   <div class="main">
     <div class="container">
-      <h1>  Pickle in a Pickle
+      <h1>  Deprecate for else or else?
 </h1>
       <hr>
   <article class="article">
     <header>
       <ul class="list-inline">
-        <li class="list-inline-item text-muted" title="2022-09-04T23:00:00+12:00">
+        <li class="list-inline-item text-muted" title="2022-09-05T21:00:00+12:00">
           <i class="fas fa-clock"></i>
-          Sun 04 September 2022
+          Mon 05 September 2022
         </li>
         <li class="list-inline-item">
           <i class="fas fa-folder-open"></i>
@@ -76,14 +76,39 @@
               <a href="https://when-of-python.github.io/blog/author/grant-paton-simpson.html">Grant Paton-Simpson</a>          </li>
           <li class="list-inline-item">
             <i class="fas fa-tag"></i>
-              <a href="https://when-of-python.github.io/blog/tag/python.html">#python</a>,               <a href="https://when-of-python.github.io/blog/tag/pickle.html">#pickle</a>          </li>
+              <a href="https://when-of-python.github.io/blog/tag/python.html">#python</a>,               <a href="https://when-of-python.github.io/blog/tag/for-else.html">#for else</a>          </li>
       </ul>
     </header>
     <div class="content">
-      <p>Python pickle is something many of us have had a love-hate relationship with. We've loved it before using it and hated it afterwards ;-). Even the official documentation at <a href="https://docs.python.org/3/library/pickle.html">pickle — Python object serialization</a> seems a bit faint in its praise.</p>
-<p>Maybe we should put pickle in the <strong>Deprecate Python</strong> category?</p>
+      <p>The for else construct seems simple enough - the problem is that the correct interpretation of how it works is counter intuitive to a large proportion of Python coders. For example, which of the following is correct? It's not immediately obvious whether the else block runs if the break is hit, or if it is not hit.</p>
+<div class="highlight"><pre><span></span><code><span class="s s-Atom">for</span> <span class="s s-Atom">animal</span> <span class="s s-Atom">in</span> <span class="s s-Atom">animals</span><span class="p">:</span>
+    <span class="s s-Atom">if</span> <span class="s s-Atom">animal</span> <span class="o">==</span> <span class="s s-Atom">my_pet</span><span class="o">:</span>
+        <span class="s s-Atom">break</span>
+<span class="s s-Atom">else</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s2">&quot;No pet is found :-(&quot;</span><span class="p">)</span>
+
+<span class="s s-Atom">for</span> <span class="s s-Atom">animal</span> <span class="s s-Atom">in</span> <span class="s s-Atom">animals</span><span class="p">:</span>
+    <span class="s s-Atom">if</span> <span class="s s-Atom">animal</span> <span class="o">==</span> <span class="s s-Atom">my_pet</span><span class="o">:</span>
+        <span class="s s-Atom">break</span>
+<span class="s s-Atom">else</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s2">&quot;Pet found :-)&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Some suggestions for better names than else have included nobreak and (less seriously) if_we_exited_the_block_without_encountering_a_break.</p>
+<p>In practice, it's clearer to just remove the ambiguity for the reader and set a variable before breaking.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">found_pet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">False</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="nv">animal</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">animals</span>:<span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nv">animal</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nv">my_pet</span>:<span class="w"></span>
+<span class="w">        </span><span class="nv">found_pet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">True</span><span class="w"></span>
+<span class="w">        </span><span class="k">break</span><span class="w"></span>
+<span class="k">if</span><span class="w"> </span><span class="nv">not</span><span class="w"> </span><span class="nv">found_pet</span>:<span class="w"></span>
+<span class="w">    </span><span class="nv">print</span><span class="ss">(</span><span class="s1">&#39;No pet found :(&#39;</span><span class="ss">)</span><span class="w"></span>
+</code></pre></div>
+
+<p>If Raymond Hettinger had a time machine he could tell Guido in the future no one will find "<code>else</code>" intuitive: <a href="https://m.youtube.com/watch?v=OSGv2VnC0go">Transforming Code into Beautiful, Idiomatic Python</a>. Incidentally this is one of the classic Python presentations - watch it and bump the views over from 999,975 to a clean 1M ;-)</p>
+<p>Guido says if he had a time machine he would not have included the feature at all: <a href="https://mail.python.org/pipermail/python-ideas/2009-October/">Python-ideas for/else syntax</a>.</p>
+<p>Maybe we should put <code>for else</code> in the <strong>Deprecate Python</strong> category? Why not - there are alternatives that are versatile, simple, and safe.</p>
 <p>Fair comment? Overly harsh? What do you think?</p>
-<p>Note - the following comments were transferred over from a more general blog post about features so all the pickle content can be together.</p>
     </div>
   </article>
 <div id="comments">
