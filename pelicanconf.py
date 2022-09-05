@@ -50,5 +50,6 @@ EXTRA_PATH_METADATA = {
 RFG_FAVICONS = True
 BOOTSTRAP_CSS = 'css/darkly.bootstrap.css'
 THEME_CSS_OVERRIDES = ['css/custom.css']
+PYGMENTS_STYLE = 'native'
 
 THEME_TEMPLATES_OVERRIDES = ['template-overrides/']
