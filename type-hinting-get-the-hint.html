@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>  Get the Hint - Type Hinting is Common Python | The When of Python Blog
+</title>
+  <link rel="canonical" href="https://when-of-python.github.io/blog/type-hinting-get-the-hint.html">
+
+    <link rel="apple-touch-icon" href="https://when-of-python.github.io/blog/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" type="image/png" href="https://when-of-python.github.io/blog/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://when-of-python.github.io/blog/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="https://when-of-python.github.io/blog/manifest.json">
+    <meta name="theme-color" content="#333333">
+
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/css/darkly.bootstrap.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/theme/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/theme/css/pygments/native.min.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/theme/css/theme.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/css/custom.css">
+
+  <link rel="alternate" type="application/atom+xml" title="Full Atom Feed"
+        href="https://when-of-python.github.io/blog/feeds/all.atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="Categories Atom Feed"
+        href="https://when-of-python.github.io/blog/feeds/python.atom.xml">  
+  <meta name="description" content="How we handle type hinting will define the future of Python for good or bad. Type hinting is useful as glorified commenting and as such should be part of everyone's Everyday Python. It should be part of Common Python. Type hinting is likely to be widely used in the code people encounter so we all need to be comfortable reading simple type hinting. Some enterprise and library codebases will benefit from a more strict and enforced form of type "hinting" and further advances in type hinting and checkers like mypy will improve the developer experience of using this feature. What has your experience of type hinting been? Do you agree with this post? Do you disagree? Please comment below.">
+
+
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+<div class="row">
+    <div class="col-sm-4">
+      <a href="https://when-of-python.github.io/blog/">
+        <img class="img-fluid rounded" src=https://when-of-python.github.io/blog/images/logo.png alt="The When of Python Blog">
+      </a>
+    </div>
+  <div class="col-sm-8">
+    <h1 class="title"><a href="https://when-of-python.github.io/blog/">The When of Python Blog</a></h1>
+      <p class="text-muted">
+<div class="text-muted" style="padding-bottom: 10px;">Guidance on when to use Python features (and when not to).</div>
+<div class="text-muted" style="padding-bottom: 10px;">Comment your opinions on our articles to join the discussion.</div>
+<div class="text-muted" style="padding-bottom: 10px;">Follow us on <a href="https://twitter.com/WhenOfPython">Twitter</a> and <a href="https://github.com/when-of-python">GitHub</a> to get the latest updates first.</div>
+</p>
+      <ul class="list-inline">
+          <li class="list-inline-item"><a class="fab fa-fa-brands fa-twitter" href="https://twitter.com/WhenOfPython" target="_blank"></a></li>
+          <li class="list-inline-item"><a class="fab fa-fa-brands fa-github" href="https://github.com/when-of-python" target="_blank"></a></li>
+      </ul>
+  </div>
+</div>    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>  Get the Hint - Type Hinting is Common Python
+</h1>
+      <hr>
+  <article class="article">
+    <header>
+      <ul class="list-inline">
+        <li class="list-inline-item text-muted" title="2022-09-13T06:00:00+12:00">
+          <i class="fas fa-clock"></i>
+          Tue 13 September 2022
+        </li>
+        <li class="list-inline-item">
+          <i class="fas fa-folder-open"></i>
+          <a href="https://when-of-python.github.io/blog/category/python.html">Python</a>
+        </li>
+          <li class="list-inline-item">
+            <i class="fas fa-user"></i>
+              <a href="https://when-of-python.github.io/blog/author/grant-paton-simpson-featuring-danny-adair.html">Grant Paton-Simpson (featuring Danny Adair)</a>          </li>
+          <li class="list-inline-item">
+            <i class="fas fa-tag"></i>
+              <a href="https://when-of-python.github.io/blog/tag/python.html">#python</a>,               <a href="https://when-of-python.github.io/blog/tag/types.html">#types</a>,               <a href="https://when-of-python.github.io/blog/tag/type-hint.html">#type hint</a>          </li>
+      </ul>
+    </header>
+    <div class="content">
+      <p>What has your experience of type hinting been? Do you agree with this post? Do you disagree? Please comment below.</p>
+<h1>Type Hinting - A Big Deal for Python?</h1>
+<p>Some new features really define the future of a programming language. Long after the walrus operator has been forgotten, and structural pattern matching found its niche, type hinting will be shaping people's everyday Python - for better or worse. A lot depends on how we agree to use this language feature.</p>
+<p>Currently, almost a third of active Python projects on Github are using type hinting for parameters (see <a href="https://when-of-python.github.io/kiwipycon2022/#/52/0/11">The When of Python - KiwiPycon 2022</a>). The sooner we figure out type hinting best practice the better.</p>
+<p>To kick this blog post off I contacted Danny Adair - founder and former President of NZPUG - to get some tentative thoughts. I knew he had opinions on type hinting based on a conversation we had at the recent Kiwi PyCon. Knowing Danny was currently extra busy I asked for a quick reaction and here it is:</p>
+<blockquote>
+<p>I think type hinting in Python can be useful, particularly if you (previously) enjoy(ed) the coziness of the harness that is static typing, and you're willing to sacrifice a duck for it.</p>
+<p>I think there are some codebases that were screaming for it (like the one at Dropbox where Guido started pimping it) but I would argue against it as becoming a habit. Unfortunately "optional" stops being optional for all practical purposes once you touch type hinted code with your code.</p>
+<p>"There should be one-- and preferably only one --obvious way to do it." - But don't worry it's optional...</p>
+<p>(How's that for a rant)</p>
+</blockquote>
+<p>Some important questions are raised about type hinting. Should it be restricted to a few enterprise codebases? Should it be a matter of personal taste - perhaps we should accept type hinting as an option for those who are happy to embrace the restrictions of a static typing approach but recommend against it generally? Can this be a matter of personal taste or is there a risk type hinting will draw everything in - potentially spoiling the dynamic, duck-typed flavour of Python which has been part of its success?</p>
+<p>I'll invite Danny to add further comment when this post is published. But let's step back a bit now and refresh our memories on how type hinting works and different ways of using it.</p>
+<h1>Different Ways of Type Hinting</h1>
+<p>Type hinting allows us to indicate what types a function expects as arguments and what types it will return. E.g.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_greeting</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">age</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</code></pre></div>
+
+<p>As the name makes clear, type hints are hints only but there are tools that enable type hinting to be checked and enforced.</p>
+<p>Type hinting is still maturing in Python and more recent versions are less verbose and more readable e.g. <code>int | float</code> rather than <code>typing.Union[int, float]</code></p>
+<p>Initially I didn’t like type hinting. I suspected it was a costly and ritualistic safety behaviour rather than a way of writing better code. And people can certainly use type hinting like that. But I have changed my overall position on Python type hinting.</p>
+<p>There are at least three ways to use type hinting in Python:</p>
+<h2>1) As Glorified Comments</h2>
+<p>We can use type hinting to improve readability and reduce confusion - basically to treat type hints like glorified comments. For example, what is the following function expecting for the date parameter?</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">myfunc</span><span class="p">(</span><span class="n">date</span><span class="p">):</span>
+</code></pre></div>
+
+<p>Is it OK if I supply date as a number (20220428) or must it be a string ("20220428") or maybe a datetime.date object? Type hinting can remove that confusion</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">myfunc</span><span class="p">(</span><span class="n">date</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+</code></pre></div>
+
+<p>It is now much more straightforward to consume this function and to modify it with confidence. I strongly recommend using type hinting like this.</p>
+<p>The following is very readable in my view:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">date</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">show_chart</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+</code></pre></div>
+
+<p>Note: there is no need to add <code>: bool</code> when the meaning is obvious (unless wanting to use static checking as discussed below). It just increases the noise-to-signal ratio in the code.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">date</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">show_chart</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+</code></pre></div>
+
+<p>On a similar vein, if a parameter obviously expects an integer or a float I don’t add a type hint. For example type hinting for the parameters below reduces readability for negligible practical gain:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_coord</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coord</span><span class="p">:</span>
+</code></pre></div>
+
+<p>Or, knowing that mypy considers int a subtype of float:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_coord</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coord</span>
+</code></pre></div>
+
+<p>Instead</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_coord</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coord</span><span class="p">:</span>
+</code></pre></div>
+
+<p>is probably the right balance. To some extent it is a matter of personal taste.</p>
+<p>I hope people aren’t deterred from using basic type hinting to increase readability by the detail required to fully implement type hinting.</p>
+<h2>2) To Enable Static Checking</h2>
+<p>Another option is to use type hinting to enable static checks with the aim of preventing type-based bugs – which potentially makes sense when working on a complex code base worked on by multiple coders. I doubt we should do the same for ordinary scripts – the costs can be very high (see endless Stack Overflow questions on Type Hinting complexities and subtleties).</p>
+<h2>3) Ritual Self-Soothing</h2>
+<p>For some people I suspect type hinting is a ritual self-soothing behaviour which functions to spin out the stressful decision-making parts of programming. Obviously I am against this especially when it makes otherwise beautiful, concise Python code “noisy” and less readable.</p>
+<h1>Duck Typing</h1>
+<h2>Time for a Duck Sacrifice?</h2>
+<p>Danny's comment on duck sacrifice may be puzzling for some. To start with, it has nothing to do with duck punching as per <a href="http://twentyfivetwenty.ca/monkey-patching-and-duck-punching">Monkey patching and Duck punching</a> ;-). The issue is whether we lose or weaken the duck typing aspect of Python if we let type hinting spread too freely.</p>
+<p>Python follows a Duck Typing philosophy – we look for matching behaviour not specific types. If it walks like a duck and quacks like a duck it’s a duck!</p>
+<p>For example, we might not care whether we get a tuple or a list as long as we can reference the items by index. Returning to the Duck illustration, we don’t test for the DNA of a Duck (its type) we check for behaviours we’ll rely on e.g. can it quack?</p>
+<p>There are pros and cons to every approach to typing but I like the way Python’s typing works: strong typing (<code>1 != '1'</code>); dynamic typing (defined at run-time); and duck typing (anything as long as it quacks).</p>
+<p>Fortunately, no duck sacrifice is necessary if we mainly use type hinting as glorified comments and, in the context of more disciplined static type checking, rely on Protocol to allow behaviour-based (structural) hinting.</p>
+<h2>Structural Type Hinting using Protocol</h2>
+<p>If we were able to blend type hinting with duck typing we would get something where we could specify accepted types based on the behaviours they support.</p>
+<p>Fortunately this is very easy in Python using Protocol. Below I contrast Nominal Type Hinting (based on the names of types) with Structural Type Hinting (based on internal details of types e.g. behaviours / methods)</p>
+<div class="highlight"><pre><span></span><code><span class="n">Full</span> <span class="n">Example</span> <span class="ow">in</span> <span class="n">Code</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Protocol</span>
+
+<span class="k">class</span> <span class="nc">BaseAttacker</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">attack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+<span class="k">class</span> <span class="nc">Soldier</span><span class="p">(</span><span class="n">BaseAttacker</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="k">def</span> <span class="nf">attack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Soldier </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> swings their sword!&quot;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Archer</span><span class="p">(</span><span class="n">BaseAttacker</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="k">def</span> <span class="nf">attack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Archer </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> fires their arrow!&quot;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Catapult</span><span class="p">:</span>  <span class="c1">## note - not inheriting from BaseAttacker</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="k">def</span> <span class="nf">attack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Catapult </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> hurls their fireball!&quot;</span><span class="p">)</span>
+
+<span class="c1">## only accept instances of BaseAttacker (or its subclasses)</span>
+<span class="k">def</span> <span class="nf">all_attack_by_type</span><span class="p">(</span><span class="n">units</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">BaseAttacker</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">units</span><span class="p">:</span>
+        <span class="n">unit</span><span class="o">.</span><span class="n">attack</span><span class="p">()</span>
+
+<span class="n">s1</span> <span class="o">=</span> <span class="n">Soldier</span><span class="p">(</span><span class="s1">&#39;Tim&#39;</span><span class="p">)</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">Soldier</span><span class="p">(</span><span class="s1">&#39;Sal&#39;</span><span class="p">)</span>
+<span class="n">a1</span> <span class="o">=</span> <span class="n">Archer</span><span class="p">(</span><span class="s1">&#39;Cal&#39;</span><span class="p">)</span>
+<span class="n">c1</span> <span class="o">=</span> <span class="n">Catapult</span><span class="p">(</span><span class="s1">&#39;Mech&#39;</span><span class="p">)</span>
+
+<span class="n">all_attack_by_type</span><span class="p">([</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">a1</span><span class="p">])</span>
+
+<span class="c1">## will run but won&#39;t pass static check</span>
+<span class="c1">## because c1 not an BaseAttacker instance</span>
+<span class="c1">## (or the instance of a subclass)</span>
+
+<span class="c1">## comment out next line if checking with mypy etc - will fail</span>
+<span class="n">all_attack_by_type</span><span class="p">([</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">c1</span><span class="p">])</span>
+
+<span class="k">class</span> <span class="nc">AttackerProtocol</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">attack</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="err">…</span> <span class="c1">## idiomatic to use ellipsis</span>
+
+<span class="k">def</span> <span class="nf">all_attack_duck_typed</span><span class="p">(</span><span class="n">units</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">AttackerProtocol</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">units</span><span class="p">:</span>
+        <span class="n">unit</span><span class="o">.</span><span class="n">attack</span><span class="p">()</span>
+
+<span class="c1">## will run as before even though c1 included</span>
+<span class="c1">## but will also pass a static check</span>
+<span class="n">all_attack_duck_typed</span><span class="p">([</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">c1</span><span class="p">])</span>
+</code></pre></div>
+
+<h1>Unexpected Conclusion</h1>
+<p>Type hinting is useful as glorified commenting and as such should be part of everyone's Everyday Python. In other words it should be part of Common Python. Type hinting is likely to be widely used in the code people encounter (see earlier comment on usage in Python projects on Github) so we all need to be comfortable reading simple type hinting.</p>
+<p>Some enterprise and library codebases will benefit from a more strict and enforced form of type "hinting" and further advances in type hinting and checkers like mypy will improve the developer experience of using this feature.</p>
+<p>The dynamic flavour of Python can be maintained by using type hinting in this way and by making use of Protocol. No duck sacrifice is necessary.</p>
+<p>If we use type hinting to improve the readability of our Python code generally, and to increase the robustness of enterprise and library code specifically; and if we can avoid using type hinting to make Python less flexible and Just Another Static Language, then type hinting will be a great addition to the language.</p>
+    </div>
+  </article>
+<div id="comments">
+  <div id="comments-inner">
+    <div id="manual-commenting"></div>
+    <script src="https://utteranc.es/client.js"
+            repo="when-of-python/blog"
+            issue-term="pathname"
+            theme="github-dark-orange"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  <script src="https://when-of-python.github.io/blog/js/comments.js"></script>
+</div>    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+<div class="row">
+  <ul class="col-sm-6 list-inline">
+      <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/authors.html">Authors</a></li>
+    <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/archives.html">Archives</a></li>
+    <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/categories.html">Categories</a></li>
+      <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/tags.html">Tags</a></li>
+  </ul>
+  <p class="col-sm-6 text-sm-right text-muted">
+    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
+    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+  </p>
+</div>    </div>
+  </footer>
+
+</body>
+
+</html>
