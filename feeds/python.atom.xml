@@ -48,7 +48,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;While it is true that, in this case, the Walrus operator saves multiple lines and avoids duplication, there are better ways of achieving the same results. It would probably be better to use an enum to collect these strings together.&lt;/p&gt;
-&lt;h1&gt;StrEnum - A Nice Addition to Python in 3.11&lt;/h1&gt;
+&lt;h1&gt;StrEnum - A Valuable Addition&lt;/h1&gt;
 &lt;p&gt;StrEnum is part of Python 3.11[2] and it enables the following syntax:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;enum&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;StrEnum&lt;/span&gt;
 
