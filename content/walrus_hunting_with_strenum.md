@@ -77,8 +77,8 @@ CITIES = [
 
 While it is true that, in this case, the Walrus operator saves multiple lines and avoids duplication, there are better ways of achieving the same results. It would probably be better to use an enum to collect these strings together.
 
-StrEnum - A Nice Addition to Python in 3.11
-===========================================
+StrEnum - A Valuable Addition
+=============================
 
 StrEnum is part of Python 3.11[2] and it enables the following syntax:
 
