@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>  Walrus Hunting with StrEnum | The When of Python Blog
+</title>
+  <link rel="canonical" href="https://when-of-python.github.io/blog/walrus-hunting-with-strenum.html">
+
+    <link rel="apple-touch-icon" href="https://when-of-python.github.io/blog/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" type="image/png" href="https://when-of-python.github.io/blog/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://when-of-python.github.io/blog/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="https://when-of-python.github.io/blog/manifest.json">
+    <meta name="theme-color" content="#333333">
+
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/css/darkly.bootstrap.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/theme/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/theme/css/pygments/native.min.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/theme/css/theme.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/css/custom.css">
+
+  <link rel="alternate" type="application/atom+xml" title="Full Atom Feed"
+        href="https://when-of-python.github.io/blog/feeds/all.atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="Categories Atom Feed"
+        href="https://when-of-python.github.io/blog/feeds/python.atom.xml">  
+  <meta name="description" content="The Walrus operator finally seemed to have found a practical use case - as a way to make collections of strings or integers without as much boiler plate as the alternative without the operator. But Python has a better approach already - Enum - and in Python 3.11 it is even easier to use with strings (StrEnum). So the Walrus operator still struggles to find a problem for which it is the best solution.">
+
+
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+<div class="row">
+    <div class="col-sm-4">
+      <a href="https://when-of-python.github.io/blog/">
+        <img class="img-fluid rounded" src=https://when-of-python.github.io/blog/images/logo.png alt="The When of Python Blog">
+      </a>
+    </div>
+  <div class="col-sm-8">
+    <h1 class="title"><a href="https://when-of-python.github.io/blog/">The When of Python Blog</a></h1>
+      <p class="text-muted">
+<div class="text-muted" style="padding-bottom: 10px;">Guidance on when to use Python features (and when not to).</div>
+<div class="text-muted" style="padding-bottom: 10px;">Comment your opinions on our articles to join the discussion.</div>
+<div class="text-muted" style="padding-bottom: 10px;">Follow us on <a href="https://twitter.com/WhenOfPython">Twitter</a> and <a href="https://github.com/when-of-python">GitHub</a> to get the latest updates first.</div>
+</p>
+      <ul class="list-inline">
+          <li class="list-inline-item"><a class="fab fa-fa-brands fa-twitter" href="https://twitter.com/WhenOfPython" target="_blank"></a></li>
+          <li class="list-inline-item"><a class="fab fa-fa-brands fa-github" href="https://github.com/when-of-python" target="_blank"></a></li>
+      </ul>
+  </div>
+</div>    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>  Walrus Hunting with StrEnum
+</h1>
+      <hr>
+  <article class="article">
+    <header>
+      <ul class="list-inline">
+        <li class="list-inline-item text-muted" title="2022-09-14T20:00:00+12:00">
+          <i class="fas fa-clock"></i>
+          Wed 14 September 2022
+        </li>
+        <li class="list-inline-item">
+          <i class="fas fa-folder-open"></i>
+          <a href="https://when-of-python.github.io/blog/category/python.html">Python</a>
+        </li>
+          <li class="list-inline-item">
+            <i class="fas fa-user"></i>
+              <a href="https://when-of-python.github.io/blog/author/grant-paton-simpson-with-ben-denham.html">Grant Paton-Simpson (with Ben Denham)</a>          </li>
+          <li class="list-inline-item">
+            <i class="fas fa-tag"></i>
+              <a href="https://when-of-python.github.io/blog/tag/python.html">#python</a>,               <a href="https://when-of-python.github.io/blog/tag/walrus-operator.html">#walrus operator</a>,               <a href="https://when-of-python.github.io/blog/tag/enum.html">#enum</a>,               <a href="https://when-of-python.github.io/blog/tag/311.html">#3.11</a>          </li>
+      </ul>
+    </header>
+    <div class="content">
+      <p>What has your experience of the Walrus operator been? How about Enum and IntEnum? Do you agree with this post? Do you disagree? Please comment below.</p>
+<h1>Walrus Operator - Finally a Useful Use Case?</h1>
+<h2>The Walrus Operator</h2>
+<p>The Walrus operator is named because <code>:=</code> looks like the eyes and tusks of a walrus of its side. I really like the name[1] so it is a shame the Walrus operator isn't a useful addition to Python. Instead, the Walrus operator seems to be a solution looking for a problem. In spite of all the blog posts and tweets illustrating how it works there is very little that tries to explain why it is better than alternative approaches (unless we assume opaque one-liners are better than readable two-liners ;-)).</p>
+<p>As a quick reminder, the Walrus operator is an assignment expression. Normally we assign values to names with the syntax <code>name = value</code> e.g. <code>fname = 'Zac'</code>. The Walrus operator allows us to perform assignment as an inline expression within another statement. For example, instead of:</p>
+<div class="highlight"><pre><span></span><code><span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;Zac&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+</code></pre></div>
+
+<p>we can save a line by writing:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">f_name</span> <span class="o">:=</span> <span class="s1">&#39;Zac&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This is not an obvious improvement - indeed it can be argued that the Walrus operator commonly makes Python less readable and increases the complexity of basic code for no payoff. But perhaps it has other higher-value use cases?</p>
+<p>One suggestion concerns collections of constants.</p>
+<h2>Constants</h2>
+<p>We often use "constants" to avoid magic numbers. E.g.</p>
+<div class="highlight"><pre><span></span><code><span class="n">PG_PORT</span> <span class="o">=</span> <span class="mi">5432</span>
+
+<span class="o">...</span>
+
+<span class="n">port</span><span class="o">=</span><span class="n">PG_PORT</span>  <span class="c1">## more semantic than port=5432</span>
+</code></pre></div>
+
+<p>We can also use them to identify strings that we wish to control as developer, sometimes in collections that cover available options. For example:</p>
+<div class="highlight"><pre><span></span><code><span class="n">AUCKLAND</span> <span class="o">=</span> <span class="s1">&#39;Auckland&#39;</span>
+<span class="n">WELLINGTON</span> <span class="o">=</span> <span class="s1">&#39;Wellingon&#39;</span>
+<span class="n">CHRISTCHURCH</span> <span class="o">=</span> <span class="s1">&#39;Christchurch&#39;</span>
+<span class="n">DUNEDIN</span> <span class="o">=</span> <span class="s1">&#39;Dunedin&#39;</span>
+
+<span class="n">CITIES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">AUCKLAND</span><span class="p">,</span>
+    <span class="n">WELLINGTON</span><span class="p">,</span>
+    <span class="n">CHRISTCHURCH</span><span class="p">,</span>
+    <span class="n">DUNEDIN</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<h2>Collections of Constants and the Walrus Operator</h2>
+<p>Recently it has been suggested that the Walrus operator is a useful way of slimming down such constructs. Using the Walrus operator we can instead write:</p>
+<div class="highlight"><pre><span></span><code><span class="n">CITIES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">AUCKLAND</span> <span class="o">:=</span> <span class="s1">&#39;Auckland&#39;</span><span class="p">,</span>
+    <span class="n">WELLINGTON</span> <span class="o">:=</span> <span class="s1">&#39;Wellington&#39;</span><span class="p">,</span>
+    <span class="n">CHRISTCHURCH</span> <span class="o">:=</span> <span class="s1">&#39;Christchurch&#39;</span><span class="p">,</span>
+    <span class="n">DUNEDIN</span> <span class="o">:=</span> <span class="s1">&#39;Dunedin&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<p>While it is true that, in this case, the Walrus operator saves multiple lines and avoids duplication, there are better ways of achieving the same results. It would probably be better to use an enum to collect these strings together.</p>
+<h1>StrEnum - A Nice Addition to Python in 3.11</h1>
+<p>StrEnum is part of Python 3.11[2] and it enables the following syntax:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">StrEnum</span>
+
+<span class="k">class</span> <span class="nc">City</span><span class="p">(</span><span class="n">StrEnum</span><span class="p">):</span>
+    <span class="n">AUCKLAND</span> <span class="o">=</span> <span class="s1">&#39;Auckland&#39;</span>
+    <span class="n">WELLINGTON</span> <span class="o">=</span> <span class="s1">&#39;Wellington&#39;</span>
+    <span class="n">CHRISTCHURCH</span> <span class="o">=</span> <span class="s1">&#39;Christchurch&#39;</span>
+    <span class="n">DUNEDIN</span> <span class="o">=</span> <span class="s1">&#39;Dunedin&#39;</span>
+</code></pre></div>
+
+<p>We can then refer to individual cities using dot notation e.g.</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="n">city</span> <span class="o">==</span> <span class="n">City</span><span class="o">.</span><span class="n">AUCKLAND</span><span class="p">:</span>
+    <span class="k">pass</span>
+</code></pre></div>
+
+<p>The following is <code>True</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="s1">&#39;Auckland&#39;</span> <span class="o">==</span> <span class="n">City</span><span class="o">.</span><span class="n">AUCKLAND</span>
+</code></pre></div>
+
+<p>We can also combine our StrEnum nicely with type hinting to clarify what sorts of strings we expect to receive in a function:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">arrange_travel</span><span class="p">(</span><span class="n">city</span><span class="p">:</span> <span class="n">City</span><span class="p">):</span>
+    <span class="o">...</span>
+</code></pre></div>
+
+<p>This is arguably better than:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">arrange_travel</span><span class="p">(</span><span class="n">city</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="o">...</span>
+</code></pre></div>
+
+<p>because it provides clear guidance about the type of inputs expected.</p>
+<p>StrEnums also play nicely in other contexts - for example, as dictionary keys. The following works:</p>
+<div class="highlight"><pre><span></span><code><span class="n">city_popns</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">City</span><span class="o">.</span><span class="n">AUCKLAND</span><span class="p">:</span> <span class="mi">1_571_700</span><span class="p">,</span>
+    <span class="n">City</span><span class="o">.</span><span class="n">WELLINGTON</span><span class="p">:</span> <span class="mi">202_700</span><span class="p">,</span>
+    <span class="n">City</span><span class="o">.</span><span class="n">CHRISTCHURCH</span><span class="p">:</span> <span class="mi">369_000</span><span class="p">,</span>
+    <span class="n">City</span><span class="o">.</span><span class="n">DUNEDIN</span><span class="p">:</span> <span class="mi">126_300</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="c1">## Both return 1_571_700</span>
+<span class="n">city_popns</span><span class="p">[</span><span class="n">City</span><span class="o">.</span><span class="n">AUCKLAND</span><span class="p">]</span>
+<span class="n">city_popns</span><span class="p">[</span><span class="s1">&#39;Auckland&#39;</span><span class="p">]</span>
+</code></pre></div>
+
+<h1>Using StrEnum Like a Ruby Symbol</h1>
+<p>Ruby has a construct called a symbol. It's a string that is identified by a colon at the front of a variable name e.g. <code>:fname</code>. The usage is subtle but important - basically "if the textual content of the object is important, use a String. If the identity of the object is important, use a Symbol." <a href="https://medium.com/@lcriswell/ruby-symbols-vs-strings-248842529fd9">Ruby Symbols vs. Strings</a>. The main benefit is clarity of programmer intention i.e. readability.</p>
+<p>In Ruby another benefit of favouring symbols over strings is that they are interned - that is, there is only one instance no matter how many times it is used. This is much less relevant to Python. Most strings will be automatically be interned anyway - see <a href="https://towardsdatascience.com/optimization-in-python-interning-805be5e9fd3e">Optimization in Python — Interning</a>.</p>
+<p>So for Python the real benefits of StrEnums are in readability and, potentially, type enforcement through type hinting. When we use a StrEnum we know it has a special meaning and is part of a controlled collection. We know that supplying any random string might not work - the code is expecting something from the type of StrEnum indicated.</p>
+<h1>When the Type of StrEnum Matters</h1>
+<p>There are cases where the fact our StrEnum is not really a string matters. See <a href="https://docs.python.org/3.11/library/enum.html#enum.StrEnum">class enum.StrEnum</a>. The documentation suggests we can simply convert our StrEnum to a string type e.g. <code>str(City.AUCKLAND)</code>. Another approach is to provide a property to the StrEnum. E.g.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">City</span><span class="p">(</span><span class="n">StrEnum</span><span class="p">):</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1">## in case we ever need the actual string type</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+
+    <span class="n">AUCKLAND</span> <span class="o">=</span> <span class="s1">&#39;Auckland&#39;</span>
+    <span class="n">WELLINGTON</span> <span class="o">=</span> <span class="s1">&#39;Wellington&#39;</span>
+    <span class="n">CHRISTCHURCH</span> <span class="o">=</span> <span class="s1">&#39;Christchurch&#39;</span>
+    <span class="n">DUNEDIN</span> <span class="o">=</span> <span class="s1">&#39;Dunedin&#39;</span>
+</code></pre></div>
+
+<p>Then we can write City.AUCKLAND.str instead if that is more to our taste.</p>
+<h1>StrEnums 1: Walrus Operator 0</h1>
+<p>In conclusion, the StrEnum is a new feature in Python we should start using a lot more. And if we do, it is even harder to think of cases where the Walrus operator is the best solution. Too harsh? Too kind? Add a comment.</p>
+<h1>Postscript - Testing StrEnum</h1>
+<p>Docker can be a convenient way of experimenting with unreleased (or old) versions of Python. The following lets you run scripts in your current working folder using the version of Python in the container.</p>
+<div class="highlight"><pre><span></span><code>docker run --rm -it --mount <span class="nv">type</span><span class="o">=</span>bind,source<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">&quot;</span>,target<span class="o">=</span>/src --workdir /src python:3.11-rc /bin/bash
+</code></pre></div>
+
+<p>[1] I also like the way Ruby has the delightfully named spaceship operator <code>&lt;=&gt;</code> <a href="https://medium.com/@albert.s.chun/ruby-the-spaceship-operator-101-717b42566971">Ruby — The Spaceship Operator 101</a>
+[2] It has been possible to use string Enums since 3.4 but it is even easier now that StrEnum has been added.</p>
+    </div>
+  </article>
+<div id="comments">
+  <div id="comments-inner">
+    <div id="manual-commenting"></div>
+    <script src="https://utteranc.es/client.js"
+            repo="when-of-python/blog"
+            issue-term="pathname"
+            theme="github-dark-orange"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  <script src="https://when-of-python.github.io/blog/js/comments.js"></script>
+</div>    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+<div class="row">
+  <ul class="col-sm-6 list-inline">
+      <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/authors.html">Authors</a></li>
+    <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/archives.html">Archives</a></li>
+    <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/categories.html">Categories</a></li>
+      <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/tags.html">Tags</a></li>
+  </ul>
+  <p class="col-sm-6 text-sm-right text-muted">
+    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
+    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+  </p>
+</div>    </div>
+  </footer>
+
+</body>
+
+</html>
