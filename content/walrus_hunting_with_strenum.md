@@ -14,7 +14,7 @@ Walrus Operator - Finally a Useful Use Case?
 The Walrus Operator
 -------------------
 
-The Walrus operator is named because `:=` looks like the eyes and tusks of a walrus of its side. I really like the name[1] so it is a shame the Walrus operator isn't a useful addition to Python. Instead, the Walrus operator seems to be a solution looking for a problem. In spite of all the blog posts and tweets illustrating how it works there is very little that tries to explain why it is better than alternative approaches (unless we assume opaque one-liners are better than readable two-liners ;-)).
+The Walrus operator is named because `:=` looks like the eyes and tusks of a walrus of its side. I really like the name[ref]I also like the way Ruby has the delightfully named spaceship operator `<=>` [Ruby — The Spaceship Operator 101](https://medium.com/@albert.s.chun/ruby-the-spaceship-operator-101-717b42566971)[/ref] so it is a shame the Walrus operator isn't a useful addition to Python. Instead, the Walrus operator seems to be a solution looking for a problem. In spite of all the blog posts and tweets illustrating how it works there is very little that tries to explain why it is better than alternative approaches (unless we assume opaque one-liners are better than readable two-liners ;-)).
 
 As a quick reminder, the Walrus operator is an assignment expression. Normally we assign values to names with the syntax `name = value` e.g. `fname = 'Zac'`. The Walrus operator allows us to perform assignment as an inline expression within another statement. For example, instead of:
 
@@ -80,7 +80,7 @@ While it is true that, in this case, the Walrus operator saves multiple lines an
 StrEnum - A Valuable Addition
 =============================
 
-StrEnum is part of Python 3.11[2] and it enables the following syntax:
+StrEnum is part of Python 3.11[ref]It has been possible to use string Enums since 3.4 but it is even easier now that StrEnum has been added.[/ref] and it enables the following syntax:
 
 ```python
 from enum import StrEnum
@@ -177,6 +177,3 @@ Docker can be a convenient way of experimenting with unreleased (or old) version
 ```bash
 docker run --rm -it --mount type=bind,source="$(pwd)",target=/src --workdir /src python:3.11-rc /bin/bash
 ```
-
-[1] I also like the way Ruby has the delightfully named spaceship operator `<=>` [Ruby — The Spaceship Operator 101](https://medium.com/@albert.s.chun/ruby-the-spaceship-operator-101-717b42566971)
-[2] It has been possible to use string Enums since 3.4 but it is even easier now that StrEnum has been added.
