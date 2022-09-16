@@ -2,14 +2,14 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>The When of Python Blog</title><link href="https://when-of-python.github.io/blog/" rel="alternate"></link><link href="https://when-of-python.github.io/blog/feeds/all.atom.xml" rel="self"></link><id>https://when-of-python.github.io/blog/</id><updated>2022-09-14T20:00:00+12:00</updated><subtitle>Guidance on when to use Python features (and when not to)</subtitle><entry><title>Walrus Hunting with StrEnum</title><link href="https://when-of-python.github.io/blog/walrus-hunting-with-strenum.html" rel="alternate"></link><published>2022-09-14T20:00:00+12:00</published><updated>2022-09-14T20:00:00+12:00</updated><author><name>Grant Paton-Simpson (with Ben Denham)</name></author><id>tag:when-of-python.github.io,2022-09-14:/blog/walrus-hunting-with-strenum.html</id><summary type="html">&lt;p&gt;The Walrus operator finally seemed to have found a practical use case - as a way to make collections of strings or integers without as much boiler plate as the alternative without the operator. But Python has a better approach already - Enum - and in Python 3.11 it is even easier to use with strings (StrEnum). So the Walrus operator still struggles to find a problem for which it is the best solution.&lt;/p&gt;</summary><content type="html">&lt;p&gt;What has your experience of the Walrus operator been? How about Enum and IntEnum? Do you agree with this post? Do you disagree? Please comment below.&lt;/p&gt;
 &lt;h1&gt;Walrus Operator - Finally a Useful Use Case?&lt;/h1&gt;
 &lt;h2&gt;The Walrus Operator&lt;/h2&gt;
-&lt;p&gt;The Walrus operator is named because &lt;code&gt;:=&lt;/code&gt; looks like the eyes and tusks of a walrus of its side. I really like the name[1] so it is a shame the Walrus operator isn't a useful addition to Python. Instead, the Walrus operator seems to be a solution looking for a problem. In spite of all the blog posts and tweets illustrating how it works there is very little that tries to explain why it is better than alternative approaches (unless we assume opaque one-liners are better than readable two-liners ;-)).&lt;/p&gt;
+&lt;p&gt;The Walrus operator is named because &lt;code&gt;:=&lt;/code&gt; looks like the eyes and tusks of a walrus of its side. I really like the name&lt;sup id="sf-walrus-hunting-with-strenum-1-back"&gt;&lt;a href="#sf-walrus-hunting-with-strenum-1" class="simple-footnote" title="I also like the way Ruby has the delightfully named spaceship operator &lt;=&gt; Ruby — The Spaceship Operator 101"&gt;1&lt;/a&gt;&lt;/sup&gt; so it is a shame the Walrus operator isn't a useful addition to Python. Instead, the Walrus operator seems to be a solution looking for a problem. In spite of all the blog posts and tweets illustrating how it works there is very little that tries to explain why it is better than alternative approaches (unless we assume opaque one-liners are better than readable two-liners ;-)).&lt;/p&gt;
 &lt;p&gt;As a quick reminder, the Walrus operator is an assignment expression. Normally we assign values to names with the syntax &lt;code&gt;name = value&lt;/code&gt; e.g. &lt;code&gt;fname = 'Zac'&lt;/code&gt;. The Walrus operator allows us to perform assignment as an inline expression within another statement. For example, instead of:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;fname&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Zac&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;fname&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Zac'&lt;/span&gt;
 &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fname&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;we can save a line by writing:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f_name&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Zac&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f_name&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="s1"&gt;'Zac'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This is not an obvious improvement - indeed it can be argued that the Walrus operator commonly makes Python less readable and increases the complexity of basic code for no payoff. But perhaps it has other higher-value use cases?&lt;/p&gt;
@@ -24,10 +24,10 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;We can also use them to identify strings that we wish to control as developer, sometimes in collections that cover available options. For example:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;AUCKLAND&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Auckland&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;WELLINGTON&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Wellingon&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;CHRISTCHURCH&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Christchurch&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;DUNEDIN&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Dunedin&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;AUCKLAND&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Auckland'&lt;/span&gt;
+&lt;span class="n"&gt;WELLINGTON&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Wellingon'&lt;/span&gt;
+&lt;span class="n"&gt;CHRISTCHURCH&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Christchurch'&lt;/span&gt;
+&lt;span class="n"&gt;DUNEDIN&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Dunedin'&lt;/span&gt;
 
 &lt;span class="n"&gt;CITIES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
     &lt;span class="n"&gt;AUCKLAND&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -40,23 +40,23 @@
 &lt;h2&gt;Collections of Constants and the Walrus Operator&lt;/h2&gt;
 &lt;p&gt;Recently it has been suggested that the Walrus operator is a useful way of slimming down such constructs. Using the Walrus operator we can instead write:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;CITIES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-    &lt;span class="n"&gt;AUCKLAND&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Auckland&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;WELLINGTON&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Wellington&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;CHRISTCHURCH&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Christchurch&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;DUNEDIN&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Dunedin&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;AUCKLAND&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="s1"&gt;'Auckland'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;WELLINGTON&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="s1"&gt;'Wellington'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;CHRISTCHURCH&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="s1"&gt;'Christchurch'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;DUNEDIN&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="s1"&gt;'Dunedin'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
 &lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;While it is true that, in this case, the Walrus operator saves multiple lines and avoids duplication, there are better ways of achieving the same results. It would probably be better to use an enum to collect these strings together.&lt;/p&gt;
 &lt;h1&gt;StrEnum - A Valuable Addition&lt;/h1&gt;
-&lt;p&gt;StrEnum is part of Python 3.11[2] and it enables the following syntax:&lt;/p&gt;
+&lt;p&gt;StrEnum is part of Python 3.11&lt;sup id="sf-walrus-hunting-with-strenum-2-back"&gt;&lt;a href="#sf-walrus-hunting-with-strenum-2" class="simple-footnote" title="It has been possible to use string Enums since 3.4 but it is even easier now that StrEnum has been added."&gt;2&lt;/a&gt;&lt;/sup&gt; and it enables the following syntax:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;enum&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;StrEnum&lt;/span&gt;
 
 &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;City&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;StrEnum&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;AUCKLAND&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Auckland&amp;#39;&lt;/span&gt;
-    &lt;span class="n"&gt;WELLINGTON&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Wellington&amp;#39;&lt;/span&gt;
-    &lt;span class="n"&gt;CHRISTCHURCH&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Christchurch&amp;#39;&lt;/span&gt;
-    &lt;span class="n"&gt;DUNEDIN&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Dunedin&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;AUCKLAND&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Auckland'&lt;/span&gt;
+    &lt;span class="n"&gt;WELLINGTON&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Wellington'&lt;/span&gt;
+    &lt;span class="n"&gt;CHRISTCHURCH&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Christchurch'&lt;/span&gt;
+    &lt;span class="n"&gt;DUNEDIN&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Dunedin'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;We can then refer to individual cities using dot notation e.g.&lt;/p&gt;
@@ -65,7 +65,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;The following is &lt;code&gt;True&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="s1"&gt;&amp;#39;Auckland&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;City&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AUCKLAND&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="s1"&gt;'Auckland'&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;City&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AUCKLAND&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;We can also combine our StrEnum nicely with type hinting to clarify what sorts of strings we expect to receive in a function:&lt;/p&gt;
@@ -88,7 +88,7 @@
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="c1"&gt;## Both return 1_571_700&lt;/span&gt;
 &lt;span class="n"&gt;city_popns&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;City&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AUCKLAND&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="n"&gt;city_popns&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Auckland&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;city_popns&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Auckland'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h1&gt;Using StrEnum Like a Ruby Symbol&lt;/h1&gt;
@@ -103,10 +103,10 @@
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;  &lt;span class="c1"&gt;## in case we ever need the actual string type&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;
 
-    &lt;span class="n"&gt;AUCKLAND&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Auckland&amp;#39;&lt;/span&gt;
-    &lt;span class="n"&gt;WELLINGTON&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Wellington&amp;#39;&lt;/span&gt;
-    &lt;span class="n"&gt;CHRISTCHURCH&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Christchurch&amp;#39;&lt;/span&gt;
-    &lt;span class="n"&gt;DUNEDIN&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Dunedin&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;AUCKLAND&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Auckland'&lt;/span&gt;
+    &lt;span class="n"&gt;WELLINGTON&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Wellington'&lt;/span&gt;
+    &lt;span class="n"&gt;CHRISTCHURCH&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Christchurch'&lt;/span&gt;
+    &lt;span class="n"&gt;DUNEDIN&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Dunedin'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Then we can write City.AUCKLAND.str instead if that is more to our taste.&lt;/p&gt;
@@ -114,11 +114,8 @@
 &lt;p&gt;In conclusion, the StrEnum is a new feature in Python we should start using a lot more. And if we do, it is even harder to think of cases where the Walrus operator is the best solution. Too harsh? Too kind? Add a comment.&lt;/p&gt;
 &lt;h1&gt;Postscript - Testing StrEnum&lt;/h1&gt;
 &lt;p&gt;Docker can be a convenient way of experimenting with unreleased (or old) versions of Python. The following lets you run scripts in your current working folder using the version of Python in the container.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run --rm -it --mount &lt;span class="nv"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;bind,source&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;,target&lt;span class="o"&gt;=&lt;/span&gt;/src --workdir /src python:3.11-rc /bin/bash
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;[1] I also like the way Ruby has the delightfully named spaceship operator &lt;code&gt;&amp;lt;=&amp;gt;&lt;/code&gt; &lt;a href="https://medium.com/@albert.s.chun/ruby-the-spaceship-operator-101-717b42566971"&gt;Ruby — The Spaceship Operator 101&lt;/a&gt;
-[2] It has been possible to use string Enums since 3.4 but it is even easier now that StrEnum has been added.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="walrus operator"></category><category term="enum"></category><category term="3.11"></category></entry><entry><title>Get the Hint - Type Hinting is Common Python</title><link href="https://when-of-python.github.io/blog/type-hinting-get-the-hint.html" rel="alternate"></link><published>2022-09-13T06:00:00+12:00</published><updated>2022-09-13T06:00:00+12:00</updated><author><name>Grant Paton-Simpson (featuring Danny Adair)</name></author><id>tag:when-of-python.github.io,2022-09-13:/blog/type-hinting-get-the-hint.html</id><summary type="html">&lt;p&gt;How we handle type hinting will define the future of Python for good or bad. Type hinting is useful as glorified commenting and as such should be part of everyone's Everyday Python. It should be part of Common Python. Type hinting is likely to be widely used in the code people encounter so we all need to be comfortable reading simple type hinting. Some enterprise and library codebases will benefit from a more strict and enforced form of type "hinting" and further advances in type hinting and checkers like mypy will improve the developer experience of using this feature. What has your experience of type hinting been? Do you agree with this post? Do you disagree? Please comment below.&lt;/p&gt;</summary><content type="html">&lt;p&gt;What has your experience of type hinting been? Do you agree with this post? Do you disagree? Please comment below.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run --rm -it --mount &lt;span class="nv"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;bind,source&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;,target&lt;span class="o"&gt;=&lt;/span&gt;/src --workdir /src python:3.11-rc /bin/bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol class="simple-footnotes"&gt;&lt;li id="sf-walrus-hunting-with-strenum-1"&gt;I also like the way Ruby has the delightfully named spaceship operator &lt;code&gt;&amp;lt;=&amp;gt;&lt;/code&gt; &lt;a href="https://medium.com/@albert.s.chun/ruby-the-spaceship-operator-101-717b42566971"&gt;Ruby — The Spaceship Operator 101&lt;/a&gt; &lt;a href="#sf-walrus-hunting-with-strenum-1-back" class="simple-footnote-back"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;li id="sf-walrus-hunting-with-strenum-2"&gt;It has been possible to use string Enums since 3.4 but it is even easier now that StrEnum has been added. &lt;a href="#sf-walrus-hunting-with-strenum-2-back" class="simple-footnote-back"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content><category term="Python"></category><category term="python"></category><category term="walrus operator"></category><category term="enum"></category><category term="3.11"></category></entry><entry><title>Get the Hint - Type Hinting is Common Python</title><link href="https://when-of-python.github.io/blog/type-hinting-get-the-hint.html" rel="alternate"></link><published>2022-09-13T06:00:00+12:00</published><updated>2022-09-13T06:00:00+12:00</updated><author><name>Grant Paton-Simpson (featuring Danny Adair)</name></author><id>tag:when-of-python.github.io,2022-09-13:/blog/type-hinting-get-the-hint.html</id><summary type="html">&lt;p&gt;How we handle type hinting will define the future of Python for good or bad. Type hinting is useful as glorified commenting and as such should be part of everyone's Everyday Python. It should be part of Common Python. Type hinting is likely to be widely used in the code people encounter so we all need to be comfortable reading simple type hinting. Some enterprise and library codebases will benefit from a more strict and enforced form of type "hinting" and further advances in type hinting and checkers like mypy will improve the developer experience of using this feature. What has your experience of type hinting been? Do you agree with this post? Do you disagree? Please comment below.&lt;/p&gt;</summary><content type="html">&lt;p&gt;What has your experience of type hinting been? Do you agree with this post? Do you disagree? Please comment below.&lt;/p&gt;
 &lt;h1&gt;Type Hinting - A Big Deal for Python?&lt;/h1&gt;
 &lt;p&gt;Some new features really define the future of a programming language. Long after the walrus operator has been forgotten, and structural pattern matching found its niche, type hinting will be shaping people's everyday Python - for better or worse. A lot depends on how we agree to use this language feature.&lt;/p&gt;
 &lt;p&gt;Currently, almost a third of active Python projects on Github are using type hinting for parameters (see &lt;a href="https://when-of-python.github.io/kiwipycon2022/#/52/0/11"&gt;The When of Python - KiwiPycon 2022&lt;/a&gt;). The sooner we figure out type hinting best practice the better.&lt;/p&gt;
