@@ -1,5 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The When of Python Blog - Python</title><link href="https://when-of-python.github.io/blog/" rel="alternate"></link><link href="https://when-of-python.github.io/blog/feeds/python.atom.xml" rel="self"></link><id>https://when-of-python.github.io/blog/</id><updated>2022-09-14T20:00:00+12:00</updated><subtitle>Guidance on when to use Python features (and when not to)</subtitle><entry><title>Walrus Hunting with StrEnum</title><link href="https://when-of-python.github.io/blog/walrus-hunting-with-strenum.html" rel="alternate"></link><published>2022-09-14T20:00:00+12:00</published><updated>2022-09-14T20:00:00+12:00</updated><author><name>Grant Paton-Simpson (with Ben Denham)</name></author><id>tag:when-of-python.github.io,2022-09-14:/blog/walrus-hunting-with-strenum.html</id><summary type="html">&lt;p&gt;The Walrus operator finally seemed to have found a practical use case - as a way to make collections of strings or integers without as much boiler plate as the alternative without the operator. But Python has a better approach already - Enum - and in Python 3.11 it is even easier to use with strings (StrEnum). So the Walrus operator still struggles to find a problem for which it is the best solution.&lt;/p&gt;</summary><content type="html">&lt;p&gt;What has your experience of the Walrus operator been? How about Enum and IntEnum? Do you agree with this post? Do you disagree? Please comment below.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The When of Python Blog - Python</title><link href="https://when-of-python.github.io/blog/" rel="alternate"></link><link href="https://when-of-python.github.io/blog/feeds/python.atom.xml" rel="self"></link><id>https://when-of-python.github.io/blog/</id><updated>2022-09-18T10:00:00+12:00</updated><subtitle>Guidance on when to use Python features (and when not to)</subtitle><entry><title>The Walrus and the (Software) Carpenter</title><link href="https://when-of-python.github.io/blog/the-walrus-and-the-software-carpenter.html" rel="alternate"></link><published>2022-09-18T10:00:00+12:00</published><updated>2022-09-18T10:00:00+12:00</updated><author><name>Grant Paton-Simpson</name></author><id>tag:when-of-python.github.io,2022-09-18:/blog/the-walrus-and-the-software-carpenter.html</id><summary type="html">&lt;p&gt;The Walrus operator encourages buggy code by conflating assignment with evaluation. PHP stands as a warning as to where this can lead. There are few, if any, cases where the convenience of the Walrus operator outweigh its risks. From a When of Python view, it should be Deprecated Python, or possibly Situational Python with very few situations accepted. The Walrus will almost never belong in production code.&lt;/p&gt;</summary><content type="html">&lt;p&gt;What has your experience of the Walrus operator been? Do you agree with this post? Do you disagree? Please comment below.&lt;/p&gt;
+&lt;h1&gt;The Walrus and the Carpenter - Lewis Carroll&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;...
+&lt;em&gt;&lt;br&gt;&lt;br&gt;The Walrus and the Carpenter
+&lt;br&gt;    Were walking close at hand;
+&lt;br&gt;They wept like anything to see
+&lt;br&gt;    Such quantities of sand:
+&lt;br&gt;If this were only cleared away,'
+&lt;br&gt;    They said, it would be grand!'
+&lt;br&gt;...
+&lt;br&gt;&lt;br&gt;Lewis Carroll - Through the Looking Glass&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img alt="Walrus and the Carpenter - illustrator John Tenniel" src="images/walrus_and_carpenter.jpg"&gt;&lt;/p&gt;
+&lt;h1&gt;The Walrus&lt;/h1&gt;
+&lt;p&gt;The Walrus operator is an assignment expression. Normally we assign values to names with the syntax &lt;code&gt;name = value&lt;/code&gt; e.g. &lt;code&gt;fname = 'Zac'&lt;/code&gt;. The Walrus operator allows us to perform assignment as an inline expression within another statement. For example, instead of:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;fname&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Zac'&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fname&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;we can save a line by writing:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f_name&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="s1"&gt;'Zac'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1&gt;The Software Carpenter&lt;/h1&gt;
+&lt;p&gt;"Software Carpenter" in this post means a skilled Software Engineer - someone who understands the craft of software development&lt;sup id="sf-the-walrus-and-the-software-carpenter-1-back"&gt;&lt;a href="#sf-the-walrus-and-the-software-carpenter-1" class="simple-footnote" title="Apologies if this is confusing to anyone. I am aware that the emphasis in Software Carpentry is on more basic skills but the Lewis Carroll reference was too good to pass up."&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;As an analogy I've built some very basic structures in my garage out of left-over pieces of timber.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Hacky woodwork" src="images/hacky_woodwork.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;They solve a practical need but would make a woodwork teacher cry. A skilled carpenter would build them much better.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Carpentry" src="images/carpentry.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;In the software world, there is a similar distinction to be made between hacking together code and being a Software Carpenter.&lt;/p&gt;
+&lt;p&gt;A Software Carpenter will care about the following:&lt;/p&gt;
+&lt;h2&gt;Readability and Maintainability&lt;/h2&gt;
+&lt;p&gt;Apart from throwaway code we need to care about readability and maintainability. In addition to unit testing and type hinting the best way of preventing bugs is to make code easily intelligible. This is especially important in projects which run for a long time and involve lots of different coders. And if code is mission critical or "enterprise" then it is especially important that code is written with readability as a high priority.&lt;/p&gt;
+&lt;h2&gt;Clever Coder not "Clever" Code&lt;/h2&gt;
+&lt;p&gt;Writing the simplest, most readable code possible is not easy. But that is the goal for a Software Carpenter. It can be fun to make the most dense, cryptic code possible - see &lt;a href="https://code.golf/"&gt;Code Golf&lt;/a&gt;. But we should never do this in production code i.e. code that matters. "Clever" code is a breeding ground for bugs.&lt;/p&gt;
+&lt;h1&gt;Walrus Examples - Simple, Readable Code?&lt;/h1&gt;
+&lt;p&gt;I recently asked for example code that demonstrated the value of the Walrus operator. The following was received:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;transaction_type&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="n"&gt;retrieve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;transaction&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;type&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"balance"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;show_balance&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;transaction_type&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"deposit"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;add_balance&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;transaction_type&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"withdrawal"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;decrease_balance&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="n"&gt;TransactionException&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;transaction_type&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="n"&gt;doesn&lt;/span&gt;&lt;span class="s1"&gt;'t make sense )&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;But avoiding the Walrus operator only adds one line (as was acknowledged up-front by the contributor) - namely:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;transaction_type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;retrieve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;transaction&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;type&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Using Python without the Walrus operator also simplifies the first condition clause. Instead of:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;transaction_type&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="n"&gt;retrieve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;transaction&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;type&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"balance"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;we have:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;transaction_type&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"balance"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So not a very compelling use case there.&lt;/p&gt;
+&lt;p&gt;Another example was discussed in &lt;a href="https://when-of-python.github.io/blog/walrus-hunting-with-strenum.html"&gt;Walrus Hunting with StrEnum&lt;/a&gt;. In that case StrEnum seems a better solution. The person suggesting the code agreed but said the example helped the Walrus operator click for them. Fair enough, but the search for a genuinely useful use case continues.&lt;/p&gt;
+&lt;p&gt;Another developer suggested a good use case for the Walrus operator was:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;filtered_list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="n"&gt;slow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;))]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;which seemed more persuasive. The &lt;code&gt;slow&lt;/code&gt; function is only called once per item. The non-Walrus, non-comprehension alternative is:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;filtered_list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;slow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;filtered_list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;which I have mixed feelings about. It &lt;em&gt;is&lt;/em&gt; a lot longer. But its meaning is so plain it is less likely to contain bugs.&lt;/p&gt;
+&lt;p&gt;In balance, perhaps, a Walrus operator is a good option in such a case. It is both elegant and efficient. This use case is arguably the most persuasive of those presented in &lt;a href="https://scribe.rip/should-you-be-using-pythons-walrus-operator-yes-and-here-s-why-36297be16907"&gt;Should You Be Using Python’s Walrus Operator? (Yes. And Here’s Why)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;But is a single use case of uncertain value enough to recommend teaching the Walrus operator to beginners? PHP is a language which has blended assignment and evaluation with often &lt;a href="https://www.php.net/manual/en/language.operators.logical.php"&gt;mind-boggling results&lt;/a&gt; - it is arguably a warning against this sort of "cleverness". Even an article promoting use of the Walrus operator (&lt;a href="https://scribe.rip/should-you-be-using-pythons-walrus-operator-yes-and-here-s-why-36297be16907"&gt;Should You Be Using Python’s Walrus Operator? (Yes. And Here’s Why)&lt;/a&gt;) acknowledges that the Walrus operator can be abused and it provides a useful section on "Gotchas and Limitations". If we want to shrink Common Python then tightly restricting the use of the Walrus operator is probably a good idea. Maybe it should be in Situational Python with a recommendation to limit usage to comprehensions.&lt;/p&gt;
+&lt;h1&gt;Current Verdict&lt;/h1&gt;
+&lt;p&gt;Until some compelling use cases for the Walrus appear we should probably discourage its widespread use in a When of Python. Mixing assignment and evaluation is a risky exercise and it would be better to invest energy understanding other safer and more useful language features or patterns instead. The one exception might be the use of the operator to avoid calling functions twice in comprehensions. The risks of this usage might be diminished if it became an idiomatic option (much the same way we often use lambdas when sorting). But generally speaking it might be best if Software Carpenters minimise contact with the Walrus:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;...
+&lt;em&gt;&lt;br&gt;&lt;br&gt;It seems a shame,' the Walrus said,
+&lt;br&gt;      To play them such a trick,
+&lt;br&gt;After we've brought them out so far,
+&lt;br&gt;      And made them trot so quick!'
+&lt;br&gt;...&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;&lt;ol class="simple-footnotes"&gt;&lt;li id="sf-the-walrus-and-the-software-carpenter-1"&gt;Apologies if this is confusing to anyone. I am aware that the emphasis in &lt;a href="https://www.software.ac.uk/programmes-events/carpentries/software-carpentry"&gt;Software Carpentry&lt;/a&gt; is on more basic skills but the &lt;a href="https://www.poetryfoundation.org/poems/43914/the-walrus-and-the-carpenter-56d222cbc80a9"&gt;Lewis Carroll reference&lt;/a&gt; was too good to pass up. &lt;a href="#sf-the-walrus-and-the-software-carpenter-1-back" class="simple-footnote-back"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content><category term="Python"></category><category term="python"></category><category term="walrus operator"></category></entry><entry><title>Walrus Hunting with StrEnum</title><link href="https://when-of-python.github.io/blog/walrus-hunting-with-strenum.html" rel="alternate"></link><published>2022-09-14T20:00:00+12:00</published><updated>2022-09-14T20:00:00+12:00</updated><author><name>Grant Paton-Simpson (with Ben Denham)</name></author><id>tag:when-of-python.github.io,2022-09-14:/blog/walrus-hunting-with-strenum.html</id><summary type="html">&lt;p&gt;The Walrus operator finally seemed to have found a practical use case - as a way to make collections of strings or integers without as much boiler plate as the alternative without the operator. But Python has a better approach already - Enum - and in Python 3.11 it is even easier to use with strings (StrEnum). So the Walrus operator still struggles to find a problem for which it is the best solution.&lt;/p&gt;</summary><content type="html">&lt;p&gt;What has your experience of the Walrus operator been? How about Enum and IntEnum? Do you agree with this post? Do you disagree? Please comment below.&lt;/p&gt;
 &lt;h1&gt;Walrus Operator - Finally a Useful Use Case?&lt;/h1&gt;
 &lt;h2&gt;The Walrus Operator&lt;/h2&gt;
 &lt;p&gt;The Walrus operator is named because &lt;code&gt;:=&lt;/code&gt; looks like the eyes and tusks of a walrus of its side. I really like the name&lt;sup id="sf-walrus-hunting-with-strenum-1-back"&gt;&lt;a href="#sf-walrus-hunting-with-strenum-1" class="simple-footnote" title="I also like the way Ruby has the delightfully named spaceship operator &lt;=&gt; Ruby — The Spaceship Operator 101"&gt;1&lt;/a&gt;&lt;/sup&gt; so it is a shame the Walrus operator isn't a useful addition to Python. Instead, the Walrus operator seems to be a solution looking for a problem. In spite of all the blog posts and tweets illustrating how it works there is very little that tries to explain why it is better than alternative approaches (unless we assume opaque one-liners are better than readable two-liners ;-)).&lt;/p&gt;
