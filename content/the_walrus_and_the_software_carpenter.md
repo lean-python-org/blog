@@ -4,7 +4,7 @@ Category: Python
 Tags: python, walrus operator
 Slug: the-walrus-and-the-software-carpenter
 Authors: Grant Paton-Simpson
-Summary: The Walrus operator encourages buggy code by conflating assignment with evaluation. PHP stands as a warning as to where this can lead. There are few, if any, cases where the convenience of the Walrus operator outweigh its risks. From a When of Python view, it should be Deprecated Python, or possibly Situational Python with very few situations accepted. The Walrus will almost never belong in production code.
+Summary: The Walrus operator risks encouraging buggy code by conflating assignment with evaluation. PHP stands as a warning as to where this can lead. There are few cases where the convenience of the Walrus operator outweigh its risks and even these are not clear-cut. From a When of Python view, the Walrus operator should be in Deprecated Python, or possibly Situational Python but with very few situations accepted. The Walrus will only very occasionally belong in production code.
 
 What has your experience of the Walrus operator been? Do you agree with this post? Do you disagree? Please comment below.
 
