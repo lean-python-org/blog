@@ -142,13 +142,13 @@
 
 <p>So not a very compelling use case there.</p>
 <p>Another example was discussed in <a href="https://when-of-python.github.io/blog/walrus-hunting-with-strenum.html">Walrus Hunting with StrEnum</a>. In that case StrEnum seems a better solution. The person suggesting the code agreed but said the example helped the Walrus operator click for them. Fair enough, but the search for a genuinely useful use case continues.</p>
-<p>Another developer suggested a good use case for the Walrus operator was:</p>
-<div class="highlight"><pre><span></span><code><span class="n">filtered_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">list</span> <span class="k">if</span> <span class="p">(</span><span class="n">res</span> <span class="o">:=</span> <span class="n">slow</span><span class="p">(</span><span class="n">item</span><span class="p">))]</span>
+<p>Another developer suggested a good use case for the Walrus operator was<sup id="sf-the-walrus-and-the-software-carpenter-2-back"><a href="#sf-the-walrus-and-the-software-carpenter-2" class="simple-footnote" title="I altered the example to avoid using the keywoprd list as a variable name as in the original example">2</a></sup>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">filtered_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span> <span class="k">if</span> <span class="p">(</span><span class="n">res</span> <span class="o">:=</span> <span class="n">slow</span><span class="p">(</span><span class="n">item</span><span class="p">))]</span>
 </code></pre></div>
 
 <p>which seemed more persuasive. The <code>slow</code> function is only called once per item. The non-Walrus, non-comprehension alternative is:</p>
 <div class="highlight"><pre><span></span><code><span class="n">filtered_list</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">:</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">slow</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
         <span class="n">filtered_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
@@ -166,7 +166,7 @@
 <br>After we've brought them out so far,
 <br>      And made them trot so quick!'
 <br>...</em></p>
-</blockquote><ol class="simple-footnotes"><li id="sf-the-walrus-and-the-software-carpenter-1">Apologies if this is confusing to anyone. I am aware that the emphasis in <a href="https://www.software.ac.uk/programmes-events/carpentries/software-carpentry">Software Carpentry</a> is on more basic skills but the <a href="https://www.poetryfoundation.org/poems/43914/the-walrus-and-the-carpenter-56d222cbc80a9">Lewis Carroll reference</a> was too good to pass up. <a href="#sf-the-walrus-and-the-software-carpenter-1-back" class="simple-footnote-back">↩</a></li></ol>
+</blockquote><ol class="simple-footnotes"><li id="sf-the-walrus-and-the-software-carpenter-1">Apologies if this is confusing to anyone. I am aware that the emphasis in <a href="https://www.software.ac.uk/programmes-events/carpentries/software-carpentry">Software Carpentry</a> is on more basic skills but the <a href="https://www.poetryfoundation.org/poems/43914/the-walrus-and-the-carpenter-56d222cbc80a9">Lewis Carroll reference</a> was too good to pass up. <a href="#sf-the-walrus-and-the-software-carpenter-1-back" class="simple-footnote-back">↩</a></li><li id="sf-the-walrus-and-the-software-carpenter-2">I altered the example to avoid using the keywoprd <code>list</code> as a variable name as in the original example <a href="#sf-the-walrus-and-the-software-carpenter-2-back" class="simple-footnote-back">↩</a></li></ol>
     </div>
   </article>
 <div id="comments">
