@@ -106,17 +106,17 @@ Another example was discussed in [Walrus Hunting with StrEnum](https://when-of-p
 Another developer suggested a good use case for the Walrus operator was:
 
 ```python
-filtered_list = [res for item in list if (res := slow(item))]
+filtered_items = [res for item in items if (res := slow(item))]
 ```
 
 which seemed more persuasive. The `slow` function is only called once per item. The non-Walrus, non-comprehension alternative is:
 
 ```python
-filtered_list = []
-for item in list:
+filtered_items = []
+for item in items:
     res = slow(item)
     if res:
-        filtered_list.append(res)
+        filtered_items.append(res)
 ```
 
 which I have mixed feelings about. It *is* a lot longer. But its meaning is so plain it is less likely to contain bugs.
