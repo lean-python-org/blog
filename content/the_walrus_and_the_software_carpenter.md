@@ -103,17 +103,17 @@ So not a very compelling use case there.
 
 Another example was discussed in [Walrus Hunting with StrEnum](https://when-of-python.github.io/blog/walrus-hunting-with-strenum.html). In that case StrEnum seems a better solution. The person suggesting the code agreed but said the example helped the Walrus operator click for them. Fair enough, but the search for a genuinely useful use case continues.
 
-Another developer suggested a good use case for the Walrus operator was:
+Another developer suggested a good use case for the Walrus operator was[ref]I altered the example to avoid using the keywoprd `list` as a variable name as in the original example[/ref]:
 
 ```python
-filtered_list = [res for item in list if (res := slow(item))]
+filtered_list = [res for item in items if (res := slow(item))]
 ```
 
 which seemed more persuasive. The `slow` function is only called once per item. The non-Walrus, non-comprehension alternative is:
 
 ```python
 filtered_list = []
-for item in list:
+for item in items:
     res = slow(item)
     if res:
         filtered_list.append(res)
