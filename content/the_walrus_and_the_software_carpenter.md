@@ -103,7 +103,7 @@ So not a very compelling use case there.
 
 Another example was discussed in [Walrus Hunting with StrEnum](https://when-of-python.github.io/blog/walrus-hunting-with-strenum.html). In that case StrEnum seems a better solution. The person suggesting the code agreed but said the example helped the Walrus operator click for them. Fair enough, but the search for a genuinely useful use case continues.
 
-Another developer suggested a good use case for the Walrus operator was[ref]The example has been altered to avoid using the keywoprd `list` as a variable name[/ref]:
+Another developer suggested a good use case for the Walrus operator was[ref]The example has been altered to avoid using the keyword `list` as a variable name[/ref]:
 
 ```python
 filtered_list = [res for item in items if (res := slow(item))]
