@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>  Classy Data with Dataclasses | The When of Python Blog
+</title>
+  <link rel="canonical" href="https://when-of-python.github.io/blog/classy-data-with-dataclasses.html">
+
+    <link rel="apple-touch-icon" href="https://when-of-python.github.io/blog/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" type="image/png" href="https://when-of-python.github.io/blog/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://when-of-python.github.io/blog/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="https://when-of-python.github.io/blog/manifest.json">
+    <meta name="theme-color" content="#333333">
+
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/css/darkly.bootstrap.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/theme/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/theme/css/pygments/native.min.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/theme/css/theme.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/css/custom.css">
+
+  <link rel="alternate" type="application/atom+xml" title="Full Atom Feed"
+        href="https://when-of-python.github.io/blog/feeds/all.atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="Categories Atom Feed"
+        href="https://when-of-python.github.io/blog/feeds/python.atom.xml">  
+  <meta name="description" content="Passing data around can easily become confusing. Dataclasses are a fantastic way of structuring and documenting our data and we should be using them a lot more. They are the only standard keyword-based data structure which can serve both our immutable and our mutable data needs. Maybe we should stop teaching collections.namedtuple and typing.NamedTuple and focus on making dataclasses.dataclasses as idiomatic, familiar, and readable as possible. It would be good to have One Obvious Way of creating keyword data structures.">
+
+
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+<div class="row">
+    <div class="col-sm-4">
+      <a href="https://when-of-python.github.io/blog/">
+        <img class="img-fluid rounded" src=https://when-of-python.github.io/blog/images/logo.png alt="The When of Python Blog">
+      </a>
+    </div>
+  <div class="col-sm-8">
+    <h1 class="title"><a href="https://when-of-python.github.io/blog/">The When of Python Blog</a></h1>
+      <p class="text-muted">
+<div class="text-muted" style="padding-bottom: 10px;">Guidance on when to use Python features (and when not to).</div>
+<div class="text-muted" style="padding-bottom: 10px;">Comment your opinions on our articles to join the discussion.</div>
+<div class="text-muted" style="padding-bottom: 10px;">Follow us on <a href="https://twitter.com/WhenOfPython">Twitter</a> and <a href="https://github.com/when-of-python">GitHub</a> to get the latest updates first.</div>
+</p>
+      <ul class="list-inline">
+          <li class="list-inline-item"><a class="fab fa-fa-brands fa-twitter" href="https://twitter.com/WhenOfPython" target="_blank"></a></li>
+          <li class="list-inline-item"><a class="fab fa-fa-brands fa-github" href="https://github.com/when-of-python" target="_blank"></a></li>
+      </ul>
+  </div>
+</div>    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>  Classy Data with Dataclasses
+</h1>
+      <hr>
+  <article class="article">
+    <header>
+      <ul class="list-inline">
+        <li class="list-inline-item text-muted" title="2022-09-25T23:00:00+13:00">
+          <i class="fas fa-clock"></i>
+          Sun 25 September 2022
+        </li>
+        <li class="list-inline-item">
+          <i class="fas fa-folder-open"></i>
+          <a href="https://when-of-python.github.io/blog/category/python.html">Python</a>
+        </li>
+          <li class="list-inline-item">
+            <i class="fas fa-user"></i>
+              <a href="https://when-of-python.github.io/blog/author/grant-paton-simpson.html">Grant Paton-Simpson</a>          </li>
+          <li class="list-inline-item">
+            <i class="fas fa-tag"></i>
+              <a href="https://when-of-python.github.io/blog/tag/python.html">#python</a>,               <a href="https://when-of-python.github.io/blog/tag/dataclasses.html">#dataclasses</a>,               <a href="https://when-of-python.github.io/blog/tag/namedtuple.html">#namedtuple</a>          </li>
+      </ul>
+    </header>
+    <div class="content">
+      <p>What has your experience of dataclasses been? Do you agree with this post? Do you disagree? Please comment below.</p>
+<h1>Introduction</h1>
+<p>Passing data around can easily become confusing. Dataclasses are a fantastic way of structuring and documenting our data and we should be using them a lot more. Maybe we should stop teaching <code>collections.namedtuple</code> and <code>typing.NamedTuple</code> and focus on making <code>dataclasses.dataclass</code>es as idiomatic, familiar, and readable as possible. This article compares different approaches to creating data structures and concludes with examples of dataclasses used in conjunction with type hinting.</p>
+<h1>Passing Data Around With Confidence</h1>
+<p>Passing data around is reasonably easy in Python. The syntax for tuples, lists, dictionaries, and sets is clean and easy to learn. Passing data around without being confused or uncertain - that takes more care. For example, imagine we are passing around coordinate data with latitude, longitude, and a code for the type of coordinate system. We can do it in a positional way or with keywords. But which is easier to deal with? <code>(35, 35, 27200)</code> or <code>{'lat': 35, 'lon': 35, 'srid': 27200}</code>? Which approach is most likely to result in bugs? And which approach is going to cope easiest with extra items and reordered data? While there are cases where plain tuples are a good choice the moment readability is jeopardised we should use a data structure option with keywords. But which type of keyword data structure should we choose?</p>
+<h1>Dicts vs namedtuples vs NamedTuples vs Dataclasses</h1>
+<p>Dictionaries are very flexibile and mutable - which is their greatest strength and their greatest weakness. When you receive a dictionary you can never be sure which keywords it will be using or whether it has been tampered with. Perhaps someone added the 'latitude' keyword and the dictionary is now:</p>
+<p><code>{'lat': 35, 'lon': 35, 'srid': 27200, 'latitude': 35}</code></p>
+<p>Dictionaries also require extra boilerplate to construct.</p>
+<p><code>Collections.namedtuple</code> provides a good solution where a dot notation is possible, keywords are fixed, data can (more often) be trusted, and yet it is possible to populate them in a lightweight way if that makes most sense. For example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+
+<span class="n">Coord</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">'Coord'</span><span class="p">,</span> <span class="s1">'lat, lon, srid'</span><span class="p">)</span>
+
+<span class="c1">## Lightweight usage</span>
+<span class="n">place_a</span> <span class="o">=</span> <span class="n">Coord</span><span class="p">(</span><span class="o">-</span><span class="mi">36</span><span class="p">,</span> <span class="mi">174</span><span class="p">,</span> <span class="mi">4326</span><span class="p">)</span>
+<span class="n">place_b</span> <span class="o">=</span> <span class="n">Coord</span><span class="p">(</span><span class="o">-</span><span class="mi">37</span><span class="p">,</span> <span class="mi">175</span><span class="p">,</span> <span class="mi">4326</span><span class="p">)</span>
+
+<span class="c1">## More explicit usage (if so desired)</span>
+<span class="n">place_c</span> <span class="o">=</span> <span class="n">Coord</span><span class="p">(</span><span class="n">lat</span><span class="o">=-</span><span class="mi">36</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="mi">175</span><span class="p">,</span> <span class="n">srid</span><span class="o">=</span><span class="mi">4326</span><span class="p">)</span>
+
+<span class="n">Better</span> <span class="n">Handling</span> <span class="n">of</span> <span class="n">Defaults</span> <span class="ow">and</span> <span class="n">Item</span> <span class="n">Types</span>
+<span class="o">==========================================</span>
+
+<span class="err">`</span><span class="n">typing</span><span class="o">.</span><span class="n">NamedTuple</span><span class="err">`</span> <span class="n">offers</span> <span class="n">an</span> <span class="n">even</span> <span class="n">better</span> <span class="n">approach</span> <span class="k">with</span> <span class="n">a</span> <span class="n">very</span> <span class="n">readable</span> <span class="n">syntax</span><span class="o">.</span> <span class="n">E</span><span class="o">.</span><span class="n">g</span><span class="o">.</span>
+
+<span class="err">```</span><span class="n">python</span>
+<span class="k">class</span> <span class="nc">Coord</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="n">lat</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">lon</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">srid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4326</span>
+</code></pre></div>
+
+<p>If you are working with a <code>typing.NamedTuple</code> Coord in your code it is very easy to see just what you are dealing with and to reason about it. Merely hovering over a type hint or instantiation will be enough to understand what data you are receiving / passing without having to lose focus on the actual coding.</p>
+<p>It is hard to overstate how valuable this in when passing around non-trivial data structures. It also proves its worth when changing the details of your data structure - it is very easy to introduce bugs when changes aren't propagated successfully throughout the code. Having a clearly defined (and discoverable) structure makes it easy to search for uses and make consistent changes with confidence.</p>
+<h1>Type Hinting and Data Types</h1>
+<h2>Type Hinting</h2>
+<p>Type hinting is an important part of modern Python - whether used as glorified comments or for stricter static type checking purposes (see <a href="https://when-of-python.github.io/blog/type-hinting-get-the-hint.html">Get the Hint - Type Hinting is Common Python</a>. Used judiciously it can make code much more readable.</p>
+<p>For example, which is easier to understand - a function definition without type hinting:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_map</span><span class="p">(</span><span class="n">coords</span><span class="p">):</span>
+    <span class="o">...</span>
+</code></pre></div>
+
+<p>or a definition with hinting:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_map</span><span class="p">(</span><span class="n">coords</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Coord</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="o">...</span>
+</code></pre></div>
+
+<p>In the case where hinting is used we can hover over <code>Coord</code> in our IDE and see precisely what we should expect including keywords to use and types.</p>
+<p>Note - this is not an argument for type hinting everything all of the time. That is a separate debate. The point here is that type hinting, combined with a readable type of data structure, can make code much safer and more pleasant to work with.</p>
+<h2>Why Dataclasses?</h2>
+<p>This is a fair question - <code>typing.NamedTuple</code> is a very good solution - so why do we need dataclasses? In some ways it is a close call and initially I concluded that we didn't in most cases <sup id="sf-classy-data-with-dataclasses-1-back"><a href="#sf-classy-data-with-dataclasses-1" class="simple-footnote" title="Python Named Tuples vs Data Classes">1</a></sup>. There are some good arguments for using named tuples in some cases as explained in <a href="https://death.andgravity.com/namedtuples">namedtuple in a post-dataclasses world</a>. But I've changed my mind more recently because of the need to constrict Python for all the reasons covered in the <a href="https://www.youtube.com/watch?v=JnY5MEiqG44">original When of Python talk</a>. The unique benefit of dataclasses is that we can use them for all our keyword data structure needs - whether mutable or immutable. This is not true of named tuples. We can also focus our teaching / learning efforts on using dataclasses and using them well. We can forget about <code>collection.namedtuple</code>'s approach to default arguments and its different ways of defining fields. We can forget about remembering the difference between <code>namedtuples</code> and <code>NamedTuples</code>.  We can forget about the sometimes subtle differences between <code>dataclasses.dataclass</code> and <code>typing.NamedTuple</code><sup id="sf-classy-data-with-dataclasses-2-back"><a href="#sf-classy-data-with-dataclasses-2" class="simple-footnote" title="For example, no special function is needed to unpack or iterate over named tuples">2</a></sup>. In short, we can ensure there is One Obvious Way of creating keyword data structures.</p>
+<p>Note - depending on how they're used<sup id="sf-classy-data-with-dataclasses-3-back"><a href="#sf-classy-data-with-dataclasses-3" class="simple-footnote" title="Vanilla dataclasses can't be unpacked or iterated over without special functions so code relying on that will break without other modifications">3</a></sup> it may not be too hard to swap out <code>typing.NamedTuple</code>s for <code>dataclasses.dataclass</code>es:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">## typing.NamedTuple</span>
+<span class="k">class</span> <span class="nc">Coord</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="n">lat</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">lon</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">srid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4326</span>
+
+<span class="c1">## dataclasses.dataclass</span>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Coord</span><span class="p">:</span>
+    <span class="n">lat</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">lon</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">srid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4326</span>
+</code></pre></div>
+
+<h1>Bringing it Together</h1>
+<p>Type hinting with dataclasses makes it very easy to know what data functions expect and what data they'll produce in a way that tuples, lists, dictionaries, and sets do not.</p>
+<p>To illustrate:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Sequence</span>
+
+<span class="n">WGS84</span> <span class="o">=</span> <span class="mi">4326</span>
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Coord</span><span class="p">:</span>
+    <span class="n">lat</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">lon</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">srid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">WGS84</span>
+
+<span class="o">...</span>
+
+<span class="c1">## Hundreds of lines of code later, or in another module</span>
+
+<span class="n">coords</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+    <span class="c1">## When writing this code I know which keywords I have to play with</span>
+    <span class="c1">## I just hover over Coord and everything is very clear</span>
+    <span class="n">coords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Coord</span><span class="p">(</span><span class="n">lat</span><span class="o">=</span><span class="n">latitude</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="n">longitude</span><span class="p">,</span> <span class="n">srid</span><span class="o">=</span><span class="n">WGS84</span><span class="p">))</span>
+
+<span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">make_map</span><span class="p">(</span><span class="n">Sequence</span><span class="p">[</span><span class="n">Coord</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">coord</span><span class="o">.</span><span class="n">srid</span> <span class="o">!=</span> <span class="n">WGS84</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"Unexpected SRID - got </span><span class="si">{</span><span class="n">coord</span><span class="o">.</span><span class="n">srid</span><span class="si">}</span><span class="s2"> instead of </span><span class="si">{</span><span class="n">WGS84</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Maybe we should stop teaching <code>collections.namedtuple</code> and <code>typing.NamedTuple</code> and focus on making <code>dataclasses.dataclass</code>es as idiomatic, familiar, and readable as possible. There are big benefits for the Python community in having One Obvious Way of creating keyword data structures. For all the reasons covered in the article, dataclasses are a classy way of working with data.</p><ol class="simple-footnotes"><li id="sf-classy-data-with-dataclasses-1"><a href="http://p-s.co.nz/wordpress/python-named-tuples-vs-data-classes/">Python Named Tuples vs Data Classes</a> <a href="#sf-classy-data-with-dataclasses-1-back" class="simple-footnote-back">↩</a></li><li id="sf-classy-data-with-dataclasses-2">For example, no special function is needed to unpack or iterate over named tuples <a href="#sf-classy-data-with-dataclasses-2-back" class="simple-footnote-back">↩</a></li><li id="sf-classy-data-with-dataclasses-3">Vanilla dataclasses can't be unpacked or iterated over without special functions so code relying on that will break without other modifications <a href="#sf-classy-data-with-dataclasses-3-back" class="simple-footnote-back">↩</a></li></ol>
+    </div>
+  </article>
+<div id="comments">
+  <div id="comments-inner">
+    <div id="manual-commenting"></div>
+    <script src="https://utteranc.es/client.js"
+            repo="when-of-python/blog"
+            issue-term="pathname"
+            theme="github-dark-orange"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  <script src="https://when-of-python.github.io/blog/js/comments.js"></script>
+</div>    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+<div class="row">
+  <ul class="col-sm-6 list-inline">
+      <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/authors.html">Authors</a></li>
+    <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/archives.html">Archives</a></li>
+    <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/categories.html">Categories</a></li>
+      <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/tags.html">Tags</a></li>
+  </ul>
+  <p class="col-sm-6 text-sm-right text-muted">
+    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
+    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+  </p>
+</div>    </div>
+  </footer>
+
+</body>
+
+</html>
