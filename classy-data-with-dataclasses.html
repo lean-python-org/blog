@@ -100,14 +100,11 @@
 
 <span class="c1">## More explicit usage (if so desired)</span>
 <span class="n">place_c</span> <span class="o">=</span> <span class="n">Coord</span><span class="p">(</span><span class="n">lat</span><span class="o">=-</span><span class="mi">36</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="mi">175</span><span class="p">,</span> <span class="n">srid</span><span class="o">=</span><span class="mi">4326</span><span class="p">)</span>
+</code></pre></div>
 
-<span class="n">Better</span> <span class="n">Handling</span> <span class="n">of</span> <span class="n">Defaults</span> <span class="ow">and</span> <span class="n">Item</span> <span class="n">Types</span>
-<span class="o">==========================================</span>
-
-<span class="err">`</span><span class="n">typing</span><span class="o">.</span><span class="n">NamedTuple</span><span class="err">`</span> <span class="n">offers</span> <span class="n">an</span> <span class="n">even</span> <span class="n">better</span> <span class="n">approach</span> <span class="k">with</span> <span class="n">a</span> <span class="n">very</span> <span class="n">readable</span> <span class="n">syntax</span><span class="o">.</span> <span class="n">E</span><span class="o">.</span><span class="n">g</span><span class="o">.</span>
-
-<span class="err">```</span><span class="n">python</span>
-<span class="k">class</span> <span class="nc">Coord</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+<h1>Better Handling of Defaults and Item Types</h1>
+<p><code>typing.NamedTuple</code> offers an even better approach with a very readable syntax. E.g.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Coord</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="n">lat</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">lon</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">srid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4326</span>
