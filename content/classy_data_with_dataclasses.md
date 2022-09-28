@@ -40,6 +40,7 @@ place_b = Coord(-37, 175, 4326)
 
 ## More explicit usage (if so desired)
 place_c = Coord(lat=-36, lon=175, srid=4326)
+```
 
 Better Handling of Defaults and Item Types
 ==========================================
