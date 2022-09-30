@@ -11,7 +11,7 @@ What has your experience of dataclasses been? Do you agree with this post? Do yo
 Introduction
 ============
 
-Passing data around can easily become confusing. Dataclasses are a fantastic way of structuring and documenting our data and we should be using them a lot more. Maybe we should stop teaching `collections.namedtuple` and `typing.NamedTuple` and focus on making `dataclasses.dataclass`es as idiomatic, familiar, and readable as possible. This article compares different approaches to creating data structures and concludes with examples of dataclasses used in conjunction with type hinting.
+Passing data around can easily become confusing. Dataclasses are a fantastic way of structuring and documenting our data and we should be using them a lot more (see [Why You Should Use Data Classes in Python](https://www.giulianopertile.com/blog/why-you-should-use-dataclasses-in-python/)). Maybe we should stop teaching `collections.namedtuple` and `typing.NamedTuple` and focus on making `dataclasses.dataclass`es as idiomatic, familiar, and readable as possible. This article compares different approaches to creating data structures and concludes with examples of dataclasses used in conjunction with type hinting.
 
 Passing Data Around With Confidence
 ===================================
