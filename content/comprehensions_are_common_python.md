@@ -8,8 +8,16 @@ Summary: List comprehensions, and other types of comprehensions such as set comp
 
 What has your experience of comprehensions been? Do you agree with this post? Do you disagree? Please comment below.
 
+Overview
+========
+
+Comprehensions are well covered elsewhere so we'll only briefly introduce them below before making the specific points relevant to the When of Python. In summary, it will be argued that comprehensions are such an important part of Python we should treat them as Common Python but that we should only use this compressed syntax when it is relatively easy to understand.
+
+Comprehensions
+==============
+
 List Comprehensions
-===================
+-------------------
 
 List comprehensions are a good starting point to explain the syntax and value of Python comprehensions. A common need in programming is to take a collection of items and return a modified or filtered collection. For example, maybe we want the square of every number in a list: `[1, 2, 3] => [1, 4, 9]`.
 
@@ -48,7 +56,7 @@ squares = [num ** 2 for num in numbers if num < 3]
 ```
 
 Other Comprehensions
-====================
+--------------------
 
 Python 3 introduced other comprehensions including dictionary and set comprehensions. For example:
 
