@@ -43,7 +43,94 @@
 &lt;p&gt;Certainly, comprehensions are very widespread in Python code, so we should include them in Common Python - that is, those features we should all know so we can basically read each other's work.&lt;/p&gt;
 &lt;p&gt;Note - just because we consider comprehensions Common Python and not Situational Python doesn't mean we shouldn't be thoughtful about when to use them and when not to.&lt;/p&gt;
 &lt;h1&gt;Incomprehensions&lt;/h1&gt;
-&lt;p&gt;Being one-liners (even if stretched over several lines) comprehensions can attract the same "cleverness" which plagues a lot of code. The desire to fit complexity into a single line can overwhelm concerns with readability, maintainability, and avoiding bugs. As a general rule of thumb, if a comprehension stops being easy to read, use an alternative approach instead e.g. a &lt;code&gt;for&lt;/code&gt; loop or &lt;code&gt;map&lt;/code&gt;. Note - Walrus operators in comprehensions should generally be viewed as "tricky" and not worth the cost.&lt;/p&gt;</content><category term="Python"></category><category term="comprehensions"></category><category term="feedback"></category><category term="common python"></category></entry><entry><title>Classy Data with Dataclasses</title><link href="https://when-of-python.github.io/blog/classy-data-with-dataclasses.html" rel="alternate"></link><published>2022-09-25T23:00:00+13:00</published><updated>2022-09-25T23:00:00+13:00</updated><author><name>Grant Paton-Simpson</name></author><id>tag:when-of-python.github.io,2022-09-25:/blog/classy-data-with-dataclasses.html</id><summary type="html">&lt;p&gt;Passing data around can easily become confusing. Dataclasses are a fantastic way of structuring and documenting our data and we should be using them a lot more. They are the only standard keyword-based data structure which can serve both our immutable and our mutable data needs. Maybe we should stop teaching &lt;code&gt;collections.namedtuple&lt;/code&gt; and &lt;code&gt;typing.NamedTuple&lt;/code&gt; and focus on making &lt;code&gt;dataclasses.dataclass&lt;/code&gt;es as idiomatic, familiar, and readable as possible. It would be good to have One Obvious Way of creating keyword data structures.&lt;/p&gt;</summary><content type="html">&lt;p&gt;What has your experience of dataclasses been? Do you agree with this post? Do you disagree? Please comment below.&lt;/p&gt;
+&lt;p&gt;Being one-liners (even if stretched over several lines) comprehensions can attract the same "cleverness" which plagues a lot of code. The desire to fit complexity into a single line can overwhelm concerns with readability, maintainability, and avoiding bugs. As a general rule of thumb, if a comprehension stops being easy to read, use an alternative approach instead e.g. a &lt;code&gt;for&lt;/code&gt; loop or &lt;code&gt;map&lt;/code&gt;. Note - Walrus operators in comprehensions should generally be viewed as "tricky" and not worth the cost.&lt;/p&gt;</content><category term="Python"></category><category term="comprehensions"></category><category term="feedback"></category><category term="common python"></category></entry><entry><title>Match Case - A Simple Switch Statement for Python?</title><link href="https://when-of-python.github.io/blog/simple-switch-statement-for-python.html" rel="alternate"></link><published>2022-10-02T18:00:00+13:00</published><updated>2022-10-02T18:00:00+13:00</updated><author><name>Grant Paton-Simpson</name></author><id>tag:when-of-python.github.io,2022-10-02:/blog/simple-switch-statement-for-python.html</id><summary type="html">&lt;p&gt;At first glance, match case (Structural Pattern Matching) looks like a simple switch statement for Python. Unfortunately, match case is a mini-language that is unsafe to use apart from the very narrow cases where its benefits outweigh its costs / risks.&lt;/p&gt;</summary><content type="html">&lt;p&gt;What has your experience of match case (Structural Pattern Matching) been? Do you agree with this post? Do you disagree? Please comment below.&lt;/p&gt;
+&lt;h1&gt;Simple Switch Statement at Last?&lt;/h1&gt;
+&lt;p&gt;Python has always lacked a &lt;code&gt;switch&lt;/code&gt; statement to perform conditional logic e.g.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;## Note - not actual Python&lt;/span&gt;
+&lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;when&lt;/span&gt; &lt;span class="n"&gt;eggs&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;'spam'&lt;/span&gt;
+    &lt;span class="n"&gt;when&lt;/span&gt; &lt;span class="n"&gt;knights&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;'Ni!'&lt;/span&gt;
+    &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The switch approach can be found in languages like PHP and also in SQL (&lt;code&gt;CASE&lt;/code&gt; &lt;code&gt;WHEN&lt;/code&gt; &lt;code&gt;THEN&lt;/code&gt; &lt;code&gt;END&lt;/code&gt; etc).&lt;/p&gt;
+&lt;p&gt;Instead, Python has relied largely on &lt;code&gt;if&lt;/code&gt;-&lt;code&gt;elif&lt;/code&gt;-&lt;code&gt;else&lt;/code&gt; constructs and, to a lesser extent, dictionaries - for example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;mapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;'eggs'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'spam'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'knights'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'Ni!'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mapper&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'eggs'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In Python 3.10, Structural Pattern Matching (match case) was added which raised some questions. Was this basically a switch statement on steroids? Should we all start using this for our conditional logic? And could it be time to largely retire &lt;code&gt;if&lt;/code&gt;-&lt;code&gt;elif&lt;/code&gt;-&lt;code&gt;else&lt;/code&gt; constructs? Initial impressions were positive. Certainly the higher level syntax for Structural Pattern Matching looks clean and elegant:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;match&lt;/span&gt; &lt;span class="n"&gt;food&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="s1"&gt;'eggs'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;'spam'&lt;/span&gt;
+    &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Unfortunately major concerns arise when we take a closer look.&lt;/p&gt;
+&lt;h1&gt;Python Pattern Matching Problems&lt;/h1&gt;
+&lt;h2&gt;New Mini Language&lt;/h2&gt;
+&lt;p&gt;Structural Pattern Matching is a new mini language in Python - a powerful language that looks like normal Python but isn't. And that is where the main gotchas come from.&lt;/p&gt;
+&lt;h2&gt;Similarity to Object Instantiation Misleading&lt;/h2&gt;
+&lt;p&gt;Imagine we have a &lt;code&gt;Point&lt;/code&gt; class:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Point&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;case Point(x, y):&lt;/code&gt; seems to me to be an obvious way of looking for such a &lt;code&gt;Point&lt;/code&gt; object and unpacking its values into &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; but it isn't allowed. It is a perfectly valid syntax for instantiating a &lt;code&gt;Point&lt;/code&gt; object but we are not instantiating an object and supplying the object the case condition – instead we are supplying a pattern to be matched and unpacked. We have to have a firm grasp on the notion that Python patterns are not objects. If we forget we get a &lt;code&gt;TypeError&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;Point&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;999&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+&lt;span class="c1"&gt;## TypeError: Point() accepts 0 positional sub-patterns (2 given)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note, we must match the parameter names (the left side) but can unpack to any variable names we like (the right side). For example, all of the following will work:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;Point&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;Point&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;lon&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;lat&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;Point&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;apple&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;banana&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;but&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;Point&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;will not.&lt;/p&gt;
+&lt;p&gt;It is a bit disconcerting being forced to use what feel like keyword arguments in our patterns when the original class definition is optionally positional. We should expect lots of mistakes here and it will require concentration to pick them up in code review.&lt;/p&gt;
+&lt;h2&gt;Similarity to &lt;code&gt;isinstance&lt;/code&gt; Misleading&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;case Point:&lt;/code&gt;, &lt;code&gt;case int:&lt;/code&gt;, &lt;code&gt;case str:&lt;/code&gt;, &lt;code&gt;case float:&lt;/code&gt; don’t work as you might expect. The proper approach is to supply parentheses: using the example of integer patterns, we need &lt;code&gt;case int():&lt;/code&gt;, or, if we want to "capture" the value into, say, &lt;code&gt;x&lt;/code&gt;, &lt;code&gt;case int(x):&lt;/code&gt;. But if we don't know about the need for parentheses, or we slip up (easy to do) these inadvertant patterns will match anything and assign it to the name Point or int or str etc. Definitely NOT what we want.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="the builtin str is now broken – hopefully obviously" src="images/str_overwritten.png"&gt;&lt;/p&gt;
+&lt;p&gt;The only protection against making this mistake is when you accidentally do this before other case conditions – e.g.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;^&lt;/span&gt;
+&lt;span class="ne"&gt;SyntaxError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="n"&gt;capture&lt;/span&gt; &lt;span class="s1"&gt;'int'&lt;/span&gt; &lt;span class="n"&gt;makes&lt;/span&gt; &lt;span class="n"&gt;remaining&lt;/span&gt; &lt;span class="n"&gt;patterns&lt;/span&gt; &lt;span class="n"&gt;unreachable&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Otherwise you are on your own and completely free to make broken code. This will probably be a common error because of our experience with isinstance where we supply the type e.g. &lt;code&gt;isinstance(x, int)&lt;/code&gt;. Which reminds me of a passage in &lt;em&gt;Through the Looking-Glass, and What Alice Found There&lt;/em&gt; by Lewis Carroll.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="A Bread-and-Butterfly" src="images/bread_and_butterfly.png"&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;‘Crawling at your feet,’ said the Gnat (Alice drew her feet back in some alarm),
+‘you may observe a Bread-and-Butterfly. Its wings are thin slices of Bread-and-butter,
+its body is a crust, and its head is a lump of sugar.’&lt;/p&gt;
+&lt;p&gt;‘And what does it live on?’&lt;/p&gt;
+&lt;p&gt;‘Weak tea with cream in it.’&lt;/p&gt;
+&lt;p&gt;A new difficulty came into Alice’s head. ‘Supposing it couldn’t find any?’ she suggested.&lt;/p&gt;
+&lt;p&gt;‘Then it would die, of course.’&lt;/p&gt;
+&lt;p&gt;‘But that must happen very often,’ Alice remarked thoughtfully.&lt;/p&gt;
+&lt;p&gt;‘It always happens,’ said the Gnat. After this, Alice was silent for a minute or two, pondering.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1&gt;Use Cases (in Python)&lt;/h1&gt;
+&lt;p&gt;OK - so we should probably avoid case match in any situation where it is simpler and safer to use &lt;code&gt;if-elif-else&lt;/code&gt; or another alternative - which will almost be all cases. Although Pattern Matching might be a great feature in Scala, it doesn't appear likely to be all that useful in a language like Python.&lt;/p&gt;
+&lt;p&gt;Having said that, match case is not completely without value for Python. Structural Pattern Matching does appear to be useful for parsing complex nested data such as ASTs or deeply nested JSON. &lt;sup id="sf-simple-switch-statement-for-python-1-back"&gt;&lt;a href="#sf-simple-switch-statement-for-python-1" class="simple-footnote" title="Trey Hunner - Twitter"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I do not recommend embracing match-case EXCEPT in the unusual cases where it's VERY handy.&lt;/p&gt;
+&lt;p&gt;The use case I had happened to be one of those weird cases (recursively matching the types and attribute values of Python AST nodes).&lt;/p&gt;
+&lt;p&gt;It can be pretty handy in some niche cases though.
+(Trey Hunner - Python trainer)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;But beyond that, it is hard to see the benefits outweighing the costs.&lt;/p&gt;
+&lt;h1&gt;Verdict&lt;/h1&gt;
+&lt;p&gt;Structural Pattern Matching should be for very narrow situational use only. Match case is not an important alternative for conditional logic in Python. In a narrow range of specialist cases it is probably the right tool for the job but it should not be thought of as Common Python.&lt;/p&gt;&lt;ol class="simple-footnotes"&gt;&lt;li id="sf-simple-switch-statement-for-python-1"&gt;&lt;a href="https://twitter.com/treyhunner/status/1575591049569144832"&gt;Trey Hunner - Twitter&lt;/a&gt; &lt;a href="#sf-simple-switch-statement-for-python-1-back" class="simple-footnote-back"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content><category term="Python"></category><category term="match case"></category><category term="structural pattern matching"></category></entry><entry><title>Classy Data with Dataclasses</title><link href="https://when-of-python.github.io/blog/classy-data-with-dataclasses.html" rel="alternate"></link><published>2022-09-25T23:00:00+13:00</published><updated>2022-09-25T23:00:00+13:00</updated><author><name>Grant Paton-Simpson</name></author><id>tag:when-of-python.github.io,2022-09-25:/blog/classy-data-with-dataclasses.html</id><summary type="html">&lt;p&gt;Passing data around can easily become confusing. Dataclasses are a fantastic way of structuring and documenting our data and we should be using them a lot more. They are the only standard keyword-based data structure which can serve both our immutable and our mutable data needs. Maybe we should stop teaching &lt;code&gt;collections.namedtuple&lt;/code&gt; and &lt;code&gt;typing.NamedTuple&lt;/code&gt; and focus on making &lt;code&gt;dataclasses.dataclass&lt;/code&gt;es as idiomatic, familiar, and readable as possible. It would be good to have One Obvious Way of creating keyword data structures.&lt;/p&gt;</summary><content type="html">&lt;p&gt;What has your experience of dataclasses been? Do you agree with this post? Do you disagree? Please comment below.&lt;/p&gt;
 &lt;h1&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;Passing data around can easily become confusing. Dataclasses are a fantastic way of structuring and documenting our data and we should be using them a lot more (see &lt;a href="https://www.giulianopertile.com/blog/why-you-should-use-dataclasses-in-python/"&gt;Why You Should Use Data Classes in Python&lt;/a&gt;). Maybe we should stop teaching &lt;code&gt;collections.namedtuple&lt;/code&gt; and &lt;code&gt;typing.NamedTuple&lt;/code&gt; and focus on making &lt;code&gt;dataclasses.dataclass&lt;/code&gt;es as idiomatic, familiar, and readable as possible. This article compares different approaches to creating data structures and concludes with examples of dataclasses used in conjunction with type hinting.&lt;/p&gt;
 &lt;h1&gt;Passing Data Around With Confidence&lt;/h1&gt;

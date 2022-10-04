@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>  Match Case - A Simple Switch Statement for Python? | The When of Python Blog
+</title>
+  <link rel="canonical" href="https://when-of-python.github.io/blog/simple-switch-statement-for-python.html">
+
+    <link rel="apple-touch-icon" href="https://when-of-python.github.io/blog/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" type="image/png" href="https://when-of-python.github.io/blog/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://when-of-python.github.io/blog/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="https://when-of-python.github.io/blog/manifest.json">
+    <meta name="theme-color" content="#333333">
+
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/css/darkly.bootstrap.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/theme/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/theme/css/pygments/native.min.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/theme/css/theme.css">
+  <link rel="stylesheet" href="https://when-of-python.github.io/blog/css/custom.css">
+
+  <link rel="alternate" type="application/atom+xml" title="Full Atom Feed"
+        href="https://when-of-python.github.io/blog/feeds/all.atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="Categories Atom Feed"
+        href="https://when-of-python.github.io/blog/feeds/python.atom.xml">  
+  <meta name="description" content="At first glance, match case (Structural Pattern Matching) looks like a simple switch statement for Python. Unfortunately, match case is a mini-language that is unsafe to use apart from the very narrow cases where its benefits outweigh its costs / risks.">
+
+
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+<div class="row">
+    <div class="col-sm-4">
+      <a href="https://when-of-python.github.io/blog/">
+        <img class="img-fluid rounded" src=https://when-of-python.github.io/blog/images/logo.png alt="The When of Python Blog">
+      </a>
+    </div>
+  <div class="col-sm-8">
+    <h1 class="title"><a href="https://when-of-python.github.io/blog/">The When of Python Blog</a></h1>
+      <p class="text-muted">
+<div class="text-muted" style="padding-bottom: 10px;">Guidance on when to use Python features (and when not to).</div>
+<div class="text-muted" style="padding-bottom: 10px;">Comment your opinions on our articles to join the discussion.</div>
+<div class="text-muted" style="padding-bottom: 10px;">Follow us on <a href="https://twitter.com/WhenOfPython">Twitter</a> and <a href="https://github.com/when-of-python">GitHub</a> to get the latest updates first.</div>
+</p>
+      <ul class="list-inline">
+          <li class="list-inline-item"><a class="fab fa-fa-brands fa-twitter" href="https://twitter.com/WhenOfPython" target="_blank"></a></li>
+          <li class="list-inline-item"><a class="fab fa-fa-brands fa-github" href="https://github.com/when-of-python" target="_blank"></a></li>
+      </ul>
+  </div>
+</div>    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>  Match Case - A Simple Switch Statement for Python?
+</h1>
+      <hr>
+  <article class="article">
+    <header>
+      <ul class="list-inline">
+        <li class="list-inline-item text-muted" title="2022-10-02T18:00:00+13:00">
+          <i class="fas fa-clock"></i>
+          Sun 02 October 2022
+        </li>
+        <li class="list-inline-item">
+          <i class="fas fa-folder-open"></i>
+          <a href="https://when-of-python.github.io/blog/category/python.html">Python</a>
+        </li>
+          <li class="list-inline-item">
+            <i class="fas fa-user"></i>
+              <a href="https://when-of-python.github.io/blog/author/grant-paton-simpson.html">Grant Paton-Simpson</a>          </li>
+          <li class="list-inline-item">
+            <i class="fas fa-tag"></i>
+              <a href="https://when-of-python.github.io/blog/tag/match-case.html">#match case</a>,               <a href="https://when-of-python.github.io/blog/tag/structural-pattern-matching.html">#structural pattern matching</a>          </li>
+      </ul>
+    </header>
+    <div class="content">
+      <p>What has your experience of match case (Structural Pattern Matching) been? Do you agree with this post? Do you disagree? Please comment below.</p>
+<h1>Simple Switch Statement at Last?</h1>
+<p>Python has always lacked a <code>switch</code> statement to perform conditional logic e.g.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">## Note - not actual Python</span>
+<span class="k">case</span> <span class="n">foo</span><span class="p">:</span>
+    <span class="n">when</span> <span class="n">eggs</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">'spam'</span>
+    <span class="n">when</span> <span class="n">knights</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">'Ni!'</span>
+    <span class="o">...</span>
+</code></pre></div>
+
+<p>The switch approach can be found in languages like PHP and also in SQL (<code>CASE</code> <code>WHEN</code> <code>THEN</code> <code>END</code> etc).</p>
+<p>Instead, Python has relied largely on <code>if</code>-<code>elif</code>-<code>else</code> constructs and, to a lesser extent, dictionaries - for example:</p>
+<div class="highlight"><pre><span></span><code><span class="n">mapper</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'eggs'</span><span class="p">:</span> <span class="s1">'spam'</span><span class="p">,</span> <span class="s1">'knights'</span><span class="p">:</span> <span class="s1">'Ni!'</span><span class="p">,</span> <span class="o">...</span><span class="p">}</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">mapper</span><span class="p">[</span><span class="s1">'eggs'</span><span class="p">]</span>
+</code></pre></div>
+
+<p>In Python 3.10, Structural Pattern Matching (match case) was added which raised some questions. Was this basically a switch statement on steroids? Should we all start using this for our conditional logic? And could it be time to largely retire <code>if</code>-<code>elif</code>-<code>else</code> constructs? Initial impressions were positive. Certainly the higher level syntax for Structural Pattern Matching looks clean and elegant:</p>
+<div class="highlight"><pre><span></span><code><span class="k">match</span> <span class="n">food</span><span class="p">:</span>
+    <span class="k">case</span> <span class="s1">'eggs'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">'spam'</span>
+    <span class="k">case</span> <span class="o">...</span>
+</code></pre></div>
+
+<p>Unfortunately major concerns arise when we take a closer look.</p>
+<h1>Python Pattern Matching Problems</h1>
+<h2>New Mini Language</h2>
+<p>Structural Pattern Matching is a new mini language in Python - a powerful language that looks like normal Python but isn't. And that is where the main gotchas come from.</p>
+<h2>Similarity to Object Instantiation Misleading</h2>
+<p>Imagine we have a <code>Point</code> class:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Point</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="k">pass</span>
+</code></pre></div>
+
+<p><code>case Point(x, y):</code> seems to me to be an obvious way of looking for such a <code>Point</code> object and unpacking its values into <code>x</code> and <code>y</code> but it isn't allowed. It is a perfectly valid syntax for instantiating a <code>Point</code> object but we are not instantiating an object and supplying the object the case condition – instead we are supplying a pattern to be matched and unpacked. We have to have a firm grasp on the notion that Python patterns are not objects. If we forget we get a <code>TypeError</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">case</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">999</span><span class="p">):</span>
+
+<span class="c1">## TypeError: Point() accepts 0 positional sub-patterns (2 given)</span>
+</code></pre></div>
+
+<p>Note, we must match the parameter names (the left side) but can unpack to any variable names we like (the right side). For example, all of the following will work:</p>
+<div class="highlight"><pre><span></span><code><span class="k">case</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">):</span>
+<span class="k">case</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">lon</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">lat</span><span class="p">):</span>
+<span class="k">case</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">apple</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">banana</span><span class="p">):</span>
+</code></pre></div>
+
+<p>but</p>
+<div class="highlight"><pre><span></span><code><span class="k">case</span> <span class="n">Point</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">y</span><span class="p">):</span>
+</code></pre></div>
+
+<p>will not.</p>
+<p>It is a bit disconcerting being forced to use what feel like keyword arguments in our patterns when the original class definition is optionally positional. We should expect lots of mistakes here and it will require concentration to pick them up in code review.</p>
+<h2>Similarity to <code>isinstance</code> Misleading</h2>
+<p><code>case Point:</code>, <code>case int:</code>, <code>case str:</code>, <code>case float:</code> don’t work as you might expect. The proper approach is to supply parentheses: using the example of integer patterns, we need <code>case int():</code>, or, if we want to "capture" the value into, say, <code>x</code>, <code>case int(x):</code>. But if we don't know about the need for parentheses, or we slip up (easy to do) these inadvertant patterns will match anything and assign it to the name Point or int or str etc. Definitely NOT what we want.</p>
+<p><img alt="the builtin str is now broken – hopefully obviously" src="images/str_overwritten.png"></p>
+<p>The only protection against making this mistake is when you accidentally do this before other case conditions – e.g.</p>
+<div class="highlight"><pre><span></span><code><span class="k">case</span> <span class="nb">int</span><span class="p">:</span>
+<span class="o">^</span>
+<span class="ne">SyntaxError</span><span class="p">:</span> <span class="n">name</span> <span class="n">capture</span> <span class="s1">'int'</span> <span class="n">makes</span> <span class="n">remaining</span> <span class="n">patterns</span> <span class="n">unreachable</span>
+</code></pre></div>
+
+<p>Otherwise you are on your own and completely free to make broken code. This will probably be a common error because of our experience with isinstance where we supply the type e.g. <code>isinstance(x, int)</code>. Which reminds me of a passage in <em>Through the Looking-Glass, and What Alice Found There</em> by Lewis Carroll.</p>
+<p><img alt="A Bread-and-Butterfly" src="images/bread_and_butterfly.png"></p>
+<blockquote>
+<p>‘Crawling at your feet,’ said the Gnat (Alice drew her feet back in some alarm),
+‘you may observe a Bread-and-Butterfly. Its wings are thin slices of Bread-and-butter,
+its body is a crust, and its head is a lump of sugar.’</p>
+<p>‘And what does it live on?’</p>
+<p>‘Weak tea with cream in it.’</p>
+<p>A new difficulty came into Alice’s head. ‘Supposing it couldn’t find any?’ she suggested.</p>
+<p>‘Then it would die, of course.’</p>
+<p>‘But that must happen very often,’ Alice remarked thoughtfully.</p>
+<p>‘It always happens,’ said the Gnat. After this, Alice was silent for a minute or two, pondering.</p>
+</blockquote>
+<h1>Use Cases (in Python)</h1>
+<p>OK - so we should probably avoid case match in any situation where it is simpler and safer to use <code>if-elif-else</code> or another alternative - which will almost be all cases. Although Pattern Matching might be a great feature in Scala, it doesn't appear likely to be all that useful in a language like Python.</p>
+<p>Having said that, match case is not completely without value for Python. Structural Pattern Matching does appear to be useful for parsing complex nested data such as ASTs or deeply nested JSON. <sup id="sf-simple-switch-statement-for-python-1-back"><a href="#sf-simple-switch-statement-for-python-1" class="simple-footnote" title="Trey Hunner - Twitter">1</a></sup></p>
+<blockquote>
+<p>I do not recommend embracing match-case EXCEPT in the unusual cases where it's VERY handy.</p>
+<p>The use case I had happened to be one of those weird cases (recursively matching the types and attribute values of Python AST nodes).</p>
+<p>It can be pretty handy in some niche cases though.
+(Trey Hunner - Python trainer)</p>
+</blockquote>
+<p>But beyond that, it is hard to see the benefits outweighing the costs.</p>
+<h1>Verdict</h1>
+<p>Structural Pattern Matching should be for very narrow situational use only. Match case is not an important alternative for conditional logic in Python. In a narrow range of specialist cases it is probably the right tool for the job but it should not be thought of as Common Python.</p><ol class="simple-footnotes"><li id="sf-simple-switch-statement-for-python-1"><a href="https://twitter.com/treyhunner/status/1575591049569144832">Trey Hunner - Twitter</a> <a href="#sf-simple-switch-statement-for-python-1-back" class="simple-footnote-back">↩</a></li></ol>
+    </div>
+  </article>
+<div id="comments">
+  <div id="comments-inner">
+    <div id="manual-commenting"></div>
+    <script src="https://utteranc.es/client.js"
+            repo="when-of-python/blog"
+            issue-term="pathname"
+            theme="github-dark-orange"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+  <script src="https://when-of-python.github.io/blog/js/comments.js"></script>
+</div>    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+<div class="row">
+  <ul class="col-sm-6 list-inline">
+      <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/authors.html">Authors</a></li>
+    <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/archives.html">Archives</a></li>
+    <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/categories.html">Categories</a></li>
+      <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/tags.html">Tags</a></li>
+  </ul>
+  <p class="col-sm-6 text-sm-right text-muted">
+    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
+    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+  </p>
+</div>    </div>
+  </footer>
+
+</body>
+
+</html>
