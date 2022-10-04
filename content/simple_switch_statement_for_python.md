@@ -136,6 +136,7 @@ Having said that, match case is not completely without value for Python. Structu
 > The use case I had happened to be one of those weird cases (recursively matching the types and attribute values of Python AST nodes).
 > 
 > It can be pretty handy in some niche cases though.
+> 
 > (Trey Hunner - Python trainer)
 
 But beyond that, it is hard to see the benefits outweighing the costs.
