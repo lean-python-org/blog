@@ -1,5 +1,5 @@
 Title: Match Case - A Simple Switch Statement for Python?
-Date: 2022-10-02 18:00
+Date: 2022-10-05 07:00
 Category: Python
 Tags: match case, structural pattern matching
 Slug: simple-switch-statement-for-python
