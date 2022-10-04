@@ -81,8 +81,8 @@ its body is a crust, and its head is a lump of sugar.’&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;I do not recommend embracing match-case EXCEPT in the unusual cases where it's VERY handy.&lt;/p&gt;
 &lt;p&gt;The use case I had happened to be one of those weird cases (recursively matching the types and attribute values of Python AST nodes).&lt;/p&gt;
-&lt;p&gt;It can be pretty handy in some niche cases though.
-(Trey Hunner - Python trainer)&lt;/p&gt;
+&lt;p&gt;It can be pretty handy in some niche cases though.&lt;/p&gt;
+&lt;p&gt;(Trey Hunner - Python trainer)&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;But beyond that, it is hard to see the benefits outweighing the costs.&lt;/p&gt;
 &lt;h1&gt;Verdict&lt;/h1&gt;
