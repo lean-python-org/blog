@@ -1,7 +1,7 @@
 Title: Comprehensions are Common Python
 Date: 2022-10-02 18:00
 Category: Python
-Tags: feedback
+Tags: comprehensions, feedback, common python
 Slug: comprehensions-are-common-python
 Authors: Grant Paton-Simpson
 Summary: List comprehensions, and other types of comprehensions such as set comprehensions, are such an important part of Python we should treat them as Common Python - that is, as a feature we should all know so we can basically read each other's work. Even though they are Common Python we should only use this compressed syntax when it is relatively easy to understand. The rule of thumb is that we should change to another approach if our comprehension becomes an _in_comprehension.
