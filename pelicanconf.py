@@ -55,3 +55,17 @@ THEME_CSS_OVERRIDES = ['css/custom.css']
 PYGMENTS_STYLE = 'native'
 
 THEME_TEMPLATES_OVERRIDES = ['template-overrides/']
+
+SITEMAP = {
+    'format': 'xml',
+    'priorities': {
+        'articles': 0.6,
+        'pages': 0.5,
+        'indexes': 0.5,
+    },
+    'changefreqs': {
+        'articles': 'daily',
+        'pages': 'monthly',
+        'indexes': 'daily',
+    },
+}

@@ -8,6 +8,7 @@ authors = ["Grant Paton-Simpson", "Ben Denham"]
 python = "^3.8"
 pelican = {extras = ["markdown"], version = "^4.8.0"}
 pelican-simple-footnotes = "^1.0.2"
+pelican-sitemap = "^1.0.2"
 
 [tool.poetry.dev-dependencies]
 ghp-import = "^2.1.0"
