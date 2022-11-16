@@ -47,7 +47,7 @@ EXTRA_PATH_METADATA = {
     'extras/mstile-150x150.png': {'path': 'mstile-150x150.png'},
     'extras/safari-pinned-tab.svg': {'path': 'safari-pinned-tab.svg'},
     'extras/site.webmanifest': {'path': 'site.webmanifest'},
-    'extras/google61a446b9d9e5e822.html': {'path': 'google61a446b9d9e5e822.html'},
+    'extras/googledaf848b752ddf6e8.html': {'path': 'googledaf848b752ddf6e8.html'},
 }
 RFG_FAVICONS = True
 BOOTSTRAP_CSS = 'css/darkly.bootstrap.css'
