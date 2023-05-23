@@ -1,20 +1,5 @@
 # The When of Python Blog
 
-## Setup
+> !!! Moved to: https://github.com/when-of-python/web/tree/main/blog !!!
 
-* Install [Poetry](https://python-poetry.org/docs/#installation)
-* Check poetry runs; if not, you might need to add \~/.local/bin to your BASH path e.g. put this line in \~/.bashrc  
-`export PATH=~/.local/bin:$PATH`
-* Clone repo & cd into main directory
-* Run `git submodule update --init`
-* Run `make deps`
-
-## Writing Content
-
-* Run `make devserver`
-* View live changes at `http://localhost:8000`
-* Add/edit markdown files inside `/content`
-
-## Publishing
-
-* Run `make github`
+This repo still hosts blog discussion threads in the Issues queue.
