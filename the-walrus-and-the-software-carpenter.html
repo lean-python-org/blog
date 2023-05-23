@@ -9,6 +9,7 @@
   <title>  The Walrus and the (Software) Carpenter | The When of Python Blog
 </title>
   <link rel="canonical" href="https://when-of-python.github.io/blog/the-walrus-and-the-software-carpenter.html">
+  <meta http-equiv="refresh" content="0; url='https://whenof.python.nz/blog/the-walrus-and-the-software-carpenter.html'" />
 
     <link rel="apple-touch-icon" href="https://when-of-python.github.io/blog/apple-touch-icon.png" sizes="180x180">
     <link rel="icon" type="image/png" href="https://when-of-python.github.io/blog/favicon-32x32.png" sizes="32x32">
@@ -32,173 +33,11 @@
 </head>
 
 <body>
-  <header class="header">
-    <div class="container">
-<div class="row">
-    <div class="col-sm-4">
-      <a href="https://when-of-python.github.io/blog/">
-        <img class="img-fluid rounded" src=https://when-of-python.github.io/blog/images/logo.png alt="The When of Python Blog">
-      </a>
-    </div>
-  <div class="col-sm-8">
-    <h1 class="title"><a href="https://when-of-python.github.io/blog/">The When of Python Blog</a></h1>
-      <p class="text-muted">
-<div class="text-muted" style="padding-bottom: 10px;">Guidance on when to use Python features (and when not to).</div>
-<div class="text-muted" style="padding-bottom: 10px;">Comment your opinions on our articles to join the discussion.</div>
-<div class="text-muted" style="padding-bottom: 10px;">Follow us on <a href="https://twitter.com/WhenOfPython">Twitter</a> and <a href="https://github.com/when-of-python">GitHub</a> to get the latest updates first.</div>
-</p>
-      <ul class="list-inline">
-          <li class="list-inline-item"><a class="fab fa-fa-brands fa-twitter" href="https://twitter.com/WhenOfPython" target="_blank"></a></li>
-          <li class="list-inline-item"><a class="fab fa-fa-brands fa-github" href="https://github.com/when-of-python" target="_blank"></a></li>
-      </ul>
-  </div>
-</div>    </div>
-  </header>
-
   <div class="main">
     <div class="container">
-      <h1>  The Walrus and the (Software) Carpenter
-</h1>
-      <hr>
-  <article class="article">
-    <header>
-      <ul class="list-inline">
-        <li class="list-inline-item text-muted" title="2022-09-18T10:00:00+12:00">
-          <i class="fas fa-clock"></i>
-          Sun 18 September 2022
-        </li>
-        <li class="list-inline-item">
-          <i class="fas fa-folder-open"></i>
-          <a href="https://when-of-python.github.io/blog/category/python.html">Python</a>
-        </li>
-          <li class="list-inline-item">
-            <i class="fas fa-user"></i>
-              <a href="https://when-of-python.github.io/blog/author/grant-paton-simpson.html">Grant Paton-Simpson</a>          </li>
-          <li class="list-inline-item">
-            <i class="fas fa-tag"></i>
-              <a href="https://when-of-python.github.io/blog/tag/python.html">#python</a>,               <a href="https://when-of-python.github.io/blog/tag/walrus-operator.html">#walrus operator</a>          </li>
-      </ul>
-    </header>
-    <div class="content">
-      <p>What has your experience of the Walrus operator been? Do you agree with this post? Do you disagree? Please comment below.</p>
-<h1>The Walrus and the Carpenter - Lewis Carroll</h1>
-<blockquote>
-<p>...
-<em><br><br>The Walrus and the Carpenter
-<br>    Were walking close at hand;
-<br>They wept like anything to see
-<br>    Such quantities of sand:
-<br>If this were only cleared away,'
-<br>    They said, it would be grand!'
-<br>...
-<br><br>Lewis Carroll - Through the Looking Glass</em></p>
-</blockquote>
-<p><img alt="Walrus and the Carpenter - illustrator John Tenniel" src="images/walrus_and_carpenter.jpg"></p>
-<h1>The Walrus</h1>
-<p>The Walrus operator is an assignment expression. Normally we assign values to names with the syntax <code>name = value</code> e.g. <code>fname = 'Zac'</code>. The Walrus operator allows us to perform assignment as an inline expression within another statement. For example, instead of:</p>
-<div class="highlight"><pre><span></span><code><span class="n">fname</span> <span class="o">=</span> <span class="s1">'Zac'</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-</code></pre></div>
-
-<p>we can save a line by writing:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">f_name</span> <span class="o">:=</span> <span class="s1">'Zac'</span><span class="p">)</span>
-</code></pre></div>
-
-<h1>The Software Carpenter</h1>
-<p>"Software Carpenter" in this post means a skilled Software Engineer - someone who understands the craft of software development<sup id="sf-the-walrus-and-the-software-carpenter-1-back"><a href="#sf-the-walrus-and-the-software-carpenter-1" class="simple-footnote" title="Apologies if this is confusing to anyone. I am aware that the emphasis in Software Carpentry is on more basic skills but the Lewis Carroll reference was too good to pass up.">1</a></sup>.</p>
-<p>As an analogy I've built some very basic structures in my garage out of left-over pieces of timber.</p>
-<p><img alt="Hacky woodwork" src="images/hacky_woodwork.jpg"></p>
-<p>They solve a practical need but would make a woodwork teacher cry. A skilled carpenter would build them much better.</p>
-<p><img alt="Carpentry" src="images/carpentry.jpg"></p>
-<p>In the software world, there is a similar distinction to be made between hacking together code and being a Software Carpenter.</p>
-<p>A Software Carpenter will care about the following:</p>
-<h2>Readability and Maintainability</h2>
-<p>Apart from throwaway code we need to care about readability and maintainability. In addition to unit testing and type hinting the best way of preventing bugs is to make code easily intelligible. This is especially important in projects which run for a long time and involve lots of different coders. And if code is mission critical or "enterprise" then it is especially important that code is written with readability as a high priority.</p>
-<h2>Clever Coder not "Clever" Code</h2>
-<p>Writing the simplest, most readable code possible is not easy. But that is the goal for a Software Carpenter. It can be fun to make the most dense, cryptic code possible - see <a href="https://code.golf/">Code Golf</a>. But we should never do this in production code i.e. code that matters. "Clever" code is a breeding ground for bugs.</p>
-<h1>Walrus Examples - Simple, Readable Code?</h1>
-<p>I recently asked for example code that demonstrated the value of the Walrus operator. The following was received:</p>
-<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(</span> <span class="n">transaction_type</span> <span class="o">:=</span> <span class="n">retrieve</span><span class="p">(</span> <span class="n">transaction</span> <span class="p">)</span><span class="o">.</span><span class="n">type</span> <span class="p">)</span> <span class="o">==</span> <span class="s2">"balance"</span><span class="p">:</span>
-    <span class="n">show_balance</span><span class="p">()</span>
-<span class="k">elif</span> <span class="n">transaction_type</span> <span class="o">==</span> <span class="s2">"deposit"</span><span class="p">:</span>
-    <span class="n">add_balance</span><span class="p">()</span>
-<span class="k">elif</span> <span class="n">transaction_type</span> <span class="o">==</span> <span class="s2">"withdrawal"</span><span class="p">:</span>
-    <span class="n">decrease_balance</span><span class="p">()</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="k">raise</span> <span class="n">TransactionException</span><span class="p">(</span> <span class="n">transaction_type</span><span class="o">...</span><span class="n">doesn</span><span class="s1">'t make sense )</span>
-</code></pre></div>
-
-<p>But avoiding the Walrus operator only adds one line (as was acknowledged up-front by the contributor) - namely:</p>
-<div class="highlight"><pre><span></span><code><span class="n">transaction_type</span> <span class="o">=</span> <span class="n">retrieve</span><span class="p">(</span> <span class="n">transaction</span> <span class="p">)</span><span class="o">.</span><span class="n">type</span>
-</code></pre></div>
-
-<p>Using Python without the Walrus operator also simplifies the first condition clause. Instead of:</p>
-<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(</span> <span class="n">transaction_type</span> <span class="o">:=</span> <span class="n">retrieve</span><span class="p">(</span> <span class="n">transaction</span> <span class="p">)</span><span class="o">.</span><span class="n">type</span> <span class="p">)</span> <span class="o">==</span> <span class="s2">"balance"</span><span class="p">:</span>
-</code></pre></div>
-
-<p>we have:</p>
-<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="n">transaction_type</span> <span class="o">==</span> <span class="s2">"balance"</span><span class="p">:</span>
-</code></pre></div>
-
-<p>So not a very compelling use case there.</p>
-<p>Another example was discussed in <a href="https://when-of-python.github.io/blog/walrus-hunting-with-strenum.html">Walrus Hunting with StrEnum</a>. In that case StrEnum seems a better solution. The person suggesting the code agreed but said the example helped the Walrus operator click for them. Fair enough, but the search for a genuinely useful use case continues.</p>
-<p>Another developer suggested a good use case for the Walrus operator was<sup id="sf-the-walrus-and-the-software-carpenter-2-back"><a href="#sf-the-walrus-and-the-software-carpenter-2" class="simple-footnote" title="The example has been altered to avoid using the keyword list as a variable name">2</a></sup>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">filtered_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span> <span class="k">if</span> <span class="p">(</span><span class="n">res</span> <span class="o">:=</span> <span class="n">slow</span><span class="p">(</span><span class="n">item</span><span class="p">))]</span>
-</code></pre></div>
-
-<p>which seemed more persuasive. The <code>slow</code> function is only called once per item. The non-Walrus, non-comprehension alternative is:</p>
-<div class="highlight"><pre><span></span><code><span class="n">filtered_list</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">slow</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
-        <span class="n">filtered_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
-</code></pre></div>
-
-<p>which I have mixed feelings about. It <em>is</em> a lot longer. But its meaning is so plain it is less likely to contain bugs.</p>
-<p>In balance, perhaps, a Walrus operator is a good option in such a case. It is both elegant and efficient. This use case is arguably the most persuasive of those presented in <a href="https://scribe.rip/should-you-be-using-pythons-walrus-operator-yes-and-here-s-why-36297be16907">Should You Be Using Python’s Walrus Operator? (Yes. And Here’s Why)</a>.</p>
-<p>But is a single use case of uncertain value enough to recommend teaching the Walrus operator to beginners? PHP is a language which has blended assignment and evaluation with often <a href="https://www.php.net/manual/en/language.operators.logical.php">mind-boggling results</a> - it is arguably a warning against this sort of "cleverness". Even an article promoting use of the Walrus operator (<a href="https://scribe.rip/should-you-be-using-pythons-walrus-operator-yes-and-here-s-why-36297be16907">Should You Be Using Python’s Walrus Operator? (Yes. And Here’s Why)</a>) acknowledges that the Walrus operator can be abused and it provides a useful section on "Gotchas and Limitations". If we want to shrink Common Python then tightly restricting the use of the Walrus operator is probably a good idea. Maybe it should be in Situational Python with a recommendation to limit usage to comprehensions.</p>
-<h1>Current Verdict</h1>
-<p>Until some compelling use cases for the Walrus appear we should probably discourage its widespread use in a When of Python. Mixing assignment and evaluation is a risky exercise and it would be better to invest energy understanding other safer and more useful language features or patterns instead. The one exception might be the use of the operator to avoid calling functions twice in comprehensions. The risks of this usage might be diminished if it became an idiomatic option (much the same way we often use lambdas when sorting). But generally speaking it might be best if Software Carpenters minimise contact with the Walrus:</p>
-<blockquote>
-<p>...
-<em><br><br>It seems a shame,' the Walrus said,
-<br>      To play them such a trick,
-<br>After we've brought them out so far,
-<br>      And made them trot so quick!'
-<br>...</em></p>
-</blockquote><ol class="simple-footnotes"><li id="sf-the-walrus-and-the-software-carpenter-1">Apologies if this is confusing to anyone. I am aware that the emphasis in <a href="https://www.software.ac.uk/programmes-events/carpentries/software-carpentry">Software Carpentry</a> is on more basic skills but the <a href="https://www.poetryfoundation.org/poems/43914/the-walrus-and-the-carpenter-56d222cbc80a9">Lewis Carroll reference</a> was too good to pass up. <a href="#sf-the-walrus-and-the-software-carpenter-1-back" class="simple-footnote-back">↩</a></li><li id="sf-the-walrus-and-the-software-carpenter-2">The example has been altered to avoid using the keyword <code>list</code> as a variable name <a href="#sf-the-walrus-and-the-software-carpenter-2-back" class="simple-footnote-back">↩</a></li></ol>
+      <p>Redirecting to <a href="https://whenof.python.nz/blog/the-walrus-and-the-software-carpenter.html">whenof.python.nz/blog/the-walrus-and-the-software-carpenter.html</a></p>
     </div>
-  </article>
-<div id="comments">
-  <div id="comments-inner">
-    <div id="manual-commenting"></div>
-    <script src="https://utteranc.es/client.js"
-            repo="when-of-python/blog"
-            issue-term="pathname"
-            theme="github-dark-orange"
-            crossorigin="anonymous"
-            async>
-    </script>
   </div>
-  <script src="https://when-of-python.github.io/blog/js/comments.js"></script>
-</div>    </div>
-  </div>
-
-  <footer class="footer">
-    <div class="container">
-<div class="row">
-  <ul class="col-sm-6 list-inline">
-      <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/authors.html">Authors</a></li>
-    <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/archives.html">Archives</a></li>
-    <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/categories.html">Categories</a></li>
-      <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/tags.html">Tags</a></li>
-  </ul>
-  <p class="col-sm-6 text-sm-right text-muted">
-    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
-    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
-  </p>
-</div>    </div>
-  </footer>
 
 </body>
 

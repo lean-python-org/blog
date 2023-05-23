@@ -9,6 +9,7 @@
   <title>  Comprehensions are Common Python | The When of Python Blog
 </title>
   <link rel="canonical" href="https://when-of-python.github.io/blog/comprehensions-are-common-python.html">
+  <meta http-equiv="refresh" content="0; url='https://whenof.python.nz/blog/comprehensions-are-common-python.html'" />
 
     <link rel="apple-touch-icon" href="https://when-of-python.github.io/blog/apple-touch-icon.png" sizes="180x180">
     <link rel="icon" type="image/png" href="https://when-of-python.github.io/blog/favicon-32x32.png" sizes="32x32">
@@ -32,131 +33,11 @@
 </head>
 
 <body>
-  <header class="header">
-    <div class="container">
-<div class="row">
-    <div class="col-sm-4">
-      <a href="https://when-of-python.github.io/blog/">
-        <img class="img-fluid rounded" src=https://when-of-python.github.io/blog/images/logo.png alt="The When of Python Blog">
-      </a>
-    </div>
-  <div class="col-sm-8">
-    <h1 class="title"><a href="https://when-of-python.github.io/blog/">The When of Python Blog</a></h1>
-      <p class="text-muted">
-<div class="text-muted" style="padding-bottom: 10px;">Guidance on when to use Python features (and when not to).</div>
-<div class="text-muted" style="padding-bottom: 10px;">Comment your opinions on our articles to join the discussion.</div>
-<div class="text-muted" style="padding-bottom: 10px;">Follow us on <a href="https://twitter.com/WhenOfPython">Twitter</a> and <a href="https://github.com/when-of-python">GitHub</a> to get the latest updates first.</div>
-</p>
-      <ul class="list-inline">
-          <li class="list-inline-item"><a class="fab fa-fa-brands fa-twitter" href="https://twitter.com/WhenOfPython" target="_blank"></a></li>
-          <li class="list-inline-item"><a class="fab fa-fa-brands fa-github" href="https://github.com/when-of-python" target="_blank"></a></li>
-      </ul>
-  </div>
-</div>    </div>
-  </header>
-
   <div class="main">
     <div class="container">
-      <h1>  Comprehensions are Common Python
-</h1>
-      <hr>
-  <article class="article">
-    <header>
-      <ul class="list-inline">
-        <li class="list-inline-item text-muted" title="2022-10-02T18:00:00+13:00">
-          <i class="fas fa-clock"></i>
-          Sun 02 October 2022
-        </li>
-        <li class="list-inline-item">
-          <i class="fas fa-folder-open"></i>
-          <a href="https://when-of-python.github.io/blog/category/python.html">Python</a>
-        </li>
-          <li class="list-inline-item">
-            <i class="fas fa-user"></i>
-              <a href="https://when-of-python.github.io/blog/author/grant-paton-simpson.html">Grant Paton-Simpson</a>          </li>
-          <li class="list-inline-item">
-            <i class="fas fa-tag"></i>
-              <a href="https://when-of-python.github.io/blog/tag/comprehensions.html">#comprehensions</a>,               <a href="https://when-of-python.github.io/blog/tag/feedback.html">#feedback</a>,               <a href="https://when-of-python.github.io/blog/tag/common-python.html">#common python</a>          </li>
-      </ul>
-    </header>
-    <div class="content">
-      <p>What has your experience of comprehensions been? Do you agree with this post? Do you disagree? Please comment below.</p>
-<h1>Overview</h1>
-<p>Comprehensions are well covered elsewhere so we'll only briefly introduce them below before making the specific points relevant to the When of Python. In summary, it will be argued that comprehensions are such an important part of Python we should treat them as Common Python but that we should only use this compressed syntax when it is relatively easy to understand.</p>
-<h1>Comprehensions</h1>
-<h2>List Comprehensions</h2>
-<p>List comprehensions are a good starting point to explain the syntax and value of Python comprehensions. A common need in programming is to take a collection of items and return a modified or filtered collection. For example, maybe we want the square of every number in a list: <code>[1, 2, 3] =&gt; [1, 4, 9]</code>.</p>
-<p>We could create this new list using a <code>for</code> loop:</p>
-<div class="highlight"><pre><span></span><code><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="n">squares</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
-    <span class="n">squares</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
-</code></pre></div>
-
-<p>Or using <code>map</code> we could write:</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span>
-
-<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="n">squares</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">square</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
-</code></pre></div>
-
-<p>In pseudocode what we want is collect into a list the square of every item in the <code>numbers</code> list. In Python we can write code where the syntax is very similar to the pseudocode using a comprehension:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">## squares is a list of the square of every item in the numbers list</span>
-<span class="n">squares</span> <span class="o">=</span> <span class="p">[</span><span class="n">num</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">]</span>
-</code></pre></div>
-
-<p>And if we want to only include numbers &lt; 3 the syntax is still very similar to a simple pseudo code version of what is desired.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">## squares is a list of the square of every item in the numbers list</span>
-<span class="c1">## if the number &lt; 3</span>
-<span class="n">squares</span> <span class="o">=</span> <span class="p">[</span><span class="n">num</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numbers</span> <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">]</span>
-</code></pre></div>
-
-<h2>Other Comprehensions</h2>
-<p>Python 3 introduced other comprehensions including dictionary and set comprehensions. For example:</p>
-<div class="highlight"><pre><span></span><code><span class="n">names</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Charles&#39;</span><span class="p">,</span> <span class="s1">&#39;George&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Camilla&#39;</span><span class="p">,</span> <span class="s1">&#39;Shand&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Charles&#39;</span><span class="p">,</span> <span class="s1">&#39;Dickens&#39;</span><span class="p">)]</span>
-<span class="n">unique_fnames</span> <span class="o">=</span> <span class="p">{</span><span class="n">fname</span> <span class="k">for</span> <span class="n">fname</span><span class="p">,</span> <span class="n">_lname</span> <span class="ow">in</span> <span class="n">names</span><span class="p">}</span>
-</code></pre></div>
-
-<h1>Comprehensions are Common Python</h1>
-<p>Comprehensions are Common Python (see <a href="https://when-of-python.github.io/blog/welcome-to-when-of-python.html">Welcome to the When of Python</a>). This point was actually controversial in a Python mailing list debate in 2018. The objection to treating comprehensions as Common Python was that developers working with Python often come from other languages which don't have comprehension constructs. It was suggested that little would be lost avoiding their usage but the benefit would be that Rust developers, for example, could work on Python code without having to learn an unfamiliar concept.</p>
-<p>Against this position I think comprehensions are an elegant, readable way of expressing simple tasks into relatively simple code (once the approach has been learned). For a defence of comprehensions I refer to Raymond Hettinger's classic talk on <a href="https://youtu.be/OSGv2VnC0go?t=2755">Transforming Code into Beautiful, Idiomatic Python</a>. Hettinger argues that we shouldn't break atoms of thought into subatomic particles. He advocates instead for concise, expressive one-liners where one logical line of code equals one sentence in English. We shouldn't cripple Python to keep it compatible with as many other languages as possible.</p>
-<p>Certainly, comprehensions are very widespread in Python code, so we should include them in Common Python - that is, those features we should all know so we can basically read each other's work.</p>
-<p>Note - just because we consider comprehensions Common Python and not Situational Python doesn't mean we shouldn't be thoughtful about when to use them and when not to.</p>
-<h1>Incomprehensions</h1>
-<p>Being one-liners (even if stretched over several lines) comprehensions can attract the same "cleverness" which plagues a lot of code. The desire to fit complexity into a single line can overwhelm concerns with readability, maintainability, and avoiding bugs. As a general rule of thumb, if a comprehension stops being easy to read, use an alternative approach instead e.g. a <code>for</code> loop or <code>map</code>. Note - Walrus operators in comprehensions should generally be viewed as "tricky" and not worth the cost.</p>
+      <p>Redirecting to <a href="https://whenof.python.nz/blog/comprehensions-are-common-python.html">whenof.python.nz/blog/comprehensions-are-common-python.html</a></p>
     </div>
-  </article>
-<div id="comments">
-  <div id="comments-inner">
-    <div id="manual-commenting"></div>
-    <script src="https://utteranc.es/client.js"
-            repo="when-of-python/blog"
-            issue-term="pathname"
-            theme="github-dark-orange"
-            crossorigin="anonymous"
-            async>
-    </script>
   </div>
-  <script src="https://when-of-python.github.io/blog/js/comments.js"></script>
-</div>    </div>
-  </div>
-
-  <footer class="footer">
-    <div class="container">
-<div class="row">
-  <ul class="col-sm-6 list-inline">
-      <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/authors.html">Authors</a></li>
-    <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/archives.html">Archives</a></li>
-    <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/categories.html">Categories</a></li>
-      <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/tags.html">Tags</a></li>
-  </ul>
-  <p class="col-sm-6 text-sm-right text-muted">
-    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
-    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
-  </p>
-</div>    </div>
-  </footer>
 
 </body>
 

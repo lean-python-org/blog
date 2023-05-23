@@ -9,6 +9,7 @@
   <title>  Deprecate for else or else? | The When of Python Blog
 </title>
   <link rel="canonical" href="https://when-of-python.github.io/blog/deprecate-for-else-or-else.html">
+  <meta http-equiv="refresh" content="0; url='https://whenof.python.nz/blog/deprecate-for-else-or-else.html'" />
 
     <link rel="apple-touch-icon" href="https://when-of-python.github.io/blog/apple-touch-icon.png" sizes="180x180">
     <link rel="icon" type="image/png" href="https://when-of-python.github.io/blog/favicon-32x32.png" sizes="32x32">
@@ -32,115 +33,11 @@
 </head>
 
 <body>
-  <header class="header">
-    <div class="container">
-<div class="row">
-    <div class="col-sm-4">
-      <a href="https://when-of-python.github.io/blog/">
-        <img class="img-fluid rounded" src=https://when-of-python.github.io/blog/images/logo.png alt="The When of Python Blog">
-      </a>
-    </div>
-  <div class="col-sm-8">
-    <h1 class="title"><a href="https://when-of-python.github.io/blog/">The When of Python Blog</a></h1>
-      <p class="text-muted">
-<div class="text-muted" style="padding-bottom: 10px;">Guidance on when to use Python features (and when not to).</div>
-<div class="text-muted" style="padding-bottom: 10px;">Comment your opinions on our articles to join the discussion.</div>
-<div class="text-muted" style="padding-bottom: 10px;">Follow us on <a href="https://twitter.com/WhenOfPython">Twitter</a> and <a href="https://github.com/when-of-python">GitHub</a> to get the latest updates first.</div>
-</p>
-      <ul class="list-inline">
-          <li class="list-inline-item"><a class="fab fa-fa-brands fa-twitter" href="https://twitter.com/WhenOfPython" target="_blank"></a></li>
-          <li class="list-inline-item"><a class="fab fa-fa-brands fa-github" href="https://github.com/when-of-python" target="_blank"></a></li>
-      </ul>
-  </div>
-</div>    </div>
-  </header>
-
   <div class="main">
     <div class="container">
-      <h1>  Deprecate for else or else?
-</h1>
-      <hr>
-  <article class="article">
-    <header>
-      <ul class="list-inline">
-        <li class="list-inline-item text-muted" title="2022-09-05T21:00:00+12:00">
-          <i class="fas fa-clock"></i>
-          Mon 05 September 2022
-        </li>
-        <li class="list-inline-item">
-          <i class="fas fa-folder-open"></i>
-          <a href="https://when-of-python.github.io/blog/category/python.html">Python</a>
-        </li>
-          <li class="list-inline-item">
-            <i class="fas fa-user"></i>
-              <a href="https://when-of-python.github.io/blog/author/grant-paton-simpson.html">Grant Paton-Simpson</a>          </li>
-          <li class="list-inline-item">
-            <i class="fas fa-tag"></i>
-              <a href="https://when-of-python.github.io/blog/tag/python.html">#python</a>,               <a href="https://when-of-python.github.io/blog/tag/for-else.html">#for else</a>          </li>
-      </ul>
-    </header>
-    <div class="content">
-      <p>The for else construct seems simple enough - the problem is that the correct interpretation of how it works is counterintuitive to a large proportion of Python coders. For example, which of the following is correct? It's not immediately obvious whether the else block runs if the break is hit, or if it is not hit.</p>
-<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">animal</span> <span class="ow">in</span> <span class="n">animals</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">animal</span> <span class="o">==</span> <span class="n">my_pet</span><span class="p">:</span>
-        <span class="k">break</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No pet is found :-(&quot;</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">animal</span> <span class="ow">in</span> <span class="n">animals</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">animal</span> <span class="o">==</span> <span class="n">my_pet</span><span class="p">:</span>
-        <span class="k">break</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pet found :-)&quot;</span><span class="p">)</span>
-</code></pre></div>
-
-<p>Some suggestions for better names than else have included <code>nobreak</code> and (less seriously) <code>if_we_exited_the_block_without_encountering_a_break</code>.</p>
-<p>In practice, it's clearer to just remove the ambiguity for the reader and set a variable before breaking.</p>
-<div class="highlight"><pre><span></span><code><span class="n">found_pet</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="k">for</span> <span class="n">animal</span> <span class="ow">in</span> <span class="n">animals</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">animal</span> <span class="o">==</span> <span class="n">my_pet</span><span class="p">:</span>
-        <span class="n">found_pet</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">break</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">found_pet</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No pet found :(&#39;</span><span class="p">)</span>
-</code></pre></div>
-
-<p>If Raymond Hettinger had a time machine he could tell Guido in the future no one will find <code>else</code> intuitive: <a href="https://m.youtube.com/watch?v=OSGv2VnC0go">Transforming Code into Beautiful, Idiomatic Python</a>. Incidentally this is one of the classic Python presentations - watch it and bump the views over from 999,975 to a clean 1M ;-)</p>
-<p>Guido says if he had a time machine he would not have included the feature at all: <a href="https://mail.python.org/pipermail/python-ideas/2009-October/">Python-ideas for/else syntax</a>.</p>
-<p>Maybe we should put <code>for else</code> in the <strong>Deprecate Python</strong> category? Why not - there are alternatives that are versatile, simple, and safe.</p>
-<p>Fair comment? Overly harsh? What do you think?</p>
+      <p>Redirecting to <a href="https://whenof.python.nz/blog/deprecate-for-else-or-else.html">whenof.python.nz/blog/deprecate-for-else-or-else.html</a></p>
     </div>
-  </article>
-<div id="comments">
-  <div id="comments-inner">
-    <div id="manual-commenting"></div>
-    <script src="https://utteranc.es/client.js"
-            repo="when-of-python/blog"
-            issue-term="pathname"
-            theme="github-dark-orange"
-            crossorigin="anonymous"
-            async>
-    </script>
   </div>
-  <script src="https://when-of-python.github.io/blog/js/comments.js"></script>
-</div>    </div>
-  </div>
-
-  <footer class="footer">
-    <div class="container">
-<div class="row">
-  <ul class="col-sm-6 list-inline">
-      <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/authors.html">Authors</a></li>
-    <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/archives.html">Archives</a></li>
-    <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/categories.html">Categories</a></li>
-      <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/tags.html">Tags</a></li>
-  </ul>
-  <p class="col-sm-6 text-sm-right text-muted">
-    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
-    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
-  </p>
-</div>    </div>
-  </footer>
 
 </body>
 

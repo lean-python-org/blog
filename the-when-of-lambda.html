@@ -9,6 +9,7 @@
   <title>  The When of Lambda | The When of Python Blog
 </title>
   <link rel="canonical" href="https://when-of-python.github.io/blog/the-when-of-lambda.html">
+  <meta http-equiv="refresh" content="0; url='https://whenof.python.nz/blog/the-when-of-lambda.html'" />
 
     <link rel="apple-touch-icon" href="https://when-of-python.github.io/blog/apple-touch-icon.png" sizes="180x180">
     <link rel="icon" type="image/png" href="https://when-of-python.github.io/blog/favicon-32x32.png" sizes="32x32">
@@ -32,145 +33,11 @@
 </head>
 
 <body>
-  <header class="header">
-    <div class="container">
-<div class="row">
-    <div class="col-sm-4">
-      <a href="https://when-of-python.github.io/blog/">
-        <img class="img-fluid rounded" src=https://when-of-python.github.io/blog/images/logo.png alt="The When of Python Blog">
-      </a>
-    </div>
-  <div class="col-sm-8">
-    <h1 class="title"><a href="https://when-of-python.github.io/blog/">The When of Python Blog</a></h1>
-      <p class="text-muted">
-<div class="text-muted" style="padding-bottom: 10px;">Guidance on when to use Python features (and when not to).</div>
-<div class="text-muted" style="padding-bottom: 10px;">Comment your opinions on our articles to join the discussion.</div>
-<div class="text-muted" style="padding-bottom: 10px;">Follow us on <a href="https://twitter.com/WhenOfPython">Twitter</a> and <a href="https://github.com/when-of-python">GitHub</a> to get the latest updates first.</div>
-</p>
-      <ul class="list-inline">
-          <li class="list-inline-item"><a class="fab fa-fa-brands fa-twitter" href="https://twitter.com/WhenOfPython" target="_blank"></a></li>
-          <li class="list-inline-item"><a class="fab fa-fa-brands fa-github" href="https://github.com/when-of-python" target="_blank"></a></li>
-      </ul>
-  </div>
-</div>    </div>
-  </header>
-
   <div class="main">
     <div class="container">
-      <h1>  The When of Lambda
-</h1>
-      <hr>
-  <article class="article">
-    <header>
-      <ul class="list-inline">
-        <li class="list-inline-item text-muted" title="2022-09-22T08:00:00+12:00">
-          <i class="fas fa-clock"></i>
-          Thu 22 September 2022
-        </li>
-        <li class="list-inline-item">
-          <i class="fas fa-folder-open"></i>
-          <a href="https://when-of-python.github.io/blog/category/python.html">Python</a>
-        </li>
-          <li class="list-inline-item">
-            <i class="fas fa-user"></i>
-              <a href="https://when-of-python.github.io/blog/author/grant-paton-simpson.html">Grant Paton-Simpson</a>          </li>
-          <li class="list-inline-item">
-            <i class="fas fa-tag"></i>
-              <a href="https://when-of-python.github.io/blog/tag/python.html">#python</a>,               <a href="https://when-of-python.github.io/blog/tag/lambda.html">#lambda</a>,               <a href="https://when-of-python.github.io/blog/tag/pandas.html">#pandas</a>          </li>
-      </ul>
-    </header>
-    <div class="content">
-      <p>What has your experience of lambda been? Do you agree with this post? Do you disagree? Please comment below.</p>
-<h1>Lambda Examples</h1>
-<div class="highlight"><pre><span></span><code><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
-</code></pre></div>
-
-<p>A lambda defines an anonymous, one-liner function which is usually very short. They are widely encountered in code and are idiomatic in at least two use cases:</p>
-<p>1) Pandas e.g.</p>
-<div class="highlight"><pre><span></span><code><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;w&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;h&#39;</span><span class="p">])</span>
-</code></pre></div>
-
-<p>2) Sort e.g.</p>
-<div class="highlight"><pre><span></span><code><span class="nb">sorted</span><span class="p">(</span><span class="n">users</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">user</span><span class="p">:</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
-</code></pre></div>
-
-<h1>When of Lambda</h1>
-<p>So when should we use them? And when shouldn't we? In other words, can we create a When of Python for lambda? Trey Hunner's article <a href="https://treyhunner.com/2018/09/stop-writing-lambda-expressions/">Overusing lambda expressions in Python</a> is highly relevant and I won't repeat all the great content in there. His main concern seems to be about the nameless nature of lambdas. Trey Hunner regularly teaches Python and places a high weight on readability. He makes a strong case that lambdas are overused and concludes with the following criteria:</p>
-<blockquote>
-<p>I’d say that using lambda expressions is acceptable only if your situation meets all four of these criteria:</p>
-<ol>
-<li>The operation you’re doing is trivial: the function doesn’t deserve a name</li>
-<li>Having a lambda expression makes your code more understandable than the function names you can think of</li>
-<li>You’re pretty sure there’s not already a function that does what you’re looking for</li>
-<li>Everyone on your team understands lambda expressions and you’ve all agreed to use them</li>
-</ol>
-</blockquote>
-<p>I would agree with those principles but want to modify the fourth. Perhaps we would be better off accepting the two use cases described earlier (pandas and sorting) and concentrate on improving their use in that context.</p>
-<h1>Idiomatic Use Clarified</h1>
-<h2>Pandas</h2>
-<p>Using Pandas requires understanding lambdas and being comfortable with them. But we should never make complex lambdas. The moment a lambda become at all difficult to understand we should make a proper named function and use that. </p>
-<blockquote>
-<p>"If a function is important, it deserves a name" (Trey Hunner)</p>
-</blockquote>
-<p>And we should at least hint at the meaning of variables we use. For example, if we are processing rows we could use <code>lambda row: row['height'] * 100</code> instead of <code>lambda x: x['height'] * 100</code>. Even <code>lambda r: r['height'] * 100</code> would be good, especially if <code>r</code> and <code>c</code> became idiomatic short-hands for row and column in such cases.</p>
-<h2>Sorting</h2>
-<p>There is an alternative available using <code>itemgetter</code> but, to be honest, it is easier to use <code>lambda</code> and <code>lambda</code> is arguably more readable for most Python coders. Hunner presents the following comparison:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Without operator: accessing a key/index</span>
-<span class="n">rows_sorted_by_city</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;city&#39;</span><span class="p">])</span>
-
-<span class="c1"># With operator: accessing a key/index</span>
-<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
-<span class="n">rows_sorted_by_city</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="s1">&#39;city&#39;</span><span class="p">))</span>
-</code></pre></div>
-
-<p>but draws a different conclusion from myself on readability. I like the <code>lambda</code> better because it is arguably idiomatic.</p>
-<p>Incidentally, imagine if Python had a different syntax for lambdas and we could write:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Without operator: accessing a key/index</span>
-<span class="n">rows_sorted_by_city</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="p">(</span><span class="n">row</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;city&#39;</span><span class="p">]))</span>
-</code></pre></div>
-
-<p>I guess it comes down to a matter of taste but I like the <code>=&gt;</code> syntax. In the Pandas context it would be especially nice:</p>
-<div class="highlight"><pre><span></span><code><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">x</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="c1">## vs</span>
-
-<span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div>
-
-<h1>Conclusion</h1>
-<p>Lambdas are a Python language feature we should provide clear guidance on. Used well they simplify code and are perfectly readable; used poorly, and code becames opaque and bug-prone. Although use should be restrained, an accommodation should be made for Pandas and sorting, albeit with caveats to ensure usage doesn't compromise readability. </p>
+      <p>Redirecting to <a href="https://whenof.python.nz/blog/the-when-of-lambda.html">whenof.python.nz/blog/the-when-of-lambda.html</a></p>
     </div>
-  </article>
-<div id="comments">
-  <div id="comments-inner">
-    <div id="manual-commenting"></div>
-    <script src="https://utteranc.es/client.js"
-            repo="when-of-python/blog"
-            issue-term="pathname"
-            theme="github-dark-orange"
-            crossorigin="anonymous"
-            async>
-    </script>
   </div>
-  <script src="https://when-of-python.github.io/blog/js/comments.js"></script>
-</div>    </div>
-  </div>
-
-  <footer class="footer">
-    <div class="container">
-<div class="row">
-  <ul class="col-sm-6 list-inline">
-      <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/authors.html">Authors</a></li>
-    <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/archives.html">Archives</a></li>
-    <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/categories.html">Categories</a></li>
-      <li class="list-inline-item"><a href="https://when-of-python.github.io/blog/tags.html">Tags</a></li>
-  </ul>
-  <p class="col-sm-6 text-sm-right text-muted">
-    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
-    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
-  </p>
-</div>    </div>
-  </footer>
 
 </body>
 
