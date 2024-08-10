@@ -38,7 +38,7 @@ Initial Resources
 
 The When of Python presentation as delivered at Kiwi Pycon 2022, and an addendum of post-conference refinements:
 
-[Slides](https://when-of-python.github.io/kiwipycon2022)
+[Slides](https://lean-python-org.github.io/kiwipycon2022)
 
 Original presentation:
 

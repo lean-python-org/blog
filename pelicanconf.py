@@ -1,10 +1,10 @@
 AUTHOR = 'Grant Paton-Simpson & Ben Denham'
-SITENAME = 'The When of Python Blog'
+SITENAME = 'The Lean Python Blog'
 SITESUBTITLE = 'Guidance on when to use Python features (and when not to)'
 SITEDESCRIPTION = '''
 <div class="text-muted" style="padding-bottom: 10px;">Guidance on when to use Python features (and when not to).</div>
 <div class="text-muted" style="padding-bottom: 10px;">Comment your opinions on our articles to join the discussion.</div>
-<div class="text-muted" style="padding-bottom: 10px;">Follow us on <a href="https://twitter.com/WhenOfPython">Twitter</a> and <a href="https://github.com/when-of-python">GitHub</a> to get the latest updates first.</div>
+<div class="text-muted" style="padding-bottom: 10px;">Follow us on <a href="https://twitter.com/WhenOfPython">Twitter</a> and <a href="https://github.com/lean-python-org">GitHub</a> to get the latest updates first.</div>
 '''
 SITEIMAGE = 'images/logo.png'
 SITEURL = ''
@@ -24,7 +24,7 @@ AUTHOR_FEED_RSS = None
 
 # Social widget
 ICONS = (('fa-brands fa-twitter', 'https://twitter.com/WhenOfPython'),
-         ('fa-brands fa-github', 'https://github.com/when-of-python'),)
+         ('fa-brands fa-github', 'https://github.com/lean-python-org'),)
 
 DEFAULT_PAGINATION = 10
 

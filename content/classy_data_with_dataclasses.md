@@ -64,7 +64,7 @@ Type Hinting and Data Types
 Type Hinting
 ------------
 
-Type hinting is an important part of modern Python - whether used as glorified comments or for stricter static type checking purposes (see [Get the Hint - Type Hinting is Common Python](https://when-of-python.github.io/blog/type-hinting-get-the-hint.html). Used judiciously it can make code much more readable.
+Type hinting is an important part of modern Python - whether used as glorified comments or for stricter static type checking purposes (see [Get the Hint - Type Hinting is Common Python](https://lean-python-org.github.io/blog/type-hinting-get-the-hint.html). Used judiciously it can make code much more readable.
 
 For example, which is easier to understand - a function definition without type hinting:
 

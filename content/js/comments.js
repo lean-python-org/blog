@@ -2,7 +2,7 @@
    Copyright (c) 2018 Jeremy Danyow - MIT License */
 (function () {
 
-  const owner = 'when-of-python';
+  const owner = 'lean-python-org';
   const repo = 'blog';
 
   const url = new URL(location.href);

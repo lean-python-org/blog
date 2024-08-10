@@ -13,7 +13,7 @@ Type Hinting - A Big Deal for Python?
 
 Some new features really define the future of a programming language. Long after the walrus operator has been forgotten, and structural pattern matching found its niche, type hinting will be shaping people's everyday Python - for better or worse. A lot depends on how we agree to use this language feature.
 
-Currently, almost a third of active Python projects on Github are using type hinting for parameters (see [The When of Python - KiwiPycon 2022](https://when-of-python.github.io/kiwipycon2022/#/52/0/11)). The sooner we figure out type hinting best practice the better.
+Currently, almost a third of active Python projects on Github are using type hinting for parameters (see [The When of Python - KiwiPycon 2022](https://lean-python-org.github.io/kiwipycon2022/#/52/0/11)). The sooner we figure out type hinting best practice the better.
 
 To kick this blog post off I contacted Danny Adair - founder and former President of NZPUG - to get some tentative thoughts. I knew he had opinions on type hinting based on a conversation we had at the recent Kiwi PyCon. Knowing Danny was currently extra busy I asked for a quick reaction and here it is:
 

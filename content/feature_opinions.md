@@ -21,7 +21,7 @@ E.g. here is what a comment on lambda might look like:
 
 **Language feature:** lambda
 
-**Common Python / Situational Python / Deprecated Python:** Situational (see [Welcome to the When of Python](https://when-of-python.github.io/blog/welcome-to-when-of-python.html) for definitions)
+**Common Python / Situational Python / Deprecated Python:** Situational (see [Welcome to the When of Python](https://lean-python-org.github.io/blog/welcome-to-when-of-python.html) for definitions)
 
 **Opinion:** Should only be used in sorting e.g. .sort(key=lambda ...) and, carefully, in Pandas e.g. .apply(lambda ...)
 
